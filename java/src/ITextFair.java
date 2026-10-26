@@ -11,6 +11,7 @@ import com.itextpdf.kernel.geom.Rectangle;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfPage;
 import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.kernel.pdf.WriterProperties;
 import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
 import com.itextpdf.kernel.pdf.event.AbstractPdfDocumentEvent;
 import com.itextpdf.kernel.pdf.event.AbstractPdfDocumentEventHandler;
@@ -102,7 +103,7 @@ public class ITextFair extends Common {
     // task invoice
     @Override byte[] invoice() throws Exception {
         ByteArrayOutputStream buf = new ByteArrayOutputStream();
-        PdfDocument pdf = new PdfDocument(new PdfWriter(buf));
+        PdfDocument pdf = new PdfDocument(new PdfWriter(buf, new WriterProperties().setFullCompressionMode(true)));
         Document doc = new Document(pdf, PageSize.LETTER);
         doc.setMargins(M, M, M, M);
         PdfFont regular = font(REGULAR);
@@ -148,7 +149,7 @@ public class ITextFair extends Common {
     // task statement
     @Override byte[] statement() throws Exception {
         ByteArrayOutputStream buf = new ByteArrayOutputStream();
-        PdfDocument pdf = new PdfDocument(new PdfWriter(buf));
+        PdfDocument pdf = new PdfDocument(new PdfWriter(buf, new WriterProperties().setFullCompressionMode(true)));
         PdfFont regular = font(REGULAR);
         PdfFont bold = font(BOLD);
         Footer footer = new Footer(regular, true);
@@ -182,7 +183,7 @@ public class ITextFair extends Common {
     // task report
     @Override byte[] report() throws Exception {
         ByteArrayOutputStream buf = new ByteArrayOutputStream();
-        PdfDocument pdf = new PdfDocument(new PdfWriter(buf));
+        PdfDocument pdf = new PdfDocument(new PdfWriter(buf, new WriterProperties().setFullCompressionMode(true)));
         PdfFont regular = font(REGULAR);
         PdfFont bold = font(BOLD);
         pdf.addEventHandler(PdfDocumentEvent.END_PAGE, new Footer(regular, false));
@@ -207,7 +208,7 @@ public class ITextFair extends Common {
     // task letters
     @Override byte[] letter(int n) throws Exception {
         ByteArrayOutputStream buf = new ByteArrayOutputStream();
-        PdfDocument pdf = new PdfDocument(new PdfWriter(buf));
+        PdfDocument pdf = new PdfDocument(new PdfWriter(buf, new WriterProperties().setFullCompressionMode(true)));
         Document doc = new Document(pdf, PageSize.LETTER);
         doc.setMargins(M, M, M, M);
         PdfFont regular = font(REGULAR);
@@ -227,7 +228,7 @@ public class ITextFair extends Common {
     // task multilingual
     @Override byte[] multilingual() throws Exception {
         ByteArrayOutputStream buf = new ByteArrayOutputStream();
-        PdfDocument pdf = new PdfDocument(new PdfWriter(buf));
+        PdfDocument pdf = new PdfDocument(new PdfWriter(buf, new WriterProperties().setFullCompressionMode(true)));
         PdfFont regular = font(REGULAR);
         PdfFont bold = font(BOLD);
         Document doc = new Document(pdf, PageSize.LETTER);
@@ -249,7 +250,7 @@ public class ITextFair extends Common {
     // task svgletters
     @Override byte[] svgLetter(int n) throws Exception {
         ByteArrayOutputStream buf = new ByteArrayOutputStream();
-        PdfDocument pdf = new PdfDocument(new PdfWriter(buf));
+        PdfDocument pdf = new PdfDocument(new PdfWriter(buf, new WriterProperties().setFullCompressionMode(true)));
         Document doc = new Document(pdf, PageSize.LETTER);
         doc.setMargins(M, M, M, M);
         PdfFont regular = font(REGULAR);

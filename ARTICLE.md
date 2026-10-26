@@ -136,11 +136,11 @@ PDFjet in C#, Go and Swift, shown with them but not ranked against them.
 <!-- table java-plex -->
 | Document | PDFBox | iText | OpenPDF | PDFjet Java | PDFjet C# | PDFjet Go | PDFjet Swift |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| invoice, 1 page | 4.2 \* | 4.6 \* | 2.6 | **1.6** | 1.7 \* | 1.5 \* | 1.9 \* |
-| statement, 12 pages | 43.5 | 69.3 | 17.5 | **5.4** | 7.8 | 4.8 | 11.0 \* |
-| report, 18 pages | 233.8 | 24.7 | 6.0 | **5.6 \*** | 8.6 \* | 6.0 | 13.2 \* |
-| multilingual, 1 page | 3.5 | 2.5 | 1.4 | **1.4** | 1.4 | 1.0 \* | 1.6 |
-| 1,000 letters, s | 2.67 | 1.92 \* | 1.02 | **0.90** | 0.93 | 0.91 | 1.51 |
+| invoice, 1 page | 4.2 | 4.8 | 2.7 | **1.6** | 1.7 \* | 1.5 \* | 1.9 \* |
+| statement, 12 pages | 43.5 | 70.2 \* | 17.3 | **5.5** | 7.8 | 4.8 | 11.0 \* |
+| report, 18 pages | 230.3 | 24.6 | 6.0 | **5.3** | 8.6 \* | 6.0 | 13.2 \* |
+| multilingual, 1 page | 3.5 | 2.6 | 1.5 | **1.4** | 1.4 | 1.0 \* | 1.6 |
+| 1,000 letters, s | 2.69 | 1.95 | 1.03 | **0.90** | 0.93 | 0.91 | 1.51 |
 <!-- end java-plex -->
 
 To draw the SVG logo the others need another module or library, and each
@@ -160,9 +160,9 @@ With Noto Sans, a large font, ms:
 <!-- table java-noto -->
 | Document | PDFBox | iText | OpenPDF | PDFjet Java | PDFjet C# | PDFjet Go | PDFjet Swift |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| invoice | 17.9 | 5.8 | 3.5 \* | **2.6** | 2.7 | 2.4 \* | 2.7 \* |
-| report | 1,330 | 27.7 | 6.8 \* | **6.5** | 10.0 \* | 7.2 | 14.6 |
-| multilingual | 22.0 | 4.2 | **2.0** | 2.1 | 2.3 | 1.8 | 2.3 |
+| invoice | 17.7 | 5.9 | 3.6 \* | **2.6** | 2.7 | 2.4 \* | 2.7 \* |
+| report | 1,320 | 27.8 | 6.9 | **6.5** | 10.0 \* | 7.2 | 14.6 |
+| multilingual | 21.8 | 4.3 | **2.1** | 2.1 | 2.3 | 1.8 | 2.3 |
 <!-- end java-noto -->
 
 The first PDF of a fresh process, each of the five documents, as a
@@ -172,16 +172,16 @@ ms; then the peak memory of the whole process, mostly the JVM itself, MB:
 <!-- table first-pdf -->
 | | PDFBox | iText | OpenPDF | PDFjet Java | PDFjet C# | PDFjet Go | PDFjet Swift |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| the invoice, ms | 229.3 | 253.6 | 192.9 | **49.2** | 50.1 | 3.5 | 4.1 |
-| the statement, ms | 360.8 | 550.2 | 254.4 | **87.9** | 64.3 | 7.8 | 14.7 |
-| the report, ms | 674.3 | 372.4 | 189.2 | **81.8** | 66.3 | 8.8 | 18.3 |
-| the notice, ms | 197.8 | 210.5 | 128.5 | **35.4** | 38.5 | 2.6 | 5.9 |
-| a letter, ms | 360.6 | 357.5 | 432.4 | **39.8** | 51.0 | 2.4 | 3.4 |
-| the invoice, peak memory, MB | 88 | 89 | 84 | **55** | 42 | 9 | 28 |
-| the statement, peak memory, MB | 154 | 167 | 136 | **65** | 47 | 11 | 35 |
-| the report, peak memory, MB | 330 | 134 | 103 | **72** | 52 | 14 | 35 |
-| the notice, peak memory, MB | 87 | 85 | 71 | **54** | 41 | 8 | 29 |
-| a letter, peak memory, MB | 113 | 133 | 135 | **54** | 42 | 8 | 28 |
+| the invoice, ms | 224.7 | 251.9 | 189.5 | **49.4** | 50.1 | 3.5 | 4.1 |
+| the statement, ms | 357.7 | 553.3 | 253.9 | **86.7** | 64.3 | 7.8 | 14.7 |
+| the report, ms | 683.4 | 370.7 | 186.0 | **80.7** | 66.3 | 8.8 | 18.3 |
+| the notice, ms | 198.5 | 206.4 | 128.2 | **35.4** | 38.5 | 2.6 | 5.9 |
+| a letter, ms | 360.3 | 356.9 | 426.5 | **39.0** | 51.0 | 2.4 | 3.4 |
+| the invoice, peak memory, MB | 87 | 89 | 84 | **54** | 42 | 9 | 28 |
+| the statement, peak memory, MB | 157 | 169 | 136 | **65** | 47 | 11 | 35 |
+| the report, peak memory, MB | 327 | 139 | 102 | **73** | 52 | 14 | 35 |
+| the notice, peak memory, MB | 87 | 85 | 72 | **54** | 41 | 8 | 29 |
+| a letter, peak memory, MB | 113 | 131 | 135 | **54** | 42 | 8 | 28 |
 <!-- end first-pdf -->
 
 Memory allocated per document, MB:
@@ -189,11 +189,11 @@ Memory allocated per document, MB:
 <!-- table memory -->
 | Document | PDFBox | iText | OpenPDF | PDFjet Java | PDFjet C# | PDFjet Go | PDFjet Swift |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| invoice | 4.0 | 3.6 | 2.2 | **1.6** | 1.4 | 2.6 | — |
-| statement | 90.5 | 71.5 | 56.0 | **4.6** | 5.4 | 4.7 | — |
-| report | 234.4 | 26.8 | 13.4 | **12.0** | 12.5 | 9.1 | — |
-| multilingual | 5.0 | 1.8 | **0.6** | 1.0 | 1.0 | 1.3 | — |
-| a letter | 4.9 | 2.4 | **0.5** | 1.0 | 0.9 | 1.5 | — |
+| invoice | 4.0 | 3.7 | 2.1 | **1.6** | 1.4 | 2.6 | — |
+| statement | 89.6 | 71.7 | 55.8 | **4.6** | 5.4 | 4.7 | — |
+| report | 231.8 | 26.9 | 13.4 | **12.0** | 12.5 | 9.1 | — |
+| multilingual | 5.0 | 1.9 | **0.5** | 1.0 | 1.0 | 1.3 | — |
+| a letter | 4.9 | 2.5 | **0.5** | 1.0 | 0.9 | 1.5 | — |
 <!-- end memory -->
 
 The size of the PDFs, KB:
@@ -201,11 +201,11 @@ The size of the PDFs, KB:
 <!-- table sizes -->
 | Document | PDFBox | iText | OpenPDF | PDFjet Java | PDFjet C# | PDFjet Go | PDFjet Swift |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| invoice | **19** | 24 | 22 | 25 | 25 | 26 | 27 |
-| statement | **42** | 62 | 59 | 64 | 64 | 63 | 71 |
-| report | **1,816** | 1,824 | 1,817 | 1,823 | 1,822 | 1,823 | 1,825 |
-| multilingual | **22** | 30 | 25 | 29 | 29 | 29 | 31 |
-| a letter | **11** | 17 | 15 | 18 | 18 | 18 | 19 |
+| invoice | **19** | 23 | 21 | 25 | 25 | 26 | 27 |
+| statement | **42** | 58 | 55 | 64 | 64 | 63 | 71 |
+| report | 1,816 | 1,820 | **1,813** | 1,823 | 1,822 | 1,823 | 1,825 |
+| multilingual | **22** | 29 | 24 | 29 | 29 | 29 | 31 |
+| a letter | **11** | 16 | 14 | 18 | 18 | 18 | 19 |
 <!-- end sizes -->
 
 Lines of code of each program, without blank lines and comments; "helpers"
@@ -217,7 +217,7 @@ wrapping), counted in the total:
 |---|---:|---:|---:|---:|---:|---:|---:|
 | PDFBox | **28** | 26 | 53 | 34 | 24 | 90 | 255 |
 | iText | 39 | 30 | **22** | **17** | **17** | 45 | 170 |
-| OpenPDF | 57 | 37 | 32 | 32 | 23 | 65 | 246 |
+| OpenPDF | 58 | 38 | 33 | 33 | 23 | 65 | 250 |
 | PDFjet Java | 31 | **25** | 32 | 20 | **17** | **37** | **162** |
 | PDFjet C# | 32 | 25 | 32 | 20 | 17 | 35 | 161 |
 | PDFjet Go | 36 | 26 | 35 | 26 | 20 | 35 | 178 |
@@ -262,6 +262,8 @@ make-tables.py makes every table of this report from the results.
   match it, as without it their page counts differ.
 - OpenPDF uses `setStrictImageSequence(true)`, or it moves text above a
   photo that goes to the next page.
+- iText and OpenPDF write object streams, which make smaller files, as
+  PDFBox does by default; PDFjet writes none.
 - iText and OpenPDF use their large-table modes for the statement, as
   their documentation shows for long tables. iText's ordinary Table was
   timed too, and was slower (about 106 ms against 72).

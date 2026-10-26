@@ -1,50 +1,50 @@
 #caption|Time per document|These tests use IBM Plex Sans.
-Invoice, 1 page|warm, ms|PDFBox=4.2=4.2 \*=4.23|iText=4.6=4.6 \*=4.6|OpenPDF=2.6=2.6=2.61|PDFjet=1.6=1.6=1.63
-Statement, 12 pages|warm, ms|PDFBox=43.5=43.5=43.49|iText=69.3=69.3=69.32|OpenPDF=17.5=17.5=17.51|PDFjet=5.4=5.4=5.43
-Report, 18 pages|warm, ms|PDFBox=233.8=233.8=233.75|iText=24.7=24.7=24.72|OpenPDF=6.0=6.0=5.96|PDFjet=5.6=5.6 \*=5.58
-Multilingual notice|warm, ms|PDFBox=3.5=3.5=3.53|iText=2.5=2.5=2.53|OpenPDF=1.4=1.4=1.45|PDFjet=1.4=1.4=1.35
-1,000 letters, SVG logo|warm, s|PDFBox=2.67=2.67=2.66853|iText=1.92=1.92 \*=1.92266|OpenPDF=1.02=1.02=1.022|PDFjet=0.90=0.90=0.90064
+Invoice, 1 page|warm, ms|PDFBox=4.2=4.2=4.21|iText=4.8=4.8=4.83|OpenPDF=2.7=2.7=2.7|PDFjet=1.6=1.6=1.63
+Statement, 12 pages|warm, ms|PDFBox=43.5=43.5=43.45|iText=70.2=70.2 \*=70.15|OpenPDF=17.3=17.3=17.34|PDFjet=5.5=5.5=5.45
+Report, 18 pages|warm, ms|PDFBox=230.3=230.3=230.3|iText=24.6=24.6=24.58|OpenPDF=6.0=6.0=5.99|PDFjet=5.3=5.3=5.33
+Multilingual notice|warm, ms|PDFBox=3.5=3.5=3.52|iText=2.6=2.6=2.57|OpenPDF=1.5=1.5=1.49|PDFjet=1.4=1.4=1.36
+1,000 letters, SVG logo|warm, s|PDFBox=2.69=2.69=2.6881999999999997|iText=1.95=1.95=1.94551|OpenPDF=1.03=1.03=1.0336800000000002|PDFjet=0.90=0.90=0.89801
 #caption|Memory allocated per document|These tests use IBM Plex Sans.
-Memory, the invoice|MB allocated|PDFBox=4.0=4.0=3.976392|iText=3.6=3.6=3.618784|OpenPDF=2.2=2.2=2.150384|PDFjet=1.6=1.6=1.550912
-Memory, the statement|MB allocated|PDFBox=90.5=90.5=90.504112|iText=71.5=71.5=71.467936|OpenPDF=56.0=56.0=56.016|PDFjet=4.6=4.6=4.645032
-Memory, the report|MB allocated|PDFBox=234.4=234.4=234.365608|iText=26.8=26.8=26.821168|OpenPDF=13.4=13.4=13.392256|PDFjet=12.0=12.0=12.040808
-Memory, the notice|MB allocated|PDFBox=5.0=5.0=4.980288|iText=1.8=1.8=1.81824|OpenPDF=0.6=0.6=0.562152|PDFjet=1.0=1.0=1.035416
-Memory, a letter|MB allocated|PDFBox=4.9=4.9=4.900743|iText=2.4=2.4=2.415384|OpenPDF=0.5=0.5=0.51381|PDFjet=1.0=1.0=0.994768
+Memory, the invoice|MB allocated|PDFBox=4.0=4.0=3.952704|iText=3.7=3.7=3.68596|OpenPDF=2.1=2.1=2.141752|PDFjet=1.6=1.6=1.550912
+Memory, the statement|MB allocated|PDFBox=89.6=89.6=89.628608|iText=71.7=71.7=71.678648|OpenPDF=55.8=55.8=55.833024|PDFjet=4.6=4.6=4.645032
+Memory, the report|MB allocated|PDFBox=231.8=231.8=231.84548|iText=26.9=26.9=26.867728|OpenPDF=13.4=13.4=13.35352|PDFjet=12.0=12.0=12.040808
+Memory, the notice|MB allocated|PDFBox=5.0=5.0=4.95116|iText=1.9=1.9=1.887272|OpenPDF=0.5=0.5=0.542744|PDFjet=1.0=1.0=1.035416
+Memory, a letter|MB allocated|PDFBox=4.9=4.9=4.903621|iText=2.5=2.5=2.478945|OpenPDF=0.5=0.5=0.506359|PDFjet=1.0=1.0=0.994768
 #page|The first PDF of a fresh process
 #caption|The first PDF of a fresh process|These tests use IBM Plex Sans.
-First PDF, the invoice|ms|PDFBox=229.3=229.3=229.34|iText=253.6=253.6=253.61|OpenPDF=192.9=192.9=192.92|PDFjet=49.2=49.2=49.19
-First PDF, the statement|ms|PDFBox=360.8=360.8=360.82|iText=550.2=550.2=550.23|OpenPDF=254.4=254.4=254.36|PDFjet=87.9=87.9=87.94
-First PDF, the report|ms|PDFBox=674.3=674.3=674.3|iText=372.4=372.4=372.4|OpenPDF=189.2=189.2=189.15|PDFjet=81.8=81.8=81.85
-First PDF, the notice|ms|PDFBox=197.8=197.8=197.78|iText=210.5=210.5=210.47|OpenPDF=128.5=128.5=128.53|PDFjet=35.4=35.4=35.36
-First PDF, a letter|ms|PDFBox=360.6=360.6=360.62|iText=357.5=357.5=357.46|OpenPDF=432.4=432.4=432.45|PDFjet=39.8=39.8=39.81
+First PDF, the invoice|ms|PDFBox=224.7=224.7=224.66|iText=251.9=251.9=251.89|OpenPDF=189.5=189.5=189.54|PDFjet=49.4=49.4=49.37
+First PDF, the statement|ms|PDFBox=357.7=357.7=357.74|iText=553.3=553.3=553.3|OpenPDF=253.9=253.9=253.94|PDFjet=86.7=86.7=86.66
+First PDF, the report|ms|PDFBox=683.4=683.4=683.41|iText=370.7=370.7=370.66|OpenPDF=186.0=186.0=185.97|PDFjet=80.7=80.7=80.7
+First PDF, the notice|ms|PDFBox=198.5=198.5=198.49|iText=206.4=206.4=206.41|OpenPDF=128.2=128.2=128.18|PDFjet=35.4=35.4=35.36
+First PDF, a letter|ms|PDFBox=360.3=360.3=360.28|iText=356.9=356.9=356.93|OpenPDF=426.5=426.5=426.54|PDFjet=39.0=39.0=38.99
 #caption|The peak memory of that process|These tests use IBM Plex Sans.
-Peak memory, the invoice|MB, the process|PDFBox=88=88=87.90016|iText=89=89=89.23136|OpenPDF=84=84=84.086784|PDFjet=55=55=54.685696
-Peak memory, the statement|MB, the process|PDFBox=154=154=153.837568|iText=167=167=167.432192|OpenPDF=136=136=135.921664|PDFjet=65=65=65.343488
-Peak memory, the report|MB, the process|PDFBox=330=330=329.834496|iText=134=134=134.459392|OpenPDF=103=103=103.292928|PDFjet=72=72=72.097792
-Peak memory, the notice|MB, the process|PDFBox=87=87=87.044096|iText=85=85=85.282816|OpenPDF=71=71=71.446528|PDFjet=54=54=53.649408
-Peak memory, a letter|MB, the process|PDFBox=113=113=112.676864|iText=133=133=133.09952|OpenPDF=135=135=134.959104|PDFjet=54=54=54.29248
+Peak memory, the invoice|MB, the process|PDFBox=87=87=87.310336|iText=89=89=89.235456|OpenPDF=84=84=84.004864|PDFjet=54=54=54.493184
+Peak memory, the statement|MB, the process|PDFBox=157=157=157.126656|iText=169=169=169.381888|OpenPDF=136=136=136.183808|PDFjet=65=65=65.277952
+Peak memory, the report|MB, the process|PDFBox=327=327=327.254016|iText=139=139=139.403264|OpenPDF=102=102=102.199296|PDFjet=73=73=72.802304
+Peak memory, the notice|MB, the process|PDFBox=87=87=86.970368|iText=85=85=85.409792|OpenPDF=72=72=71.55712|PDFjet=54=54=53.874688
+Peak memory, a letter|MB, the process|PDFBox=113=113=113.197056|iText=131=131=130.695168|OpenPDF=135=135=134.873088|PDFjet=54=54=54.29248
 #page|The size of the PDFs
 #caption|The size of the PDFs|These tests use IBM Plex Sans.
-Size, the invoice|KB|PDFBox=19=19=18.784|iText=24=24=24.086|OpenPDF=22=22=22.166|PDFjet=25=25=25.127
-Size, the statement|KB|PDFBox=42=42=42.468|iText=62=62=61.988|OpenPDF=59=59=58.516|PDFjet=64=64=63.63
-Size, the report|KB|PDFBox=1816=1,816=1816.182|iText=1824=1,824=1824.238|OpenPDF=1817=1,817=1816.566|PDFjet=1823=1,823=1823.102
-Size, the notice|KB|PDFBox=22=22=22.014|iText=30=30=30.162|OpenPDF=25=25=25.461|PDFjet=29=29=28.639
-Size, a letter|KB|PDFBox=11=11=10.959|iText=17=17=16.648|OpenPDF=15=15=14.527|PDFjet=18=18=17.646
+Size, the invoice|KB|PDFBox=19=19=18.784|iText=23=23=22.856|OpenPDF=21=21=21.0|PDFjet=25=25=25.127
+Size, the statement|KB|PDFBox=42=42=42.468|iText=58=58=58.31|OpenPDF=55=55=55.403|PDFjet=64=64=63.63
+Size, the report|KB|PDFBox=1816=1,816=1816.182|iText=1820=1,820=1819.658|OpenPDF=1813=1,813=1812.785|PDFjet=1823=1,823=1823.102
+Size, the notice|KB|PDFBox=22=22=22.014|iText=29=29=28.698|OpenPDF=24=24=24.068|PDFjet=29=29=28.639
+Size, a letter|KB|PDFBox=11=11=10.959|iText=16=16=15.536|OpenPDF=14=14=13.502|PDFjet=18=18=17.646
 #page|With Noto Sans, a large font
 #caption|Time per document, Noto Sans|These tests use Noto Sans, which has many more glyphs than IBM Plex Sans.
-Invoice, Noto Sans|warm, ms|PDFBox=17.9=17.9=17.94|iText=5.8=5.8=5.85|OpenPDF=3.5=3.5 \*=3.5|PDFjet=2.6=2.6=2.57
-Report, Noto Sans|warm, ms|PDFBox=1330=1,330=1330.16|iText=27.7=27.7=27.66|OpenPDF=6.8=6.8 \*=6.77|PDFjet=6.5=6.5=6.52
-Multilingual, Noto Sans|warm, ms|PDFBox=22.0=22.0=22.04|iText=4.2=4.2=4.21|OpenPDF=2.0=2.0=2.02|PDFjet=2.1=2.1=2.08
+Invoice, Noto Sans|warm, ms|PDFBox=17.7=17.7=17.74|iText=5.9=5.9=5.88|OpenPDF=3.6=3.6 \*=3.59|PDFjet=2.6=2.6=2.57
+Report, Noto Sans|warm, ms|PDFBox=1320=1,320=1319.58|iText=27.8=27.8=27.77|OpenPDF=6.9=6.9=6.87|PDFjet=6.5=6.5=6.53
+Multilingual, Noto Sans|warm, ms|PDFBox=21.8=21.8=21.81|iText=4.3=4.3=4.31|OpenPDF=2.1=2.1=2.08|PDFjet=2.1=2.1=2.1
 #page|The lines of code of the programs
 #caption|Lines of code, all the tasks|Without blank lines and comments.
-Lines of code|all the tasks|PDFBox=255=255=255|iText=170=170=170|OpenPDF=246=246=246|PDFjet=162=162=162
+Lines of code|all the tasks|PDFBox=255=255=255|iText=170=170=170|OpenPDF=250=250=250|PDFjet=162=162=162
 #page|PDFjet in Java, C#, Go and Swift
 #caption|Time per document, the four ports|These tests use IBM Plex Sans.
 Invoice, 1 page|warm, ms|Java=1.6=1.6=1.63|C#=1.7=1.7 \*=1.7|Go=1.5=1.5 \*=1.49|Swift=1.9=1.9 \*=1.86
-Statement, 12 pages|warm, ms|Java=5.4=5.4=5.43|C#=7.8=7.8=7.79|Go=4.8=4.8=4.83|Swift=11.0=11.0 \*=11.0
-Report, 18 pages|warm, ms|Java=5.6=5.6 \*=5.58|C#=8.6=8.6 \*=8.59|Go=6.0=6.0=6.05|Swift=13.2=13.2 \*=13.2
-Multilingual notice|warm, ms|Java=1.4=1.4=1.35|C#=1.4=1.4=1.44|Go=1.0=1.0 \*=1.04|Swift=1.6=1.6=1.61
-1,000 letters, SVG logo|warm, s|Java=0.90=0.90=0.90064|C#=0.93=0.93=0.93153|Go=0.91=0.91=0.9054500000000001|Swift=1.51=1.51=1.51323
+Statement, 12 pages|warm, ms|Java=5.5=5.5=5.45|C#=7.8=7.8=7.79|Go=4.8=4.8=4.83|Swift=11.0=11.0 \*=11.0
+Report, 18 pages|warm, ms|Java=5.3=5.3=5.33|C#=8.6=8.6 \*=8.59|Go=6.0=6.0=6.05|Swift=13.2=13.2 \*=13.2
+Multilingual notice|warm, ms|Java=1.4=1.4=1.36|C#=1.4=1.4=1.44|Go=1.0=1.0 \*=1.04|Swift=1.6=1.6=1.61
+1,000 letters, SVG logo|warm, s|Java=0.90=0.90=0.89801|C#=0.93=0.93=0.93153|Go=0.91=0.91=0.9054500000000001|Swift=1.51=1.51=1.51323
 #caption|The first PDF of a fresh process, the four ports|These tests use IBM Plex Sans.
-First PDF, the invoice|ms|Java=49.2=49.2=49.19|C#=50.1=50.1=50.09|Go=3.5=3.5=3.47|Swift=4.1=4.1=4.07
-First PDF, peak memory|MB, the process|Java=55=55=54.685696|C#=42=42=42.123264|Go=9=9=9.076736|Swift=28=28=28.266496
+First PDF, the invoice|ms|Java=49.4=49.4=49.37|C#=50.1=50.1=50.09|Go=3.5=3.5=3.47|Swift=4.1=4.1=4.07
+First PDF, peak memory|MB, the process|Java=54=54=54.493184|C#=42=42=42.123264|Go=9=9=9.076736|Swift=28=28=28.266496

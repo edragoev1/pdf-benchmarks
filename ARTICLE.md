@@ -73,6 +73,7 @@ question; iText also has a company behind it with paid support.
 | HTML to PDF | no | pdfHTML add-on | openpdf-html module | no |
 | Images | JPEG, PNG, GIF, BMP, TIFF | those, WMF, JPEG 2000, JBIG2, WebP | those, WMF, JPEG 2000 | JPEG, PNG, BMP |
 | Kerning | no | pdfCalligraph, commercial | through Java AWT or Apache FOP | **✓** |
+| Ligatures (GSUB) | **✓** | pdfCalligraph, commercial | through Java AWT or Apache FOP | no |
 | Arabic | no | pdfCalligraph, commercial | **✓** | **✓** |
 | Devanagari and other Indic scripts | some | pdfCalligraph, commercial | through Java AWT or Apache FOP | no |
 | Hyphenation | no | hyph module | ✓ patterns not included | soft hyphens only |
@@ -258,8 +259,5 @@ make-tables.py makes every table of this report from the results.
 - PDFBox draws one rule under each table row and one header rectangle,
   where the others draw a border under each cell: slightly less work for
   PDFBox.
-- PDFBox applies the font's ligatures (GSUB) to its text, which the others
-  do not; with Noto Sans, whose tables are large, this is the likely cause
-  of its slow report, which allocates 2.8 GB, though it was not profiled.
 - PDFjet's Noto report is 21 pages to the others' 20: it spaces lines by the
   font's own height.

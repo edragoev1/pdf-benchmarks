@@ -333,16 +333,6 @@ def charts(path):
     add("First PDF, peak memory", "MB, the process",
         [(name, statistics.median(x[1] for x in process[lib]) * 1024 / 1e6,
           "%.0f" % (statistics.median(x[1] for x in process[lib]) * 1024 / 1e6)) for lib, name in ports])
-    page("PDFjet without page compression")
-    caption("Time per document, the pages not compressed",
-            "These tests use IBM Plex Sans; the fonts and the photos are compressed as before.")
-    for task, title in [("invoice", "Invoice, not compressed"), ("statement", "Statement, not compressed"),
-                        ("report", "Report, not compressed")]:
-        values = []
-        for lib, name in ports:
-            v = time_value(nocompress_stat(lib, task, "raw"), False)
-            values.append((name, v[0], v[1]))
-        add(title, "warm, ms", values)
     open(path, "w").write("\n".join(lines) + "\n")
 
 

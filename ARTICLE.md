@@ -222,73 +222,33 @@ the total:
 PDFjet is also written in C#, Go and Swift: the same classes and the same
 public API in each, and the same documents laid out the same way, which an
 automated check compares on every change. The last three columns of the
-tables above are the same documents made by each of them, for anyone
-choosing which one to use, and, as an aside, because the same work done by
-the same library in four runtimes says something about the runtimes too.
+tables above are the same documents made by each of them. For a
+program that makes PDFs, what counts is what the port of its language
+makes, and how fast: that is what those columns show.
 
-**Compression is the biggest difference between them.** Every PDF compresses
-its pages, and each port compresses them differently:
+**A port can use only what its language offers, and Deflate shows it most.**
+Every PDF compresses its pages, and each language offers its own Deflate:
 
 | Port | Deflate | Level |
 |---|---|---|
 | Java | zlib (java.util.zip), native C | 5 |
-| C# | zlib (ZLibStream), native C | 6, .NET's Optimal; it has no 5 |
+| C# | zlib (ZLibStream), native C | 6, .NET's Optimal |
 | Go | compress/zlib, written in Go | 6 |
 | Swift | PDFjet's own, written in Swift | its own, searching less than zlib |
 
-Where the time of the 12-page statement goes, from a profile of each port
-at its steady state (perf, a long run so that the JIT runtimes have
-finished compiling):
-
-| Share of the time | Java | C# | Go | Swift |
-|---|---|---|---|---|
-| compressing | 59% | 43% | 32% | 16% |
-| the runtime: GC, reference counting, allocating, copying | 13% | 18% | 26% | 30% |
-| strings, the language's own | — | — | — | 14% |
-| PDFjet's own code, and the rest | 28% | 39% | 42% | 40% |
-
-*(Measured 26 October with every port at level 6, before Java went to
-level 5; to be measured again with 9.1.5.)*
-
-So in Java more than half of the time making a statement is zlib, and how
-fast Java is here says as much about zlib as about the JVM. Go's own
-Deflate is fast enough that compressing is a third of its time. Swift
-spends the least on compressing, with an encoder that searches less and
-writes larger files, and the most on its runtime: reference counting,
-exclusivity checks and its String type take more of its time than
-compressing does. C# spends about a tenth of its report copying and zeroing
-memory buffers for the photos, where Java spends a twentieth, which is part
-of the gap between them in that document.
-
-The same documents with their pages not compressed, `setCompression(false)`,
-show each port's code without its compressor; the fonts and the photos are
-compressed as before. Three rounds in a random order, 20 warm-ups and 15
-timed runs, as above, by `ports-nocompress.sh`, ms:
-
-<!-- table nocompress -->
-| Document | Java (OpenJDK 25) | C# (.NET) | Go | Swift |
-|---|---:|---:|---:|---:|
-| invoice, compressed | 1.9 | 1.9 | **1.6 \*** | 2.3 \* |
-| invoice, not compressed | 1.8 | 1.9 \* | **1.6 \*** | 1.8 \* |
-| statement, compressed | 5.7 | 7.9 | **4.9** | 11.3 \* |
-| statement, not compressed | **2.7** | 4.5 \* | 3.5 \* | 8.4 |
-| report, compressed | **5.9** | 8.8 \* | 6.4 \* | 13.1 |
-| report, not compressed | **4.1** | 7.6 \* | 4.9 | 12.2 \* |
-<!-- end nocompress -->
-
-Without compression Java is the fastest of the four at the statement and the
-report; with it, Go is the fastest at the statement, so Go's lead there
-comes from its compressor more than from its language. The PDFs grow: the
-statement from 70 KB to 342 KB, which is why the pages are compressed
-unless `setCompression(false)` turns it off.
+Java offers zlib at every level, and PDFjet uses 5, the fastest for the
+size it gives. .NET offers the same zlib at three levels only, Fastest,
+Optimal and SmallestSize, with no 5 between them. Go offers its own Deflate,
+written in Go; native zlib would need cgo, which a library in pure Go
+avoids. Swift has no Deflate of its own on every platform PDFjet runs on,
+so the Swift port has its own encoder, which searches less: its PDFs are
+the largest of the four, the statement 79 KB to the others' 70.
 
 The ports are not Java in other syntax. Each is written for its language,
 with its own standard library and idioms, and the results show it: one
 design translated would rank the same in every document, and these do not.
-Each port is its own code, so a difference can come from a port as well as
-from its language, as compression shows above. If you
-find an omission that puts your favorite language at a disadvantage, a
-slow way of doing something where the language has a faster one, please
+If you find an omission that puts your favorite language at a disadvantage,
+a slow way of doing something where the language has a faster one, please
 tell us: we will be happy to adopt it in the library and run the test
 again.
 
@@ -320,3 +280,39 @@ make-tables.py makes every table of this report from the results.
   of its slow report, which allocates 2.8 GB, though it was not profiled.
 - PDFjet's Noto report is 21 pages to the others' 20: it spaces lines by the
   font's own height.
+
+## The ports, looked into
+
+For the curious, not for choosing a port: where the time of the 12-page
+statement goes, from a profile of each port at its steady state (perf, a
+long run so that the JIT runtimes have finished compiling):
+
+| Share of the time | Java | C# | Go | Swift |
+|---|---|---|---|---|
+| compressing | 59% | 43% | 32% | 16% |
+| the runtime: GC, reference counting, allocating, copying | 13% | 18% | 26% | 30% |
+| strings, the language's own | — | — | — | 14% |
+| PDFjet's own code, and the rest | 28% | 39% | 42% | 40% |
+
+*(Measured 26 October with every port at level 6, before Java went to
+level 5; to be measured again with 9.1.5.)*
+
+C# spends about a tenth of its report copying and zeroing memory buffers
+for the photos, where Java spends a twentieth, which is part of the gap
+between them in that document.
+
+The same documents with their pages not compressed, `setCompression(false)`,
+show each port's code without its compressor; the fonts and the photos are
+compressed as before. Three rounds in a random order, 20 warm-ups and 15
+timed runs, as in the main run, by `ports-nocompress.sh`, ms:
+
+<!-- table nocompress -->
+| Document | Java (OpenJDK 25) | C# (.NET) | Go | Swift |
+|---|---:|---:|---:|---:|
+| invoice, compressed | 1.9 | 1.9 | **1.6 \*** | 2.3 \* |
+| invoice, not compressed | 1.8 | 1.9 \* | **1.6 \*** | 1.8 \* |
+| statement, compressed | 5.7 | 7.9 | **4.9** | 11.3 \* |
+| statement, not compressed | **2.7** | 4.5 \* | 3.5 \* | 8.4 |
+| report, compressed | **5.9** | 8.8 \* | 6.4 \* | 13.1 |
+| report, not compressed | **4.1** | 7.6 \* | 4.9 | 12.2 \* |
+<!-- end nocompress -->

@@ -42,6 +42,21 @@ release tag, its Maven POM and its documentation; only the features the
 documents use were tested here. A module is another jar of the same
 project; an add-on is a separate product of the same company.
 
+*PDFBox has no table of its own, so its programs here draw the tables by
+hand: a gray box behind the header, each cell's text measured to align the
+numbers right, a rule under each row, the header again on each new page,
+and the page numbers in a second pass once the pages are counted.*
+
+The other jars each of the others needs at run time, from its POM: PDFBox pdfbox-io,
+fontbox and commons-logging; iText io, commons, jackson-databind, slf4j-api
+and bouncy-castle-connector, and its layout jar for tables and flowing text;
+OpenPDF brotli4j with a native jar for the platform. pdfCalligraph,
+pdfRender, pdfHTML, pdfSweep and pdfOCR are iText add-ons.
+
+Far more people have worked on PDFBox, iText and OpenPDF than on PDFjet,
+and far more people use them, with more answers on the web for every
+question; iText also has a company behind it with paid support.
+
 | Feature | PDFBox | iText | OpenPDF | PDFjet |
 |---|---|---|---|---|
 | Tables | no | yes | yes | yes |
@@ -73,25 +88,10 @@ project; an add-on is a separate product of the same company.
 | Redaction | no | pdfSweep add-on | no | no |
 | OCR | no | pdfOCR add-on | no | no |
 | XFA forms | reads the data | fills the data; flattens, commercial | reads, fills the data | no |
-| Other jars needed | yes | yes | yes | none |
+| No other jars needed | no | no | no | yes |
 | Java | 8 and later | 8 and later | 21 and later | 8 and later |
 | Also for | — | .NET | — | C#, Go, Swift |
 | License | Apache 2.0 | AGPL-3.0 or commercial | LGPL-2.1 or MPL-2.0 | MIT |
-
-*PDFBox has no table of its own, so its programs here draw the tables by
-hand: a gray box behind the header, each cell's text measured to align the
-numbers right, a rule under each row, the header again on each new page,
-and the page numbers in a second pass once the pages are counted.*
-
-The other jars each needs at run time, from its POM: PDFBox pdfbox-io,
-fontbox and commons-logging; iText io, commons, jackson-databind, slf4j-api
-and bouncy-castle-connector, and its layout jar for tables and flowing text;
-OpenPDF brotli4j with a native jar for the platform. pdfCalligraph,
-pdfRender, pdfHTML, pdfSweep and pdfOCR are iText add-ons.
-
-Far more people have worked on PDFBox, iText and OpenPDF than on PDFjet,
-and far more people use them, with more answers on the web for every
-question; iText also has a company behind it with paid support.
 
 ## What was measured
 

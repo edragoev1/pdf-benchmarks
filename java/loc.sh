@@ -24,12 +24,12 @@ count() {   # file, task
 printf "%-8s %8s %10s %7s %8s %12s %8s %6s\n" lib invoice statement report letters multilingual helpers total
 for lib in PDFjet IText OpenPDF PDFBox; do
     f=src/${lib}Fair.java
-    i=$(count $f invoice); s=$(count $f statement); r=$(count $f report); l=$(count $f letters); m=$(count $f multilingual); h=$(count $f helpers)
+    i=$(count $f invoice); s=$(count $f statement); r=$(count $f report); l=$(count $f svgletters); m=$(count $f multilingual); h=$(count $f helpers)
     printf "%-8s %8d %10d %7d %8d %12d %8d %6d\n" $lib $i $s $r $l $m $h $((i + s + r + l + m + h))
 done
 # PDFjet's other ports, the same tasks with the same markers
 for port in "C#:../dotnet/Program.cs" "Go:../go/main.go" "Swift:../swift/Sources/Bench/main.swift"; do
     lib=${port%%:*}; f=${port#*:}
-    i=$(count $f invoice); s=$(count $f statement); r=$(count $f report); l=$(count $f letters); m=$(count $f multilingual); h=$(count $f helpers)
+    i=$(count $f invoice); s=$(count $f statement); r=$(count $f report); l=$(count $f svgletters); m=$(count $f multilingual); h=$(count $f helpers)
     printf "%-8s %8d %10d %7d %8d %12d %8d %6d\n" "$lib" $i $s $r $l $m $h $((i + s + r + l + m + h))
 done

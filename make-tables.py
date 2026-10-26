@@ -32,7 +32,7 @@ PORTS = ["pdfjet", "pdfjet-dotnet", "pdfjet-go", "pdfjet-swift"]
 PORT_NAMES = ["Java (OpenJDK 25)", "C# (.NET)", "Go", "Swift"]
 DOCS = [("invoice", "invoice, 1 page"), ("statement", "statement, 12 pages"),
         ("report", "report, 18 pages"), ("multilingual", "multilingual, 1 page"),
-        ("letters", "1,000 letters, s"), ("svgletters", "1,000 letters, SVG logo, s")]
+        ("svgletters", "1,000 letters, s")]
 # What a library needs to draw SVG, for the letters with an SVG logo
 SVG_NEEDS = {"pdfjet": "", "itext": "iText's svg module", "openpdf": "Apache Batik",
              "pdfbox": "Apache Batik and pdfbox-graphics2d"}
@@ -120,7 +120,7 @@ def times(libs, names, font, docs):
 def memory(libs, names):
     out = ["| Document | %s |" % " | ".join(names), "|---|%s" % ("---:|" * len(names))]
     for task, label in [("invoice", "invoice"), ("statement", "statement"), ("report", "report"),
-                        ("multilingual", "multilingual"), ("letters", "a letter")]:
+                        ("multilingual", "multilingual"), ("svgletters", "a letter")]:
         values = []
         for lib in libs:
             s = stat(lib, "plex", task)
@@ -132,7 +132,7 @@ def memory(libs, names):
 def sizes(libs, names):
     out = ["| Document | %s |" % " | ".join(names), "|---|%s" % ("---:|" * len(names))]
     for task, label in [("invoice", "invoice"), ("statement", "statement"), ("report", "report"),
-                        ("multilingual", "multilingual"), ("letters", "a letter")]:
+                        ("multilingual", "multilingual"), ("svgletters", "a letter")]:
         values = []
         for lib in libs:
             s = stat(lib, "plex", task)
@@ -212,18 +212,22 @@ def charts(path):
                                                for n, v, l in values]))
 
     # The first page: a row of the time of each document, then a row of the
-    # letters, each under its header
+    # memory each allocates, each under its header
     lines.append("#caption|Time per document|These tests use IBM Plex Sans.")
     for task, title, seconds in [("invoice", "Invoice, 1 page", False), ("statement", "Statement, 12 pages", False),
                                  ("report", "Report, 18 pages", False), ("multilingual", "Multilingual notice", False),
-                                 ("letters", "1,000 letters", True), ("svgletters", "1,000 letters, SVG logo", True)]:
+                                 ("svgletters", "1,000 letters, SVG logo", True)]:
         values = []
         for lib, name in zip(LIBS, LIB_NAMES):
             v = time_value(stat(lib, "plex", task), seconds)
             values.append((name, v[0], v[1]))
-        if task == "letters":
-            lines.append("#caption|The 1,000 letters, with the logo as PNG and as SVG|These tests use IBM Plex Sans.")
         add(title, "warm, s" if seconds else "warm, ms", values)
+    lines.append("#caption|Memory allocated per document|These tests use IBM Plex Sans.")
+    for task, title in [("invoice", "Memory, the invoice"), ("statement", "Memory, the statement"),
+                        ("report", "Memory, the report"), ("multilingual", "Memory, the notice"),
+                        ("svgletters", "Memory, a letter")]:
+        add(title, "MB allocated", [(name, stat(lib, "plex", task)["alloc"], "%.1f" % stat(lib, "plex", task)["alloc"])
+                                    for lib, name in zip(LIBS, LIB_NAMES)])
     # The pages of charts after the first: a line "#page|heading" starts a
     # page, and "#caption|header|note" a row of charts, under its header and
     # the font its tests use
@@ -251,18 +255,11 @@ def charts(path):
     for task, title in [("invoice", "Invoice, Noto Sans"), ("report", "Report, Noto Sans"),
                         ("multilingual", "Multilingual, Noto Sans")]:
         libs_chart(title, "warm, ms", task, "noto", "ms")
-    page("The memory each document allocates")
-    caption("Memory allocated per document", "These tests use IBM Plex Sans.")
-    for task, title in [("invoice", "Memory, the invoice"), ("statement", "Memory, the statement"),
-                        ("report", "Memory, the report"), ("multilingual", "Memory, the notice"),
-                        ("letters", "Memory, a letter")]:
-        libs_chart(title, "MB allocated", task, "plex", "alloc")
-
     page("The size of the PDFs")
     caption("The size of the PDFs", "These tests use IBM Plex Sans.")
     for task, title in [("invoice", "Size, the invoice"), ("statement", "Size, the statement"),
                         ("report", "Size, the report"), ("multilingual", "Size, the notice"),
-                        ("letters", "Size, a letter")]:
+                        ("svgletters", "Size, a letter")]:
         libs_chart(title, "KB", task, "plex", "kb")
     page("The first PDF of a process")
     caption("The first PDF of a fresh process", "These tests use IBM Plex Sans.")
@@ -292,14 +289,13 @@ def charts(path):
     ports = [("pdfjet", "Java"), ("pdfjet-dotnet", "C#"), ("pdfjet-go", "Go"), ("pdfjet-swift", "Swift")]
     for task, title, seconds in [("invoice", "Invoice, 1 page", False), ("statement", "Statement, 12 pages", False),
                                  ("report", "Report, 18 pages", False), ("multilingual", "Multilingual notice", False),
-                                 ("letters", "1,000 letters", True), ("svgletters", "1,000 letters, SVG logo", True)]:
+                                 ("svgletters", "1,000 letters, SVG logo", True)]:
         values = []
         for lib, name in ports:
             v = time_value(stat(lib, "plex", task), seconds)
             values.append((name, v[0], v[1]))
         add(title, "warm, s" if seconds else "warm, ms", values)
-        if task == "multilingual":
-            caption("The letters and the first PDF, the four ports", "These tests use IBM Plex Sans.")
+    caption("The first PDF of a fresh process, the four ports", "These tests use IBM Plex Sans.")
     add("First PDF, the invoice", "ms", [(name, statistics.median(first[lib]), fmt(statistics.median(first[lib])))
                                          for lib, name in ports])
     add("First PDF, peak memory", "MB, the process",

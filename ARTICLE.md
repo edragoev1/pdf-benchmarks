@@ -95,7 +95,7 @@ question; iText also has a company behind it with paid support.
 
 ## What was measured
 
-Six tasks, specified exactly in SPEC.md, the same text and the same layout
+Five tasks, specified exactly in SPEC.md, the same text and the same layout
 in every library:
 
 - **invoice**: 1 page, the PDFjet logo, two address blocks, a table of 15
@@ -106,9 +106,8 @@ in every library:
   of 1870 × 2420 pixels, 1.8 MB in all.
 - **multilingual**: 1 page, a notice in eight languages: English, French,
   German, Polish, Turkish, Greek, Bulgarian and Ukrainian.
-- **letters**: 1,000 one-page letters with the logo, a PNG, timed as the
+- **letters**: 1,000 one-page letters with the logo as SVG, timed as the
   batch.
-- **letters with an SVG logo**: the same letters with the same logo as SVG.
 
 All in **IBM Plex Sans**, embedded as subsets; the invoice, the report and
 the notice again in **Noto Sans**, a much larger font.
@@ -138,8 +137,7 @@ PDFjet in C#, Go and Swift, shown with them but not ranked against them.
 | statement, 12 pages | 43.7 | 72.5 \* | 17.3 | **7.6** | 8.1 | 4.8 | 11.3 |
 | report, 18 pages | 231.7 | 24.6 \* | **6.0** | 6.1 \* | 9.0 | 6.3 | 12.9 |
 | multilingual, 1 page | 3.5 | 2.5 | **1.5** | 1.9 | 1.7 | 1.1 \* | 1.7 |
-| 1,000 letters, s | 3.95 | 2.02 | 1.96 | **1.84** | 1.74 | 1.50 | 1.63 |
-| 1,000 letters, SVG logo, s | 2.71 | 1.94 | **1.03** | 1.22 | 1.17 | 1.04 | 1.69 |
+| 1,000 letters, s | 2.71 | 1.94 | **1.03** | 1.22 | 1.17 | 1.04 | 1.69 |
 <!-- end java-plex -->
 
 To draw the SVG logo the others need another module or library, and each
@@ -185,7 +183,7 @@ Memory allocated per document, MB:
 | statement | 89.9 | 71.5 | 56.0 | **4.7** | 5.5 | 4.8 | — |
 | report | 232.6 | 26.8 | 13.4 | **12.1** | 12.6 | 9.1 | — |
 | multilingual | 5.0 | 1.8 | **0.6** | 1.1 | 1.1 | 1.3 | — |
-| a letter | 5.0 | 1.4 | **1.0** | 1.5 | 1.4 | 2.2 | — |
+| a letter | 4.9 | 2.4 | **0.5** | 1.1 | 1.0 | 1.5 | — |
 <!-- end memory -->
 
 The size of the PDFs, KB:
@@ -197,23 +195,22 @@ The size of the PDFs, KB:
 | statement | **42** | 62 | 59 | 70 | 70 | 70 | 79 |
 | report | **1,816** | 1,824 | 1,817 | 1,829 | 1,829 | 1,830 | 1,833 |
 | multilingual | **22** | 30 | 25 | 35 | 35 | 36 | 38 |
-| a letter | **13** | 18 | 17 | 26 | 26 | 27 | 28 |
+| a letter | **11** | 17 | 15 | 24 | 24 | 25 | 26 |
 <!-- end sizes -->
 
 Lines of code of each program, without blank lines and comments; "helpers"
 are the methods a library's tasks share (fonts, cells, footers, word
-wrapping), counted in the total. The letters with an SVG logo are not in
-the total:
+wrapping), counted in the total:
 
 <!-- table loc -->
 | | invoice | statement | report | letters | multilingual | helpers | total |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| PDFBox | **28** | 26 | 53 | 23 | 24 | 90 | 244 |
+| PDFBox | **28** | 26 | 53 | 34 | 24 | 90 | 255 |
 | iText | 39 | 30 | **22** | **17** | **17** | 45 | 170 |
-| OpenPDF | 57 | 37 | 32 | 25 | 23 | 65 | 239 |
+| OpenPDF | 57 | 37 | 32 | 32 | 23 | 65 | 246 |
 | PDFjet Java | 31 | **25** | 32 | 20 | **17** | **37** | **162** |
 | PDFjet C# | 32 | 25 | 32 | 20 | 17 | 35 | 161 |
-| PDFjet Go | 36 | 26 | 35 | 23 | 20 | 35 | 175 |
+| PDFjet Go | 36 | 26 | 35 | 26 | 20 | 35 | 178 |
 | PDFjet Swift | 29 | 22 | 31 | 18 | 15 | 45 | 160 |
 <!-- end loc -->
 

@@ -92,15 +92,21 @@ public class Report {
         new TextLine(title, "Generating PDFs in Java: four libraries compared").setTextColor(INK)
                 .setStructureType(StructElem.H1).setLocation(M, M + 22f).drawOn(page);
         List<Paragraph> intro = new ArrayList<>();
-        intro.add(new Paragraph(new TextLine(note, "Five business documents and a batch of letters, made by "
-                + "each library the way its own documentation shows, every PDF checked, in IBM Plex Sans. "
-                + "Lower is better in every chart, and the best is in navy. Written by the author of "
-                + "PDFjet, with everything needed to run it again published; the other measurements, "
-                + "the features of each library, the method and the tables of every figure are on the "
-                + "pages after this one.").setTextColor(MUTED)));
+        // The fonts of the test in semibold
+        Paragraph text = new Paragraph();
+        text.add(new TextLine(note, "Five business documents and a batch of letters, made by each library "
+                + "the way its own documentation shows, every PDF checked, in").setTextColor(MUTED));
+        text.add(new TextLine(semi, "IBM Plex Sans").setTextColor(INK));
+        text.addJoined(new TextLine(note, ", and the invoice, the report and the notice again in").setTextColor(MUTED));
+        text.add(new TextLine(semi, "Noto Sans").setTextColor(INK));
+        text.addJoined(new TextLine(note, ". Lower is better in every chart, and the best is in navy. Written by the "
+                + "author of PDFjet, with everything needed to run it again published; the other "
+                + "measurements, the features of each library, the method and the tables of every figure "
+                + "are on the pages after this one.").setTextColor(MUTED));
+        intro.add(text);
         new TextFrame(intro).setLocation(M, M + 34f).setWidth(TW).drawOn(page);
 
-        float bottom = drawCharts(pdf, page, charts, M + 84f);
+        float bottom = drawCharts(pdf, page, charts, M + 100f);
         libraries(page, bottom + 24f, semi, note);
         return page;
     }

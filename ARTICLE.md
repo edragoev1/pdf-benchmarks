@@ -110,8 +110,8 @@ in every library:
   batch.
 - **letters with an SVG logo**: the same letters with the same logo as SVG.
 
-All in IBM Plex Sans, embedded as subsets; the invoice, the report and the
-notice again in Noto Sans, a much larger font.
+All in **IBM Plex Sans**, embedded as subsets; the invoice, the report and
+the notice again in **Noto Sans**, a much larger font.
 
 **Method.** Each library in its own fresh JVM, in a random order, three
 rounds. Each task is warmed up for at least 20 runs and 3 seconds, then

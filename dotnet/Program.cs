@@ -130,17 +130,6 @@ static class Bench {
         return sb.ToString();
     }
 
-    // A PDF, its pages uncompressed when NOCOMPRESS is set: for the run that
-    // measures the code without the compression of the pages. Not counted in
-    // the lines of code, as the tasks would write new PDF(buf).
-    static PDF NewPDF(Stream buf) {
-        PDF pdf = new PDF(buf);
-        if (Environment.GetEnvironmentVariable("NOCOMPRESS") != null) {
-            pdf.SetCompression(false);
-        }
-        return pdf;
-    }
-
     // task helpers
     static Font NewFont(PDF pdf, byte[] bytes) {
         return new Font(pdf, new MemoryStream(bytes));
@@ -185,7 +174,7 @@ static class Bench {
     // task invoice
     static byte[] Invoice() {
         MemoryStream buf = new MemoryStream();
-        PDF pdf = NewPDF(buf);
+        PDF pdf = new PDF(buf);
         Font regular = NewFont(pdf, REGULAR);
         Font bold = NewFont(pdf, BOLD);
         Page page = new Page(pdf, Letter.PORTRAIT);
@@ -223,7 +212,7 @@ static class Bench {
     // task statement
     static byte[] Statement() {
         MemoryStream buf = new MemoryStream();
-        PDF pdf = NewPDF(buf);
+        PDF pdf = new PDF(buf);
         Font regular = NewFont(pdf, REGULAR);
         Font bold = NewFont(pdf, BOLD);
         Page first = new Page(pdf, Letter.PORTRAIT, Page.DETACHED);
@@ -252,7 +241,7 @@ static class Bench {
     // task report
     static byte[] Report() {
         MemoryStream buf = new MemoryStream();
-        PDF pdf = NewPDF(buf);
+        PDF pdf = new PDF(buf);
         Font regular = NewFont(pdf, REGULAR);
         Font bold = NewFont(pdf, BOLD);
         TextFlow flow = new TextFlow(pdf, Letter.PORTRAIT).SetMargins(M);
@@ -287,7 +276,7 @@ static class Bench {
     // task letters
     static byte[] Letter1(int n) {
         MemoryStream buf = new MemoryStream();
-        PDF pdf = NewPDF(buf);
+        PDF pdf = new PDF(buf);
         Font regular = NewFont(pdf, REGULAR);
         Font bold = NewFont(pdf, BOLD);
         Page page = new Page(pdf, Letter.PORTRAIT);
@@ -312,7 +301,7 @@ static class Bench {
     // task svgletters
     static byte[] SvgLetter1(int n) {
         MemoryStream buf = new MemoryStream();
-        PDF pdf = NewPDF(buf);
+        PDF pdf = new PDF(buf);
         Font regular = NewFont(pdf, REGULAR);
         Font bold = NewFont(pdf, BOLD);
         Page page = new Page(pdf, Letter.PORTRAIT);
@@ -335,7 +324,7 @@ static class Bench {
     // task multilingual
     static byte[] Multilingual() {
         MemoryStream buf = new MemoryStream();
-        PDF pdf = NewPDF(buf);
+        PDF pdf = new PDF(buf);
         Font regular = NewFont(pdf, REGULAR);
         Font bold = NewFont(pdf, BOLD);
         Page page = new Page(pdf, Letter.PORTRAIT);
@@ -377,9 +366,6 @@ static class Bench {
         List<string> only = new List<string>(((args.Length > 5) ? args[5] : "invoice,statement,report,letters,svgletters,multilingual").Split(','));
         ReadInputs(family);
         string outDir = "out-" + family;
-        if (Environment.GetEnvironmentVariable("NOCOMPRESS") != null) {
-            outDir += "-raw";   // The uncompressed PDFs apart from the others
-        }
         Directory.CreateDirectory(outDir);
 
         if (mode == "first") {

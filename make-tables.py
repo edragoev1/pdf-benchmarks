@@ -154,33 +154,6 @@ def first_pdf(libs, names):
     return "\n".join(out)
 
 
-def nocompress_stat(lib, task, mode):
-    """The median of the round medians of the run of ports-nocompress.sh, and
-    whether its rounds differ by more than 5%."""
-    ms = []
-    path = os.path.join(HERE, "results", "nocompress.txt")
-    for line in open(path):
-        f = line.split()
-        if len(f) > 6 and f[1] == mode and f[2] == lib and f[4] == task and f[5] == "median-ms":
-            ms.append(float(f[6]))
-    med = statistics.median(ms)
-    return {"ms": med, "spread": (max(ms) - min(ms)) / med > 0.05}
-
-
-NOCOMPRESS_DOCS = [("invoice", "invoice"), ("statement", "statement"), ("report", "report")]
-
-
-def nocompress():
-    """PDFjet's ports with the pages compressed and not, ms; the best of
-    each row in bold."""
-    out = ["| Document | %s |" % " | ".join(PORT_NAMES), "|---|%s" % ("---:|" * len(PORT_NAMES))]
-    for task, label in NOCOMPRESS_DOCS:
-        for mode, how in [("compressed", "compressed"), ("raw", "not compressed")]:
-            out.append(row("%s, %s" % (label, how), [time_value(nocompress_stat(lib, task, mode), False)
-                                                     for lib in PORTS]))
-    return "\n".join(out)
-
-
 def svg_needs():
     out = ["| Library | to draw SVG it needs |", "|---|---|"]
     for lib, name in zip(LIBS, LIB_NAMES):
@@ -223,7 +196,6 @@ TABLES = {
     "loc": lines_of_code,
     "ports-plex": lambda: times(PORTS, PORT_NAMES, "plex", DOCS),
     "ports-first-pdf": lambda: first_pdf(PORTS, PORT_NAMES),
-    "nocompress": nocompress,
 }
 
 

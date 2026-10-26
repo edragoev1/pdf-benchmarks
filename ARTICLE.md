@@ -226,9 +226,10 @@ tables above are the same documents made by each of them. For a
 program that makes PDFs, what counts is what the port of its language
 makes, and how fast: that is what those columns show.
 
-Each port compresses its pages with the Deflate its language offers, and
-the Swift port, with an encoder of its own, makes the largest files of the
-four.
+Each port compresses its pages with the Deflate its language offers, but
+for Swift: Swift offers none on Linux, so the Swift port has an encoder of
+its own, which searches less than zlib. Its PDFs, the largest of the four,
+are larger because of that encoder, not because of Swift.
 
 The ports are not Java in other syntax. Each is written for its language,
 with its own standard library and idioms, and the results show it: one

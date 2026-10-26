@@ -226,25 +226,9 @@ tables above are the same documents made by each of them. For a
 program that makes PDFs, what counts is what the port of its language
 makes, and how fast: that is what those columns show.
 
-**A port can use only what its language offers, and Deflate shows it most.**
-Every PDF compresses its pages, and each language offers its own Deflate:
-
-| Port | Deflate | Level |
-|---|---|---|
-| Java | zlib (java.util.zip), native C | 5 |
-| C# | zlib (ZLibStream), native C | 6, .NET's Optimal |
-| Go | compress/zlib, written in Go | 6 |
-| Swift | PDFjet's own, written in Swift | its own, searching less than zlib |
-
-Java offers zlib at every level, and PDFjet uses 5, the fastest for the
-size it gives. .NET offers the same zlib at three levels only, Fastest,
-Optimal and SmallestSize, with no 5 between them. Go offers its own Deflate,
-written in Go; native zlib would need cgo, which a library in pure Go
-avoids. Swift offers Deflate only on Apple's platforms, in Apple's
-Compression framework and Foundation's `NSData.compressed`; on Linux it
-offers neither, and the Swift port, which needs nothing but Foundation, has
-its own encoder, which searches less: its PDFs are the largest of the four,
-the statement 79 KB to the others' 70.
+Each port compresses its pages with the Deflate its language offers, and
+the Swift port, with an encoder of its own, makes the largest files of the
+four.
 
 The ports are not Java in other syntax. Each is written for its language,
 with its own standard library and idioms, and the results show it: one
@@ -260,8 +244,7 @@ Everything is in github.com/edragoev1/pdf-benchmarks: SPEC.md, the text of
 the notice, the logo and the photos, the program of each library and port,
 the run and check scripts, and the raw results with their logs. java/run.sh
 runs the four Java libraries (about 30 minutes) and java/check.sh checks
-every PDF; dotnet/, go/ and swift/ run PDFjet's other ports the same way; ports-nocompress.sh runs the four ports with their pages
-not compressed;
+every PDF; dotnet/, go/ and swift/ run PDFjet's other ports the same way;
 make-tables.py makes every table of this report from the results.
 
 ## Judgment calls
@@ -282,39 +265,3 @@ make-tables.py makes every table of this report from the results.
   of its slow report, which allocates 2.8 GB, though it was not profiled.
 - PDFjet's Noto report is 21 pages to the others' 20: it spaces lines by the
   font's own height.
-
-## The ports, looked into
-
-For the curious, not for choosing a port: where the time of the 12-page
-statement goes, from a profile of each port at its steady state (perf, a
-long run so that the JIT runtimes have finished compiling):
-
-| Share of the time | Java | C# | Go | Swift |
-|---|---|---|---|---|
-| compressing | 59% | 43% | 32% | 16% |
-| the runtime: GC, reference counting, allocating, copying | 13% | 18% | 26% | 30% |
-| strings, the language's own | — | — | — | 14% |
-| PDFjet's own code, and the rest | 28% | 39% | 42% | 40% |
-
-*(Measured 26 October with every port at level 6, before Java went to
-level 5; to be measured again with 9.1.5.)*
-
-C# spends about a tenth of its report copying and zeroing memory buffers
-for the photos, where Java spends a twentieth, which is part of the gap
-between them in that document.
-
-The same documents with their pages not compressed, `setCompression(false)`,
-show each port's code without its compressor; the fonts and the photos are
-compressed as before. Three rounds in a random order, 20 warm-ups and 15
-timed runs, as in the main run, by `ports-nocompress.sh`, ms:
-
-<!-- table nocompress -->
-| Document | Java (OpenJDK 25) | C# (.NET) | Go | Swift |
-|---|---:|---:|---:|---:|
-| invoice, compressed | 1.9 | 1.9 | **1.6 \*** | 2.3 \* |
-| invoice, not compressed | 1.8 | 1.9 \* | **1.6 \*** | 1.8 \* |
-| statement, compressed | 5.7 | 7.9 | **4.9** | 11.3 \* |
-| statement, not compressed | **2.7** | 4.5 \* | 3.5 \* | 8.4 |
-| report, compressed | **5.9** | 8.8 \* | 6.4 \* | 13.1 |
-| report, not compressed | **4.1** | 7.6 \* | 4.9 | 12.2 \* |
-<!-- end nocompress -->

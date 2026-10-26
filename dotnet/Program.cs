@@ -369,11 +369,21 @@ static class Bench {
         Directory.CreateDirectory(outDir);
 
         if (mode == "first") {
+            // The first document of a fresh process: the invoice unless
+            // another is named, and one letter for the letters
+            string name = (args.Length > 5) ? args[5] : "invoice";
             Stopwatch sw = Stopwatch.StartNew();
-            byte[] pdf = Invoice();
+            byte[] pdf = name switch {
+                "invoice" => Invoice(),
+                "statement" => Statement(),
+                "report" => Report(),
+                "multilingual" => Multilingual(),
+                "svgletters" => SvgLetter1(1),
+                _ => throw new ArgumentException(name),
+            };
             double ms = sw.Elapsed.TotalMilliseconds;
             Console.WriteLine(string.Format(CultureInfo.InvariantCulture,
-                    "{0} {1} first median-ms {2:F2} bytes {3}", Label, family, ms, pdf.Length));
+                    "{0} {1} first {2} median-ms {3:F2} bytes {4}", Label, family, name, ms, pdf.Length));
             return;
         }
 

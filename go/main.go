@@ -473,9 +473,19 @@ func main() {
 	}
 
 	if mode == "first" {
+		// The first document of a fresh process: the invoice unless another
+		// is named, and one letter for the letters
+		name := "invoice"
+		if len(os.Args) > 6 {
+			name = os.Args[6]
+		}
+		makers := map[string]func() []byte{
+			"invoice": invoice, "statement": statement, "report": report, "multilingual": multilingual,
+			"svgletters": func() []byte { return svgLetter1(1) },
+		}
 		t0 := time.Now()
-		pdf := invoice()
-		fmt.Printf("%s %s first median-ms %.2f bytes %d\n", label, family, ms(time.Since(t0)), len(pdf))
+		pdf := makers[name]()
+		fmt.Printf("%s %s first %s median-ms %.2f bytes %d\n", label, family, name, ms(time.Since(t0)), len(pdf))
 		return
 	}
 

@@ -1,1 +1,1 @@
-ccf9600d Markdown: setFullWidthTables(true) makes every table as wide as the text, in the four ports
+6a295afd BarChart: the look of the simple charts

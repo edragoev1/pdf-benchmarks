@@ -215,12 +215,23 @@ abstract class Common {
 
     void run(String lib, String[] args) throws Exception {
         if (args[0].equals("first")) {
+            // The first document of a fresh process: the invoice unless another
+            // is named, and one letter for the letters
             String font = args[1];
+            String name = args.length > 2 ? args[2] : "invoice";
             readInputs(font);
             long t0 = System.nanoTime();
-            byte[] pdf = invoice();
+            byte[] pdf;
+            switch (name) {
+            case "invoice": pdf = invoice(); break;
+            case "statement": pdf = statement(); break;
+            case "report": pdf = report(); break;
+            case "multilingual": pdf = multilingual(); break;
+            case "svgletters": pdf = svgLetter(1); break;
+            default: throw new IllegalArgumentException(name);
+            }
             double ms = (System.nanoTime() - t0) / 1e6;
-            System.out.printf(Locale.US, "%s %s first median-ms %.2f bytes %d%n", lib, font, ms, pdf.length);
+            System.out.printf(Locale.US, "%s %s first %s median-ms %.2f bytes %d%n", lib, font, name, ms, pdf.length);
             return;
         }
         String font = args[0];

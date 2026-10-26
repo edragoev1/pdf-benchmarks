@@ -1,5 +1,8 @@
 go version go1.27.2 linux/amd64
-PDFjet 84e73b5f SimpleScatterChart: a named point can be a link; Example_26 links its countries
+PDFjet 6a295afd BarChart: the look of the simple charts
 cpus 12, AMD Ryzen 5 5600G with Radeon Graphics
-2026-10-26T10:36:05-04:00
-2026-10-26T10:38:03-04:00
+2026-10-26T17:16:48-04:00
+2026-10-26T17:18:40-04:00
+The first documents alone, run again:
+2026-10-26T17:26:53-04:00
+2026-10-26T17:26:53-04:00

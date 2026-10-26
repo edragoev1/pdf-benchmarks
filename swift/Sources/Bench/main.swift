@@ -373,9 +373,16 @@ let outDir = "out-" + family
 try FileManager.default.createDirectory(atPath: outDir, withIntermediateDirectories: true)
 
 if mode == "first" {
+    // The first document of a fresh process: the invoice unless another is
+    // named, and one letter for the letters
+    let name = args.count > 6 ? args[6] : "invoice"
+    let makers: [String: () throws -> Data] = [
+        "invoice": invoice, "statement": statement, "report": report, "multilingual": multilingual,
+        "svgletters": { try svgLetter(1) },
+    ]
     let t0 = DispatchTime.now()
-    let pdf = try invoice()
-    print(String(format: "%@ %@ first median-ms %.2f bytes %d", label, family, ms(t0), pdf.count))
+    let pdf = try makers[name]!()
+    print(String(format: "%@ %@ first %@ median-ms %.2f bytes %d", label, family, name, ms(t0), pdf.count))
     exit(0)
 }
 

@@ -10,3 +10,4 @@ obj/
 go/fairbench
 *.png
 !images/*.png
+__pycache__/

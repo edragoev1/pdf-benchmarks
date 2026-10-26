@@ -15,11 +15,17 @@ PDFJET=${PDFJET:-$HOME/Projects/pdfjet}
 swift build -c release
 mkdir -p results render out-plex out-noto
 (cd "$PDFJET" && git log --oneline -1 | cat) > results/pdfjet-commit.txt
+# A run of the first documents alone adds to the environment of the rounds.
+ENVFILE=results/environment.txt
+if [ -n "$FIRST_ONLY" ]; then
+    ENVFILE=/dev/null
+    echo "The first documents alone, run again:" >> results/environment.txt
+fi
 {
     swift --version 2>&1 | head -1
     echo "PDFjet $(cat results/pdfjet-commit.txt)"
     echo "cpus $(nproc), $(grep -m1 'model name' /proc/cpuinfo | sed 's/.*: //')"
-} > results/environment.txt
+} > $ENVFILE
 [ -n "$BUILD_ONLY" ] && { echo "Built."; exit 0; }
 
 tasks() { [ "$1" = noto ] && echo invoice,report,multilingual || echo invoice,statement,report,letters,svgletters,multilingual; }
@@ -32,6 +38,8 @@ if [ -n "$QUICK" ]; then
 fi
 
 date -Iseconds >> results/environment.txt
+# FIRST_ONLY=1 runs the first documents alone, keeping the runs of the rounds.
+if [ -z "$FIRST_ONLY" ]; then
 : > results/runs.txt
 : > results/memory.txt
 for font in plex noto; do
@@ -43,12 +51,17 @@ for font in plex noto; do
     done
 done
 
-# The first document of a fresh process: the invoice, 5 processes, and the
-# wall time of each whole process.
+fi
+
+# The first document of a fresh process, each of the five, 5 processes for
+# each in a random order; the peak memory and the wall time of each whole
+# process too.
+FIRSTS="invoice statement report multilingual svgletters"
 : > results/first.txt
-for i in 1 2 3 4 5; do
-    /usr/bin/time -f "$i pdfjet-swift first-process-wall-s %e max-rss-kb %M" -a -o results/first.txt \
-        .build/release/Bench plex first 0 0 2>&1 | sed "s/^/$i /" >> results/first.txt
+for job in $(for i in 1 2 3 4 5; do for d in $FIRSTS; do echo $i:$d; done; done | shuf); do
+    i=${job%%:*}; doc=${job#*:}
+    /usr/bin/time -f "$i pdfjet-swift $doc first-process-wall-s %e max-rss-kb %M" -a -o results/first.txt \
+        .build/release/Bench plex first 0 0 0 $doc 2>&1 | sed "s/^/$i /" >> results/first.txt
 done
 date -Iseconds >> results/environment.txt
 echo "Results in results/runs.txt, results/memory.txt and results/first.txt; the PDFs in out-*/"

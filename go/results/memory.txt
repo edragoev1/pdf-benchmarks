@@ -1,6 +1,6 @@
-1 plex pdfjet-go max-rss-kb 24524 wall-s 30.10
-2 plex pdfjet-go max-rss-kb 24220 wall-s 30.26
-3 plex pdfjet-go max-rss-kb 25128 wall-s 29.86
-1 noto pdfjet-go max-rss-kb 28680 wall-s 9.21
-2 noto pdfjet-go max-rss-kb 27940 wall-s 9.21
-3 noto pdfjet-go max-rss-kb 27308 wall-s 9.20
+1 plex pdfjet-go max-rss-kb 24180 wall-s 28.03
+2 plex pdfjet-go max-rss-kb 24124 wall-s 28.05
+3 plex pdfjet-go max-rss-kb 24144 wall-s 28.57
+1 noto pdfjet-go max-rss-kb 28464 wall-s 9.18
+2 noto pdfjet-go max-rss-kb 28776 wall-s 9.19
+3 noto pdfjet-go max-rss-kb 28684 wall-s 9.19

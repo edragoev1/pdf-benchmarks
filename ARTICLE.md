@@ -17,7 +17,7 @@ run the benchmark again.**
 
 | Library | Version | License | Java |
 |---|---|---|---|
-| PDFjet (core) | 9.1.5 (main at 84e73b5f until the release) | MIT | 8 and later |
+| PDFjet (core) | 9.1.5 (main at 6a295afd until the release) | MIT | 8 and later |
 | Apache PDFBox | 3.0.8 | Apache 2.0 | 8 and later |
 | iText Core | 9.8.0 | AGPL-3.0 or commercial | 8 and later |
 | OpenPDF | 3.0.5 | LGPL-2.1 or MPL-2.0 | 21 and later |
@@ -136,11 +136,11 @@ PDFjet in C#, Go and Swift, shown with them but not ranked against them.
 <!-- table java-plex -->
 | Document | PDFBox | iText | OpenPDF | PDFjet Java | PDFjet C# | PDFjet Go | PDFjet Swift |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| invoice, 1 page | 4.4 \* | 4.7 \* | 2.8 \* | **2.1** | 2.0 | 1.5 \* | 2.1 |
-| statement, 12 pages | 43.7 | 72.5 \* | 17.3 | **7.6** | 8.1 | 4.8 | 11.3 |
-| report, 18 pages | 231.7 | 24.6 \* | **6.0** | 6.1 \* | 9.0 | 6.3 | 12.9 |
-| multilingual, 1 page | 3.5 | 2.5 | **1.5** | 1.9 | 1.7 | 1.1 \* | 1.7 |
-| 1,000 letters, s | 2.71 | 1.94 | **1.03** | 1.22 | 1.17 | 1.04 | 1.69 |
+| invoice, 1 page | 4.2 \* | 4.6 \* | 2.6 | **1.6** | 1.7 \* | 1.5 \* | 1.9 \* |
+| statement, 12 pages | 43.5 | 69.3 | 17.5 | **5.4** | 7.8 | 4.8 | 11.0 \* |
+| report, 18 pages | 233.8 | 24.7 | 6.0 | **5.6 \*** | 8.6 \* | 6.0 | 13.2 \* |
+| multilingual, 1 page | 3.5 | 2.5 | 1.4 | **1.4** | 1.4 | 1.0 \* | 1.6 |
+| 1,000 letters, s | 2.67 | 1.92 \* | 1.02 | **0.90** | 0.93 | 0.91 | 1.51 |
 <!-- end java-plex -->
 
 To draw the SVG logo the others need another module or library, and each
@@ -160,21 +160,28 @@ With Noto Sans, a large font, ms:
 <!-- table java-noto -->
 | Document | PDFBox | iText | OpenPDF | PDFjet Java | PDFjet C# | PDFjet Go | PDFjet Swift |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| invoice | 18.9 \* | 5.9 \* | **3.6 \*** | 5.0 | 4.7 | 2.7 \* | 4.4 |
-| report | 1,350 | 28.0 | **6.8 \*** | 8.8 | 12.0 \* | 7.6 | 15.1 |
-| multilingual | 22.1 | 4.2 | **2.0** | 4.5 | 4.4 | 2.4 \* | 2.9 |
+| invoice | 17.9 | 5.8 | 3.5 \* | **2.6** | 2.7 | 2.4 \* | 2.7 \* |
+| report | 1,330 | 27.7 | 6.8 \* | **6.5** | 10.0 \* | 7.2 | 14.6 |
+| multilingual | 22.0 | 4.2 | **2.0** | 2.1 | 2.3 | 1.8 | 2.3 |
 <!-- end java-noto -->
 
-The first PDF of a fresh process, the invoice, as a command-line tool, a
-serverless function or a server just started pays it. The peak memory is
-that of the whole process, mostly the JVM itself:
+The first PDF of a fresh process, each of the five documents, as a
+command-line tool, a serverless function or a server just started pays it,
+ms; then the peak memory of the whole process, mostly the JVM itself, MB:
 
 <!-- table first-pdf -->
 | | PDFBox | iText | OpenPDF | PDFjet Java | PDFjet C# | PDFjet Go | PDFjet Swift |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| the invoice, ms | 225.7 | 252.2 | 192.3 | **50.0** | 49.1 | 4.3 | 4.5 |
-| the whole process, s | 0.28 | 0.31 | 0.24 | **0.08** | 0.10 | 0.00 | 0.01 |
-| its peak resident memory, MB | 87 | 91 | 84 | **54** | 42 | 10 | 28 |
+| the invoice, ms | 229.3 | 253.6 | 192.9 | **49.2** | 50.1 | 3.5 | 4.1 |
+| the statement, ms | 360.8 | 550.2 | 254.4 | **87.9** | 64.3 | 7.8 | 14.7 |
+| the report, ms | 674.3 | 372.4 | 189.2 | **81.8** | 66.3 | 8.8 | 18.3 |
+| the notice, ms | 197.8 | 210.5 | 128.5 | **35.4** | 38.5 | 2.6 | 5.9 |
+| a letter, ms | 360.6 | 357.5 | 432.4 | **39.8** | 51.0 | 2.4 | 3.4 |
+| the invoice, peak memory, MB | 88 | 89 | 84 | **55** | 42 | 9 | 28 |
+| the statement, peak memory, MB | 154 | 167 | 136 | **65** | 47 | 11 | 35 |
+| the report, peak memory, MB | 330 | 134 | 103 | **72** | 52 | 14 | 35 |
+| the notice, peak memory, MB | 87 | 85 | 71 | **54** | 41 | 8 | 29 |
+| a letter, peak memory, MB | 113 | 133 | 135 | **54** | 42 | 8 | 28 |
 <!-- end first-pdf -->
 
 Memory allocated per document, MB:
@@ -182,11 +189,11 @@ Memory allocated per document, MB:
 <!-- table memory -->
 | Document | PDFBox | iText | OpenPDF | PDFjet Java | PDFjet C# | PDFjet Go | PDFjet Swift |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| invoice | 4.0 | 3.6 | 2.2 | **1.6** | 1.5 | 2.7 | — |
-| statement | 89.9 | 71.5 | 56.0 | **4.7** | 5.5 | 4.8 | — |
-| report | 232.6 | 26.8 | 13.4 | **12.1** | 12.6 | 9.1 | — |
-| multilingual | 5.0 | 1.8 | **0.6** | 1.1 | 1.1 | 1.3 | — |
-| a letter | 4.9 | 2.4 | **0.5** | 1.1 | 1.0 | 1.5 | — |
+| invoice | 4.0 | 3.6 | 2.2 | **1.6** | 1.4 | 2.6 | — |
+| statement | 90.5 | 71.5 | 56.0 | **4.6** | 5.4 | 4.7 | — |
+| report | 234.4 | 26.8 | 13.4 | **12.0** | 12.5 | 9.1 | — |
+| multilingual | 5.0 | 1.8 | **0.6** | 1.0 | 1.0 | 1.3 | — |
+| a letter | 4.9 | 2.4 | **0.5** | 1.0 | 0.9 | 1.5 | — |
 <!-- end memory -->
 
 The size of the PDFs, KB:
@@ -194,11 +201,11 @@ The size of the PDFs, KB:
 <!-- table sizes -->
 | Document | PDFBox | iText | OpenPDF | PDFjet Java | PDFjet C# | PDFjet Go | PDFjet Swift |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| invoice | **19** | 24 | 22 | 32 | 32 | 32 | 34 |
-| statement | **42** | 62 | 59 | 70 | 70 | 70 | 79 |
-| report | **1,816** | 1,824 | 1,817 | 1,829 | 1,829 | 1,830 | 1,833 |
-| multilingual | **22** | 30 | 25 | 35 | 35 | 36 | 38 |
-| a letter | **11** | 17 | 15 | 24 | 24 | 25 | 26 |
+| invoice | **19** | 24 | 22 | 25 | 25 | 26 | 27 |
+| statement | **42** | 62 | 59 | 64 | 64 | 63 | 71 |
+| report | **1,816** | 1,824 | 1,817 | 1,823 | 1,822 | 1,823 | 1,825 |
+| multilingual | **22** | 30 | 25 | 29 | 29 | 29 | 31 |
+| a letter | **11** | 17 | 15 | 18 | 18 | 18 | 19 |
 <!-- end sizes -->
 
 Lines of code of each program, without blank lines and comments; "helpers"

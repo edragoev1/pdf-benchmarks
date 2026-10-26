@@ -176,7 +176,7 @@ public class Report {
             // As many decimals as the figures of the tables have
             int digits = 0;
             for (int i = 2; i < fields.length; i++) {
-                String label = fields[i].split("=", 3)[2].split(" ")[0];
+                String label = fields[i].split("=", 4)[2].split(" ")[0];
                 if (label.contains(".")) {
                     digits = Math.max(digits, label.length() - label.indexOf('.') - 1);
                 }
@@ -187,11 +187,13 @@ public class Report {
             int best = 0;
             float bestValue = Float.MAX_VALUE;
             for (int i = 2; i < fields.length; i++) {
-                String[] part = fields[i].split("=", 3);
-                float value = Float.parseFloat(part[1]);
-                chart.add(part[0], value);
-                if (value < bestValue) {
-                    bestValue = value;
+                // name=value=label=unrounded: the bar as the label shows it,
+                // the best by the value before it was rounded
+                String[] part = fields[i].split("=", 4);
+                chart.add(part[0], Float.parseFloat(part[1]));
+                float unrounded = Float.parseFloat(part[3]);
+                if (unrounded < bestValue) {
+                    bestValue = unrounded;
                     best = i - 2;
                 }
             }

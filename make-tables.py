@@ -53,13 +53,28 @@ for port in ["java", "dotnet", "go", "swift"]:
         if m:
             _, lib, font, task, ms, size, alloc = m.groups()
             rounds[(lib, font, task)].append((float(ms), int(size), int(alloc) if alloc else None))
+    # The first document of a fresh process, by library and document
     for line in open(os.path.join(results, "first.txt")):
-        m = re.match(r"\d+ (\S+) \S+ first median-ms ([\d.]+)", line)
+        m = re.match(r"\d+ (\S+) \S+ first (\S+) median-ms ([\d.]+)", line)
         if m:
-            first[lib_of(m.group(1))].append(float(m.group(2)))
-        m = re.match(r"\d+ (\S+) first-process-wall-s ([\d.]+) max-rss-kb (\d+)", line)
+            first[(lib_of(m.group(1)), m.group(2))].append(float(m.group(3)))
+        m = re.match(r"\d+ (\S+) (\S+) first-process-wall-s ([\d.]+) max-rss-kb (\d+)", line)
         if m:
-            process[lib_of(m.group(1))].append((float(m.group(2)), int(m.group(3))))
+            process[(lib_of(m.group(1)), m.group(2))].append((float(m.group(3)), int(m.group(4))))
+
+# The documents whose first PDF is measured, and what the tables call them
+FIRST_DOCS = [("invoice", "the invoice"), ("statement", "the statement"), ("report", "the report"),
+              ("multilingual", "the notice"), ("svgletters", "a letter")]
+
+
+def first_ms(lib, doc):
+    """The median time of the first PDF of a fresh process, ms."""
+    return statistics.median(first[(lib, doc)])
+
+
+def peak_mb(lib, doc):
+    """The median peak resident memory of the process that made it, MB."""
+    return statistics.median(x[1] for x in process[(lib, doc)]) * 1024 / 1e6
 
 
 def fmt(v):
@@ -143,14 +158,11 @@ def sizes(libs, names):
 
 def first_pdf(libs, names):
     out = ["| | %s |" % " | ".join(names), "|---|%s" % ("---:|" * len(names))]
-    out.append(row("the invoice, ms", [(statistics.median(first[l]), fmt(statistics.median(first[l])))
-                                       for l in libs], RANKED))
-    out.append(row("the whole process, s", [(statistics.median(x[0] for x in process[l]),
-                                             "%.2f" % statistics.median(x[0] for x in process[l]))
-                                            for l in libs], RANKED))
-    out.append(row("its peak resident memory, MB",
-                   [(statistics.median(x[1] for x in process[l]) * 1024 / 1e6,
-                     "%.0f" % (statistics.median(x[1] for x in process[l]) * 1024 / 1e6)) for l in libs], RANKED))
+    for doc, label in FIRST_DOCS:
+        out.append(row(label + ", ms", [(first_ms(l, doc), fmt(first_ms(l, doc))) for l in libs], RANKED))
+    for doc, label in FIRST_DOCS:
+        out.append(row(label + ", peak memory, MB", [(peak_mb(l, doc), "%.0f" % peak_mb(l, doc)) for l in libs],
+                       RANKED))
     return "\n".join(out)
 
 
@@ -208,7 +220,8 @@ def charts(path):
     def add(title, unit, values):
         # The value as the label shows it, so that the chart and the table
         # show the same figure
-        lines.append("|".join([title, unit] + ["%s=%s=%s" % (n, l.replace(" \\*", "").replace(",", ""), l)
+        # and the value itself last, which picks the best when two round alike
+        lines.append("|".join([title, unit] + ["%s=%s=%s=%r" % (n, l.replace(" \\*", "").replace(",", ""), l, v)
                                                for n, v, l in values]))
 
     # The first page: a row of the time of each document, then a row of the
@@ -250,16 +263,16 @@ def charts(path):
                 values.append((name, s["kb"], "{:,.0f}".format(s["kb"])))
         add(title, unit, values)
 
-    page("The first PDF of a process, and the size of the PDFs")
+    page("The first PDF of a fresh process")
     caption("The first PDF of a fresh process", "These tests use IBM Plex Sans.")
-    add("First PDF, the invoice", "ms", [(name, statistics.median(first[lib]), fmt(statistics.median(first[lib])))
-                                         for lib, name in zip(LIBS, LIB_NAMES)])
-    add("First PDF, the whole process", "s", [(name, statistics.median(x[0] for x in process[lib]),
-                                               "%.2f" % statistics.median(x[0] for x in process[lib]))
-                                              for lib, name in zip(LIBS, LIB_NAMES)])
-    add("First PDF, peak memory", "MB, the process",
-        [(name, statistics.median(x[1] for x in process[lib]) * 1024 / 1e6,
-          "%.0f" % (statistics.median(x[1] for x in process[lib]) * 1024 / 1e6)) for lib, name in zip(LIBS, LIB_NAMES)])
+    for doc, label in FIRST_DOCS:
+        add("First PDF, " + label, "ms", [(name, first_ms(lib, doc), fmt(first_ms(lib, doc)))
+                                           for lib, name in zip(LIBS, LIB_NAMES)])
+    caption("The peak memory of that process", "These tests use IBM Plex Sans.")
+    for doc, label in FIRST_DOCS:
+        add("Peak memory, " + label, "MB, the process", [(name, peak_mb(lib, doc), "%.0f" % peak_mb(lib, doc))
+                                                          for lib, name in zip(LIBS, LIB_NAMES)])
+    page("The size of the PDFs")
     caption("The size of the PDFs", "These tests use IBM Plex Sans.")
     for task, title in [("invoice", "Size, the invoice"), ("statement", "Size, the statement"),
                         ("report", "Size, the report"), ("multilingual", "Size, the notice"),
@@ -295,11 +308,10 @@ def charts(path):
             values.append((name, v[0], v[1]))
         add(title, "warm, s" if seconds else "warm, ms", values)
     caption("The first PDF of a fresh process, the four ports", "These tests use IBM Plex Sans.")
-    add("First PDF, the invoice", "ms", [(name, statistics.median(first[lib]), fmt(statistics.median(first[lib])))
+    add("First PDF, the invoice", "ms", [(name, first_ms(lib, "invoice"), fmt(first_ms(lib, "invoice")))
                                          for lib, name in ports])
     add("First PDF, peak memory", "MB, the process",
-        [(name, statistics.median(x[1] for x in process[lib]) * 1024 / 1e6,
-          "%.0f" % (statistics.median(x[1] for x in process[lib]) * 1024 / 1e6)) for lib, name in ports])
+        [(name, peak_mb(lib, "invoice"), "%.0f" % peak_mb(lib, "invoice")) for lib, name in ports])
     open(path, "w").write("\n".join(lines) + "\n")
 
 

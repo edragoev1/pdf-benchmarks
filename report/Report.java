@@ -17,7 +17,7 @@ import java.util.*;
 
 public class Report {
     static final float W = 792f, H = 612f, M = 48f, TW = W - 2 * M;
-    static final int INK = 0x22262B, MUTED = 0x5F6873, NAVY = 0x1F3A5F, GREEN = 0x1A7F37;
+    static final int INK = 0x22262B, MUTED = 0x5F6873, NAVY = 0x1F3A5F;
     static final String FONTS = System.getProperty("user.home") + "/Projects/pdfjet/fonts/";
 
     static Font font(PDF pdf, String file, float size) throws Exception {
@@ -50,11 +50,9 @@ public class Report {
         // The article, in the fonts and colors of md2pdf, in a column of
         // reading width
         float size = 10.5f;
-        Font regular = font(pdf, "IBMPlexSans/IBMPlexSans-Regular.ttf", size);
-        Font semibold = font(pdf, "IBMPlexSans/IBMPlexSans-SemiBold.ttf", size);
         Markdown markdown = new Markdown(
-                regular,
-                semibold,
+                font(pdf, "IBMPlexSans/IBMPlexSans-Regular.ttf", size),
+                font(pdf, "IBMPlexSans/IBMPlexSans-SemiBold.ttf", size),
                 font(pdf, "IBMPlexSans/IBMPlexSans-Italic.ttf", size),
                 font(pdf, "IBMPlexSans/IBMPlexSans-SemiBoldItalic.ttf", size),
                 font(pdf, "IBMPlexMono/IBMPlexMono-Regular.ttf", size * 0.86f))
@@ -63,13 +61,6 @@ public class Report {
                 .setFullWidthTables(true)
                 .setMargins(96f, 48f, 96f, 54f);
         String text = new String(Files.readAllBytes(Paths.get(markdownFile)), StandardCharsets.UTF_8);
-        // The table of features is drawn here, with green check marks, after
-        // the text before it; the text after it starts on a new page
-        int start = text.indexOf("\n| Feature |") + 1;
-        int end = text.indexOf("\n\n", start) + 1;
-        float[] xy = markdown.drawOn(pdf, text.substring(0, start), pages, Letter.LANDSCAPE);
-        features(pdf, pages, text.substring(start, end), regular, semibold, xy[1] + size);
-        text = text.substring(end);
         // The appendix starts on a page of its own, as each drawOn does
         int appendix = text.indexOf("\n## Appendix");
         if (appendix == -1) {
@@ -118,48 +109,6 @@ public class Report {
         float bottom = drawCharts(pdf, page, charts, M + 100f);
         libraries(page, bottom + 24f, semi, note);
         return page;
-    }
-
-    // The table of features, in the look of the tables of the Markdown: a
-    // "yes" is a green check mark, the rest of a "yes, ..." after it, and a
-    // "no" is gray.
-    static void features(PDF pdf, List<Page> pages, String markdown, Font regular, Font semibold, float y)
-            throws Exception {
-        List<List<Cell>> rows = new ArrayList<>();
-        for (String line : markdown.split("\n")) {
-            if (line.startsWith("|---")) {
-                continue;
-            }
-            List<Cell> row = new ArrayList<>();
-            String[] fields = line.substring(1, line.length() - 1).split("\\|");
-            for (int c = 0; c < fields.length; c++) {
-                String field = fields[c].trim();
-                Cell cell;
-                if (rows.isEmpty() || c == 0) {
-                    cell = new Cell(rows.isEmpty() ? semibold : regular, field);
-                } else if (field.equals("yes") || field.startsWith("yes, ")) {
-                    cell = new Cell(field.equals("yes") ? semibold : regular,
-                            "\u2713" + field.substring(3).replaceFirst("^,", ""));
-                    cell.setTextColor(GREEN);
-                } else if (field.equals("no") || field.equals("\u2014")) {
-                    cell = new Cell(regular, field).setTextColor(MUTED);
-                } else {
-                    cell = new Cell(regular, field);
-                }
-                row.add(cell);
-            }
-            rows.add(row);
-        }
-        Table table = new Table();
-        table.setTableData(rows, 1);
-        table.setHeaderRowStyle(semibold, 0x000000, 0xEEF0F3);
-        table.setCellBorderColor(0xC8CCD2);
-        table.autoAdjustColumnWidths();
-        table.fitToWidth(W - 96f - 48f);
-        table.setLocation(96f, 96f);
-        table.setFirstPageTopMargin(y);
-        table.setBottomMargin(54f);
-        table.drawOn(pdf, pages.get(pages.size() - 1), pages, Letter.LANDSCAPE);
     }
 
     // A page of more charts, under its heading and a note on what they show.

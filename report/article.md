@@ -57,36 +57,36 @@ question; iText also has a company behind it with paid support.
 
 | Feature | PDFBox | iText | OpenPDF | PDFjet |
 |---|---|---|---|---|
-| Tables | no | yes | yes | yes |
-| Text wrapped into paragraphs | no, by hand | yes | yes | yes |
-| Text flowing onto new pages | no | yes | yes | yes |
-| Tagged PDF, PDF/UA-1 | tags by hand | yes | tags by hand | yes |
-| PDF/UA-2 | no | yes | no | no |
+| Tables | no | **✓** | **✓** | **✓** |
+| Text wrapped into paragraphs | no, by hand | **✓** | **✓** | **✓** |
+| Text flowing onto new pages | no | **✓** | **✓** | **✓** |
+| Tagged PDF, PDF/UA-1 | tags by hand | **✓** | tags by hand | **✓** |
+| PDF/UA-2 | no | **✓** | no | no |
 | PDF/A | metadata by hand | 1a to 4f | 1a to 3u | 1a to 3b |
-| SVG | no | svg module | no | yes |
-| Barcodes, 1D | no | yes | yes | yes |
-| QR codes | no | yes | no | yes |
+| SVG | no | svg module | no | **✓** |
+| Barcodes, 1D | no | **✓** | **✓** | **✓** |
+| QR codes | no | **✓** | no | **✓** |
 | Charts | no | no | no | bar, line, scatter, donut |
-| Markdown to PDF | no | no | no | yes |
+| Markdown to PDF | no | no | no | **✓** |
 | HTML to PDF | no | pdfHTML add-on | openpdf-html module | no |
 | Images | JPEG, PNG, GIF, BMP, TIFF | those, WMF, JPEG 2000, JBIG2, WebP | those, WMF, JPEG 2000 | JPEG, PNG, BMP |
-| Kerning | no | pdfCalligraph, commercial | through Java AWT or Apache FOP | yes |
-| Arabic | no | pdfCalligraph, commercial | yes | yes |
+| Kerning | no | pdfCalligraph, commercial | through Java AWT or Apache FOP | **✓** |
+| Arabic | no | pdfCalligraph, commercial | **✓** | **✓** |
 | Devanagari and other Indic scripts | some | pdfCalligraph, commercial | through Java AWT or Apache FOP | no |
-| Hyphenation | no | hyph module | yes, patterns not included | soft hyphens only |
-| Extract text | yes | yes | yes | no |
-| Render a page to an image | yes | pdfRender, commercial | openpdf-renderer module | no |
-| Change existing PDFs | yes | yes | yes | add content, merge, split |
-| Fill or create form fields | yes | yes | yes | no |
-| Digital signatures | yes, with Bouncy Castle | sign module, with Bouncy Castle | yes, with Bouncy Castle | no |
-| Password encryption, AES-256 | yes | yes | yes | yes |
-| Certificate encryption | yes, with Bouncy Castle | yes, with Bouncy Castle | yes, with Bouncy Castle | no |
-| PDF 2.0 | no option found | yes | a 2.0 header by default | no, PDF 1.7 |
-| Object streams, for smaller files | yes, by default | yes, an option | yes, an option | no |
+| Hyphenation | no | hyph module | ✓ patterns not included | soft hyphens only |
+| Extract text | **✓** | **✓** | **✓** | no |
+| Render a page to an image | **✓** | pdfRender, commercial | openpdf-renderer module | no |
+| Change existing PDFs | **✓** | **✓** | **✓** | add content, merge, split |
+| Fill or create form fields | **✓** | **✓** | **✓** | no |
+| Digital signatures | ✓ with Bouncy Castle | sign module, with Bouncy Castle | ✓ with Bouncy Castle | no |
+| Password encryption, AES-256 | **✓** | **✓** | **✓** | **✓** |
+| Certificate encryption | ✓ with Bouncy Castle | ✓ with Bouncy Castle | ✓ with Bouncy Castle | no |
+| PDF 2.0 | no option found | **✓** | a 2.0 header by default | no, PDF 1.7 |
+| Object streams, for smaller files | ✓ by default | ✓ an option | ✓ an option | no |
 | Redaction | no | pdfSweep add-on | no | no |
 | OCR | no | pdfOCR add-on | no | no |
 | XFA forms | reads the data | fills the data; flattens, commercial | reads, fills the data | no |
-| No other jars needed | no | no | no | yes |
+| No other jars needed | no | no | no | **✓** |
 | Java | 8 and later | 8 and later | 21 and later | 8 and later |
 | Also for | — | .NET | — | C#, Go, Swift |
 | License | Apache 2.0 | AGPL-3.0 or commercial | LGPL-2.1 or MPL-2.0 | MIT |

@@ -68,6 +68,8 @@ question; iText also has a company behind it with paid support.
 | SVG | no | svg module | no | **✓** |
 | Barcodes, 1D | no | **✓** | **✓** | **✓** |
 | QR codes | no | **✓** | no | **✓** |
+| Data Matrix | no | **✓** | **✓** | **✓** |
+| PDF417 | no | **✓** | **✓** | **✓** |
 | Charts | no | no | no | bar, line, scatter, donut |
 | Markdown to PDF | no | no | no | **✓** |
 | HTML to PDF | no | pdfHTML add-on | openpdf-html module | no |

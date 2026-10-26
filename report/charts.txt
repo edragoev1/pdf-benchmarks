@@ -44,3 +44,8 @@ Multilingual notice|warm, ms|Java=1.9=1.9|C#=1.7=1.7|Go=1.1=1.1 \*|Swift=1.7=1.7
 1,000 letters, SVG logo|warm, s|Java=1.22=1.22|C#=1.17=1.17|Go=1.04=1.04|Swift=1.69=1.69
 First PDF, the invoice|ms|Java=50.0=50.0|C#=49.1=49.1|Go=4.3=4.3|Swift=4.5=4.5
 First PDF, peak memory|MB, the process|Java=54=54|C#=42=42|Go=10=10|Swift=28=28
+#page|PDFjet without page compression
+#caption|Time per document, the pages not compressed|These tests use IBM Plex Sans; the fonts and the photos are compressed as before.
+Invoice, not compressed|warm, ms|Java=1.8=1.8|C#=1.9=1.9 \*|Go=1.6=1.6 \*|Swift=1.8=1.8 \*
+Statement, not compressed|warm, ms|Java=2.7=2.7|C#=4.5=4.5 \*|Go=3.5=3.5 \*|Swift=8.4=8.4
+Report, not compressed|warm, ms|Java=4.1=4.1|C#=7.6=7.6 \*|Go=4.9=4.9|Swift=12.2=12.2 \*

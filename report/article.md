@@ -179,6 +179,26 @@ compressing does. C# spends about a tenth of its report copying and zeroing
 memory buffers for the photos, where Java spends a twentieth, which is part
 of the gap between them in that document.
 
+The same documents with their pages not compressed, `setCompression(false)`,
+show each port's code without its compressor; the fonts and the photos are
+compressed as before. Three rounds in a random order, 20 warm-ups and 15
+timed runs, as above, by `ports-nocompress.sh`, ms:
+
+| Document | Java (OpenJDK 25) | C# (.NET) | Go | Swift |
+|---|---:|---:|---:|---:|
+| invoice, compressed | 1.9 | 1.9 | **1.6 \*** | 2.3 \* |
+| invoice, not compressed | 1.8 | 1.9 \* | **1.6 \*** | 1.8 \* |
+| statement, compressed | 5.7 | 7.9 | **4.9** | 11.3 \* |
+| statement, not compressed | **2.7** | 4.5 \* | 3.5 \* | 8.4 |
+| report, compressed | **5.9** | 8.8 \* | 6.4 \* | 13.1 |
+| report, not compressed | **4.1** | 7.6 \* | 4.9 | 12.2 \* |
+
+Without compression Java is the fastest of the four at the statement and the
+report; with it, Go is the fastest at the statement, so Go's lead there
+comes from its compressor more than from its language. The PDFs grow: the
+statement from 70 KB to 342 KB, which is why the pages are compressed
+unless `setCompression(false)` turns it off.
+
 The ports are not Java in other syntax. Each is written for its language,
 with its own standard library and idioms, and the results show it: one
 design translated would rank the same in every document, and these do not.
@@ -195,7 +215,8 @@ Everything is in github.com/edragoev1/pdf-benchmarks: SPEC.md, the text of
 the notice, the logo and the photos, the program of each library and port,
 the run and check scripts, and the raw results with their logs. java/run.sh
 runs the four Java libraries (about 30 minutes) and java/check.sh checks
-every PDF; dotnet/, go/ and swift/ run PDFjet's other ports the same way;
+every PDF; dotnet/, go/ and swift/ run PDFjet's other ports the same way; ports-nocompress.sh runs the four ports with their pages
+not compressed;
 make-tables.py makes every table of this report from the results.
 
 ## Judgment calls

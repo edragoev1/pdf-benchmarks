@@ -78,6 +78,11 @@ project; an add-on is a separate product of the same company.
 | Also for | — | .NET | — | C#, Go, Swift |
 | License | Apache 2.0 | AGPL-3.0 or commercial | LGPL-2.1 or MPL-2.0 | MIT |
 
+*PDFBox has no table of its own, so its programs here draw the tables by
+hand: a gray box behind the header, each cell's text measured to align the
+numbers right, a rule under each row, the header again on each new page,
+and the page numbers in a second pass once the pages are counted.*
+
 The other jars each needs at run time, from its POM: PDFBox pdfbox-io,
 fontbox and commons-logging; iText io, commons, jackson-databind, slf4j-api
 and bouncy-castle-connector, and its layout jar for tables and flowing text;

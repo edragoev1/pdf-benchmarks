@@ -250,18 +250,7 @@ def charts(path):
                 values.append((name, s["kb"], "{:,.0f}".format(s["kb"])))
         add(title, unit, values)
 
-    page("The size of the PDFs")
-    caption("The size of the PDFs", "These tests use IBM Plex Sans.")
-    for task, title in [("invoice", "Size, the invoice"), ("statement", "Size, the statement"),
-                        ("report", "Size, the report"), ("multilingual", "Size, the notice"),
-                        ("svgletters", "Size, a letter")]:
-        libs_chart(title, "KB", task, "plex", "kb")
-    page("With Noto Sans, a large font")
-    caption("Time per document, Noto Sans", "These tests use Noto Sans, which has many more glyphs than IBM Plex Sans.")
-    for task, title in [("invoice", "Invoice, Noto Sans"), ("report", "Report, Noto Sans"),
-                        ("multilingual", "Multilingual, Noto Sans")]:
-        libs_chart(title, "warm, ms", task, "noto", "ms")
-    page("The first PDF of a process")
+    page("The first PDF of a process, and the size of the PDFs")
     caption("The first PDF of a fresh process", "These tests use IBM Plex Sans.")
     add("First PDF, the invoice", "ms", [(name, statistics.median(first[lib]), fmt(statistics.median(first[lib])))
                                          for lib, name in zip(LIBS, LIB_NAMES)])
@@ -271,9 +260,19 @@ def charts(path):
     add("First PDF, peak memory", "MB, the process",
         [(name, statistics.median(x[1] for x in process[lib]) * 1024 / 1e6,
           "%.0f" % (statistics.median(x[1] for x in process[lib]) * 1024 / 1e6)) for lib, name in zip(LIBS, LIB_NAMES)])
+    caption("The size of the PDFs", "These tests use IBM Plex Sans.")
+    for task, title in [("invoice", "Size, the invoice"), ("statement", "Size, the statement"),
+                        ("report", "Size, the report"), ("multilingual", "Size, the notice"),
+                        ("svgletters", "Size, a letter")]:
+        libs_chart(title, "KB", task, "plex", "kb")
 
+    page("With Noto Sans, a large font")
+    caption("Time per document, Noto Sans", "These tests use Noto Sans, which has many more glyphs than IBM Plex Sans.")
+    for task, title in [("invoice", "Invoice, Noto Sans"), ("report", "Report, Noto Sans"),
+                        ("multilingual", "Multilingual, Noto Sans")]:
+        libs_chart(title, "warm, ms", task, "noto", "ms")
     page("The lines of code of the programs")
-    caption("Lines of code, all the tasks", "Without blank lines and comments; the letters with an SVG logo are not counted.")
+    caption("Lines of code, all the tasks", "Without blank lines and comments.")
     loc = {}
     for line in subprocess.run([os.path.join(HERE, "java", "loc.sh")], capture_output=True,
                                text=True).stdout.splitlines():

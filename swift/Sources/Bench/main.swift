@@ -131,11 +131,21 @@ func letterParagraph(_ n: Int) -> String {
     return text
 }
 
+// A PDF, its pages uncompressed when NOCOMPRESS is set: for the run that
+// measures the code without the compression of the pages. Not counted in the
+// lines of code, as newPDF would return PDF(stream).
+func compressionSet(_ pdf: PDF) -> PDF {
+    if ProcessInfo.processInfo.environment["NOCOMPRESS"] != nil {
+        pdf.setCompression(false)
+    }
+    return pdf
+}
+
 // task helpers
 func newPDF() -> (PDF, OutputStream) {
     let stream = OutputStream(toMemory: ())
     stream.open()
-    return (PDF(stream), stream)
+    return (compressionSet(PDF(stream)), stream)
 }
 
 func finish(_ pdf: PDF, _ stream: OutputStream) throws -> Data {
@@ -369,7 +379,10 @@ let warm = Int(args[3])!
 let runs = Int(args[4])!
 let minWarmSeconds = args.count > 5 ? Double(args[5])! : 3.0
 let only = (args.count > 6 ? args[6] : "invoice,statement,report,letters,svgletters,multilingual").split(separator: ",").map(String.init)
-let outDir = "out-" + family
+var outDir = "out-" + family
+if ProcessInfo.processInfo.environment["NOCOMPRESS"] != nil {
+    outDir += "-raw"    // The uncompressed PDFs apart from the others
+}
 try FileManager.default.createDirectory(atPath: outDir, withIntermediateDirectories: true)
 
 if mode == "first" {

@@ -14,6 +14,17 @@ public class PDFjetFair extends Common {
         new PDFjetFair().run("pdfjet", args);
     }
 
+    // A PDF, its pages uncompressed when NOCOMPRESS is set: for the run that
+    // measures the code without the compression of the pages. Not counted in
+    // the lines of code, as the tasks would write new PDF(buf).
+    static PDF newPDF(ByteArrayOutputStream buf) throws Exception {
+        PDF pdf = new PDF(buf);
+        if (System.getenv("NOCOMPRESS") != null) {
+            pdf.setCompression(false);
+        }
+        return pdf;
+    }
+
     // task helpers
     static Font font(PDF pdf, byte[] bytes) throws Exception {
         return new Font(pdf, new ByteArrayInputStream(bytes));
@@ -60,7 +71,7 @@ public class PDFjetFair extends Common {
     // task invoice
     @Override byte[] invoice() throws Exception {
         ByteArrayOutputStream buf = new ByteArrayOutputStream();
-        PDF pdf = new PDF(buf);
+        PDF pdf = newPDF(buf);
         Font regular = font(pdf, REGULAR);
         Font bold = font(pdf, BOLD);
         Page page = new Page(pdf, Letter.PORTRAIT);
@@ -97,7 +108,7 @@ public class PDFjetFair extends Common {
     // task statement
     @Override byte[] statement() throws Exception {
         ByteArrayOutputStream buf = new ByteArrayOutputStream();
-        PDF pdf = new PDF(buf);
+        PDF pdf = newPDF(buf);
         Font regular = font(pdf, REGULAR);
         Font bold = font(pdf, BOLD);
         Page first = new Page(pdf, Letter.PORTRAIT, Page.DETACHED);
@@ -126,7 +137,7 @@ public class PDFjetFair extends Common {
     // task report
     @Override byte[] report() throws Exception {
         ByteArrayOutputStream buf = new ByteArrayOutputStream();
-        PDF pdf = new PDF(buf);
+        PDF pdf = newPDF(buf);
         Font regular = font(pdf, REGULAR);
         Font bold = font(pdf, BOLD);
         TextFlow flow = new TextFlow(pdf, Letter.PORTRAIT).setMargins(M);
@@ -161,7 +172,7 @@ public class PDFjetFair extends Common {
     // task letters
     @Override byte[] letter(int n) throws Exception {
         ByteArrayOutputStream buf = new ByteArrayOutputStream();
-        PDF pdf = new PDF(buf);
+        PDF pdf = newPDF(buf);
         Font regular = font(pdf, REGULAR);
         Font bold = font(pdf, BOLD);
         Page page = new Page(pdf, Letter.PORTRAIT);
@@ -186,7 +197,7 @@ public class PDFjetFair extends Common {
     // task svgletters
     @Override byte[] svgLetter(int n) throws Exception {
         ByteArrayOutputStream buf = new ByteArrayOutputStream();
-        PDF pdf = new PDF(buf);
+        PDF pdf = newPDF(buf);
         Font regular = font(pdf, REGULAR);
         Font bold = font(pdf, BOLD);
         Page page = new Page(pdf, Letter.PORTRAIT);
@@ -209,7 +220,7 @@ public class PDFjetFair extends Common {
     // task multilingual
     @Override byte[] multilingual() throws Exception {
         ByteArrayOutputStream buf = new ByteArrayOutputStream();
-        PDF pdf = new PDF(buf);
+        PDF pdf = newPDF(buf);
         Font regular = font(pdf, REGULAR);
         Font bold = font(pdf, BOLD);
         Page page = new Page(pdf, Letter.PORTRAIT);

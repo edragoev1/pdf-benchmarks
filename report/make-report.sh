@@ -19,14 +19,17 @@ if '\n---\n\n## Open decisions' in s:
     s = s[:s.index('\n---\n\n## Open decisions')]
 # The tables of the results go to an appendix at the end, each with the
 # paragraph that leads into it, as the charts show their figures
+TITLES = {'java-plex': 'Time per document, IBM Plex Sans', 'java-noto': 'Time per document, Noto Sans',
+          'first-pdf': 'The first PDF of a process', 'memory': 'Memory allocated per document',
+          'sizes': 'The size of the PDFs', 'loc': 'Lines of code'}
 moved = []
 def move(m):
-    moved.append(m.group(0))
+    moved.append('### ' + TITLES[m.group('id')] + '\n\n' + m.group(0))
     return '' if len(moved) > 1 else POINTER
 POINTER = ('Every measurement is drawn as a chart on the first pages, and the tables of '
            'every figure, with PDFjet in C#, Go and Swift beside the four libraries, are '
            'in the appendix at the end.\n\n')
-s = re.sub(r'(?:[^\n]+\n)+\n<!-- table (?:java-plex|java-noto|first-pdf|memory|sizes|loc) -->\n.*?'
+s = re.sub(r'(?:[^\n]+\n)+\n<!-- table (?P<id>java-plex|java-noto|first-pdf|memory|sizes|loc) -->\n.*?'
            r'<!-- end [a-z-]+ -->\n\n', move, s, flags=re.S)
 assert len(moved) == 6, len(moved)
 s = s.replace('tables above', 'tables in the appendix')

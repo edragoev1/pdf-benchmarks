@@ -33,7 +33,7 @@ public class Report {
 
         List<Page> pages = new ArrayList<>();
         // charts.txt: the charts of the first page, then for each other page a
-        // line "#page|heading|note" and its charts; "#row" starts a new row
+        // line "#page|heading" and its charts; "#caption" starts a row
         List<List<String>> groups = new ArrayList<>();
         groups.add(new ArrayList<>());
         for (String line : Files.readAllLines(Paths.get(chartsFile), StandardCharsets.UTF_8)) {
@@ -99,54 +99,77 @@ public class Report {
         text.add(new TextLine(semi, "IBM Plex Sans").setTextColor(INK));
         text.addJoined(new TextLine(note, ", and the invoice, the report and the notice again in").setTextColor(MUTED));
         text.add(new TextLine(semi, "Noto Sans").setTextColor(INK));
-        text.addJoined(new TextLine(note, ". Lower is better in every chart, and the best is in navy. Written by the "
+        text.addJoined(new TextLine(note, ". Written by the "
                 + "author of PDFjet, with everything needed to run it again published; the other "
                 + "measurements, the features of each library, the method and the tables of every figure "
                 + "are on the pages after this one.").setTextColor(MUTED));
         intro.add(text);
         new TextFrame(intro).setLocation(M, M + 34f).setWidth(TW).drawOn(page);
+        lowerIsBetter(page, semi, M + 86f);
 
         float bottom = drawCharts(pdf, page, charts, M + 100f);
         libraries(page, bottom + 24f, semi, note);
         return page;
     }
 
-    // A page of more charts, under its heading and a note on what they show.
+    // The line on every page of charts, in bold, that says how to read them.
+    static void lowerIsBetter(Page page, Font semi, float y) throws Exception {
+        new TextLine(semi, "Lower is better, and the best is in navy.").setTextColor(INK)
+                .setLocation(M, y).drawOn(page);
+    }
+
+    // A page of more charts, under its heading and the line that says how to
+    // read them.
     static Page moreChartsPage(PDF pdf, List<String> charts) throws Exception {
         Page page = new Page(pdf, Letter.LANDSCAPE, Page.DETACHED);
         Font semi = font(pdf, "IBMPlexSans/IBMPlexSans-SemiBold.ttf", 15f);
         Font note = font(pdf, "IBMPlexSans/IBMPlexSans-Regular.ttf", 10f);
-        String[] head = charts.get(0).split("\\|", 3);
+        String[] head = charts.get(0).split("\\|", 2);
         page.setBrushColor(NAVY);
         page.fillRect(M, M - 6f, 36f, 4f);
         new TextLine(semi, head[1]).setTextColor(INK)
                 .setStructureType(StructElem.H2).setLocation(M, M + 16f).drawOn(page);
-        List<Paragraph> paragraphs = new ArrayList<>();
-        paragraphs.add(new Paragraph(new TextLine(note, head[2] + " Lower is better, and the best is in navy.")
-                .setTextColor(MUTED)));
-        new TextFrame(paragraphs).setLocation(M, M + 28f).setWidth(TW).drawOn(page);
-        drawCharts(pdf, page, charts.subList(1, charts.size()), M + 72f);
+        lowerIsBetter(page, font(pdf, "IBMPlexSans/IBMPlexSans-SemiBold.ttf", 10f), M + 36f);
+        drawCharts(pdf, page, charts.subList(1, charts.size()), M + 50f);
         return page;
     }
 
-    // A bar chart for each line, five to a row and a new row at "#row", the
-    // best (the lowest) of each highlighted. Returns the bottom of the last row.
+    // A bar chart for each line, five to a row, the best (the lowest) of each
+    // highlighted; a line "#caption|header|note" starts a row under its header
+    // and the font its tests use. Returns the bottom of the last row.
     static float drawCharts(PDF pdf, Page page, List<String> charts, float top) throws Exception {
         Font semi = font(pdf, "IBMPlexSans/IBMPlexSans-SemiBold.ttf", 10f);
         Font regular = font(pdf, "IBMPlexSans/IBMPlexSans-Regular.ttf", 8.5f);
+        Font header = font(pdf, "IBMPlexSans/IBMPlexSans-SemiBold.ttf", 11f);
+        Font note = font(pdf, "IBMPlexSans/IBMPlexSans-Regular.ttf", 10f);
         float gap = 12f;
         int perRow = 5;
         float cw = (TW - (perRow - 1) * gap) / perRow;
         float rowBottom = top;
+        boolean drawn = false;
         int column = 0;
         for (String line : charts) {
-            if (line.equals("#row") || column == perRow) {
+            if (line.startsWith("#caption|")) {
+                String[] caption = line.split("\\|", 3);
+                if (drawn) {
+                    top = rowBottom + 2 * gap;
+                }
+                Paragraph paragraph = new Paragraph();
+                paragraph.add(new TextLine(header, caption[1] + ".").setTextColor(INK));
+                paragraph.add(new TextLine(note, caption[2]).setTextColor(MUTED));
+                List<Paragraph> paragraphs = new ArrayList<>();
+                paragraphs.add(paragraph);
+                new TextFrame(paragraphs).setLocation(M, top).setWidth(TW).drawOn(page);
+                top += 22f;
+                rowBottom = top;
+                column = 0;
+                continue;
+            }
+            if (column == perRow) {
                 top = rowBottom + 2 * gap;
                 column = 0;
-                if (line.equals("#row")) {
-                    continue;
-                }
             }
+            drawn = true;
             String[] fields = line.split("\\|");
             float x = M + column * (cw + gap);
             column++;

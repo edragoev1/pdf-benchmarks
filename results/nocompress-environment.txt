@@ -1,0 +1,18 @@
+The uncompressed run of 2026-10-26, ports-nocompress.sh:
+== java
+openjdk version "25.0.4.1" 2026-08-18 LTS
+PDFjet 1ca1dac4 TODO: the associated-files reader is done in PDFjet Pro
+iText 9.8.0, OpenPDF 3.0.5, PDFBox 3.0.8
+cpus 12, AMD Ryzen 5 5600G with Radeon Graphics
+== go
+go version go1.27.2 linux/amd64
+PDFjet 1ca1dac4 TODO: the associated-files reader is done in PDFjet Pro
+cpus 12, AMD Ryzen 5 5600G with Radeon Graphics
+== dotnet
+8.0.424
+PDFjet 1ca1dac4 TODO: the associated-files reader is done in PDFjet Pro
+cpus 12, AMD Ryzen 5 5600G with Radeon Graphics
+== swift
+Swift version 6.4.1 (swift-6.4.1-RELEASE)
+PDFjet 1ca1dac4 TODO: the associated-files reader is done in PDFjet Pro
+cpus 12, AMD Ryzen 5 5600G with Radeon Graphics

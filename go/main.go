@@ -190,6 +190,17 @@ func letterParagraph(n int) string {
 	return sb.String()
 }
 
+// newPDF returns a PDF, its pages uncompressed when NOCOMPRESS is set: for the
+// run that measures the code without the compression of the pages. Not counted
+// in the lines of code, as the tasks would call pdfjet.NewPDF.
+func newPDF(w *bufio.Writer) *pdfjet.PDF {
+	pdf := pdfjet.NewPDF(w)
+	if os.Getenv("NOCOMPRESS") != "" {
+		pdf.SetCompression(false)
+	}
+	return pdf
+}
+
 // task helpers
 func newFont(pdf *pdfjet.PDF, b []byte) *pdfjet.Font {
 	return pdfjet.NewFont(pdf, bytes.NewReader(b))
@@ -235,7 +246,7 @@ func tableData(regular, bold *pdfjet.Font, header []string, rows [][]string, wid
 // task invoice
 func invoice() []byte {
 	var buf bytes.Buffer
-	pdf := pdfjet.NewPDF(bufio.NewWriter(&buf))
+	pdf := newPDF(bufio.NewWriter(&buf))
 	regular := newFont(pdf, regularBytes)
 	bold := newFont(pdf, boldBytes)
 	page := pdfjet.NewPage(pdf, letter.Portrait())
@@ -278,7 +289,7 @@ func invoice() []byte {
 // task statement
 func statement() []byte {
 	var buf bytes.Buffer
-	pdf := pdfjet.NewPDF(bufio.NewWriter(&buf))
+	pdf := newPDF(bufio.NewWriter(&buf))
 	regular := newFont(pdf, regularBytes)
 	bold := newFont(pdf, boldBytes)
 	first := pdfjet.NewPageDetached(pdf, letter.Portrait())
@@ -309,7 +320,7 @@ func statement() []byte {
 // task report
 func report() []byte {
 	var buf bytes.Buffer
-	pdf := pdfjet.NewPDF(bufio.NewWriter(&buf))
+	pdf := newPDF(bufio.NewWriter(&buf))
 	regular := newFont(pdf, regularBytes)
 	bold := newFont(pdf, boldBytes)
 	flow := pdfjet.NewTextFlow(pdf, letter.Portrait()).SetMargins(M)
@@ -348,7 +359,7 @@ func report() []byte {
 // task letters
 func letter1(n int) []byte {
 	var buf bytes.Buffer
-	pdf := pdfjet.NewPDF(bufio.NewWriter(&buf))
+	pdf := newPDF(bufio.NewWriter(&buf))
 	regular := newFont(pdf, regularBytes)
 	bold := newFont(pdf, boldBytes)
 	page := pdfjet.NewPage(pdf, letter.Portrait())
@@ -377,7 +388,7 @@ func letter1(n int) []byte {
 // task svgletters
 func svgLetter1(n int) []byte {
 	var buf bytes.Buffer
-	pdf := pdfjet.NewPDF(bufio.NewWriter(&buf))
+	pdf := newPDF(bufio.NewWriter(&buf))
 	regular := newFont(pdf, regularBytes)
 	bold := newFont(pdf, boldBytes)
 	page := pdfjet.NewPage(pdf, letter.Portrait())
@@ -407,7 +418,7 @@ func svgLetter1(n int) []byte {
 // task multilingual
 func multilingual() []byte {
 	var buf bytes.Buffer
-	pdf := pdfjet.NewPDF(bufio.NewWriter(&buf))
+	pdf := newPDF(bufio.NewWriter(&buf))
 	regular := newFont(pdf, regularBytes)
 	bold := newFont(pdf, boldBytes)
 	page := pdfjet.NewPage(pdf, letter.Portrait())
@@ -468,6 +479,9 @@ func main() {
 	}
 	load(family)
 	outDir := "out-" + family
+	if os.Getenv("NOCOMPRESS") != "" {
+		outDir += "-raw" // The uncompressed PDFs apart from the others
+	}
 	if err := os.MkdirAll(outDir, 0o755); err != nil {
 		panic(err)
 	}

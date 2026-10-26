@@ -219,6 +219,8 @@ make-tables.py makes every table of this report from the results.
 
 ## Appendix: the tables
 
+### Time per document, IBM Plex Sans
+
 Time per document, warm, ms (the letters: the batch of 1,000, s). In every
 table lower is better, faster, less memory, smaller files, fewer lines, and
 the best of the four Java libraries is in bold. The last three columns are
@@ -233,6 +235,8 @@ PDFjet in C#, Go and Swift, shown with them but not ranked against them.
 | 1,000 letters, s | 3.95 | 2.02 | 1.96 | **1.84** | 1.74 | 1.50 | 1.63 |
 | 1,000 letters, SVG logo, s | 2.71 | 1.94 | **1.03** | 1.22 | 1.17 | 1.04 | 1.69 |
 
+### Time per document, Noto Sans
+
 With Noto Sans, a large font, ms:
 
 | Document | PDFBox | iText | OpenPDF | PDFjet Java | PDFjet C# | PDFjet Go | PDFjet Swift |
@@ -240,6 +244,8 @@ With Noto Sans, a large font, ms:
 | invoice | 18.9 \* | 5.9 \* | **3.6 \*** | 5.0 | 4.7 | 2.7 \* | 4.4 |
 | report | 1,350 | 28.0 | **6.8 \*** | 8.8 | 12.0 \* | 7.6 | 15.1 |
 | multilingual | 22.1 | 4.2 | **2.0** | 4.5 | 4.4 | 2.4 \* | 2.9 |
+
+### The first PDF of a process
 
 The first PDF of a fresh process, the invoice, as a command-line tool, a
 serverless function or a server just started pays it. The peak memory is
@@ -251,6 +257,8 @@ that of the whole process, mostly the JVM itself:
 | the whole process, s | 0.28 | 0.31 | 0.24 | **0.08** | 0.10 | 0.00 | 0.01 |
 | its peak resident memory, MB | 87 | 91 | 84 | **54** | 42 | 10 | 28 |
 
+### Memory allocated per document
+
 Memory allocated per document, MB:
 
 | Document | PDFBox | iText | OpenPDF | PDFjet Java | PDFjet C# | PDFjet Go | PDFjet Swift |
@@ -261,6 +269,8 @@ Memory allocated per document, MB:
 | multilingual | 5.0 | 1.8 | **0.6** | 1.1 | 1.1 | 1.3 | — |
 | a letter | 5.0 | 1.4 | **1.0** | 1.5 | 1.4 | 2.2 | — |
 
+### The size of the PDFs
+
 The size of the PDFs, KB:
 
 | Document | PDFBox | iText | OpenPDF | PDFjet Java | PDFjet C# | PDFjet Go | PDFjet Swift |
@@ -270,6 +280,8 @@ The size of the PDFs, KB:
 | report | **1,816** | 1,824 | 1,817 | 1,829 | 1,829 | 1,830 | 1,833 |
 | multilingual | **22** | 30 | 25 | 35 | 35 | 36 | 38 |
 | a letter | **13** | 18 | 17 | 26 | 26 | 27 | 28 |
+
+### Lines of code
 
 Lines of code of each program, without blank lines and comments; "helpers"
 are the methods a library's tasks share (fonts, cells, footers, word

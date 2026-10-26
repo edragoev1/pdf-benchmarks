@@ -240,9 +240,11 @@ Java offers zlib at every level, and PDFjet uses 5, the fastest for the
 size it gives. .NET offers the same zlib at three levels only, Fastest,
 Optimal and SmallestSize, with no 5 between them. Go offers its own Deflate,
 written in Go; native zlib would need cgo, which a library in pure Go
-avoids. Swift has no Deflate of its own on every platform PDFjet runs on,
-so the Swift port has its own encoder, which searches less: its PDFs are
-the largest of the four, the statement 79 KB to the others' 70.
+avoids. Swift offers Deflate only on Apple's platforms, in Apple's
+Compression framework and Foundation's `NSData.compressed`; on Linux it
+offers neither, and the Swift port, which needs nothing but Foundation, has
+its own encoder, which searches less: its PDFs are the largest of the four,
+the statement 79 KB to the others' 70.
 
 The ports are not Java in other syntax. Each is written for its language,
 with its own standard library and idioms, and the results show it: one

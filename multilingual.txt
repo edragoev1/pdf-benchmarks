@@ -1,0 +1,8 @@
+English|Our office will be closed on Monday, 14 December, for maintenance of our systems. Orders placed that day will be shipped on Tuesday. Thank you for your patience.
+Français|Notre bureau sera fermé le lundi 14 décembre pour la maintenance de nos systèmes. Les commandes passées ce jour-là seront expédiées le mardi. Merci de votre patience.
+Deutsch|Unser Büro bleibt am Montag, dem 14. Dezember, wegen der Wartung unserer Systeme geschlossen. Bestellungen von diesem Tag werden am Dienstag versandt. Vielen Dank für Ihre Geduld.
+Polski|Nasze biuro będzie zamknięte w poniedziałek 14 grudnia z powodu konserwacji naszych systemów. Zamówienia złożone tego dnia zostaną wysłane we wtorek. Dziękujemy za cierpliwość.
+Türkçe|Ofisimiz, sistemlerimizin bakımı nedeniyle 14 Aralık Pazartesi günü kapalı olacaktır. O gün verilen siparişler Salı günü kargoya verilecektir. Sabrınız için teşekkür ederiz.
+Ελληνικά|Το γραφείο μας θα είναι κλειστό τη Δευτέρα 14 Δεκεμβρίου για τη συντήρηση των συστημάτων μας. Οι παραγγελίες εκείνης της ημέρας θα αποσταλούν την Τρίτη. Σας ευχαριστούμε για την υπομονή σας.
+Български|Нашият офис ще бъде затворен в понеделник, 14 декември, поради поддръжка на нашите системи. Поръчките от този ден ще бъдат изпратени във вторник. Благодарим ви за търпението.
+Українська|Наш офіс буде зачинено в понеділок, 14 грудня, через технічне обслуговування наших систем. Замовлення, зроблені цього дня, буде відправлено у вівторок. Дякуємо за ваше терпіння.

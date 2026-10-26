@@ -1,0 +1,5 @@
+go version go1.27.2 linux/amd64
+PDFjet 84e73b5f SimpleScatterChart: a named point can be a link; Example_26 links its countries
+cpus 12, AMD Ryzen 5 5600G with Radeon Graphics
+2026-10-26T10:36:05-04:00
+2026-10-26T10:38:03-04:00

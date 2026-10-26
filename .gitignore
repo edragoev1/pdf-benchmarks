@@ -1,0 +1,12 @@
+# Built or downloaded by the scripts
+out-*/
+classes/
+pdfjet-classes/
+lib/
+render/
+bin/
+obj/
+.build/
+go/fairbench
+*.png
+!images/*.png

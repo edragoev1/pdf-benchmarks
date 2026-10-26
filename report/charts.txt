@@ -1,0 +1,10 @@
+Invoice, 1 page|warm, ms|PDFBox=4.4=4.4 \*|iText=4.7=4.7 \*|OpenPDF=2.8=2.8 \*|PDFjet=2.1=2.1
+Statement, 12 pages|warm, ms|PDFBox=43.7=43.7|iText=72.5=72.5 \*|OpenPDF=17.3=17.3|PDFjet=7.6=7.6
+Report, 18 pages|warm, ms|PDFBox=231.7=231.7|iText=24.6=24.6 \*|OpenPDF=6.0=6.0|PDFjet=6.1=6.1 \*
+Multilingual notice|warm, ms|PDFBox=3.5=3.5|iText=2.5=2.5|OpenPDF=1.5=1.5|PDFjet=1.9=1.9
+1,000 letters|warm, s|PDFBox=3.95=3.95|iText=2.02=2.02|OpenPDF=1.96=1.96|PDFjet=1.84=1.84
+1,000 letters, SVG logo|warm, s|PDFBox=2.71=2.71|iText=1.94=1.94|OpenPDF=1.03=1.03|PDFjet=1.22=1.22
+First PDF of a process|ms|PDFBox=225.7=225.7|iText=252.2=252.2|OpenPDF=192.3=192.3|PDFjet=50.0=50.0
+Memory, the statement|MB allocated|PDFBox=89.9=89.9|iText=71.5=71.5|OpenPDF=56.0=56.0|PDFjet=4.7=4.7
+Lines of code|all the tasks|PDFBox=244=244|iText=170=170|OpenPDF=239=239|PDFjet=162=162
+Size, the invoice|KB|PDFBox=19=19|iText=24=24|OpenPDF=22=22|PDFjet=32=32

@@ -1,0 +1,5 @@
+Swift version 6.4.1 (swift-6.4.1-RELEASE)
+PDFjet 84e73b5f SimpleScatterChart: a named point can be a link; Example_26 links its countries
+cpus 12, AMD Ryzen 5 5600G with Radeon Graphics
+2026-10-26T10:40:18-04:00
+2026-10-26T10:42:33-04:00

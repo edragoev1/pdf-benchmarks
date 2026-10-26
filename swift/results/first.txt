@@ -1,0 +1,10 @@
+1 pdfjet-swift first-process-wall-s 0.01 max-rss-kb 27824
+1 pdfjet-swift plex first median-ms 4.63 bytes 33998
+2 pdfjet-swift first-process-wall-s 0.01 max-rss-kb 27604
+2 pdfjet-swift plex first median-ms 4.20 bytes 33998
+3 pdfjet-swift first-process-wall-s 0.01 max-rss-kb 27616
+3 pdfjet-swift plex first median-ms 4.26 bytes 33998
+4 pdfjet-swift first-process-wall-s 0.01 max-rss-kb 27752
+4 pdfjet-swift plex first median-ms 4.50 bytes 33998
+5 pdfjet-swift first-process-wall-s 0.01 max-rss-kb 27976
+5 pdfjet-swift plex first median-ms 4.57 bytes 33998

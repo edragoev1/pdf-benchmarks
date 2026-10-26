@@ -1,0 +1,10 @@
+1 pdfjet-dotnet first-process-wall-s 0.10 max-rss-kb 41228
+1 pdfjet-dotnet plex first median-ms 50.24 bytes 31789
+2 pdfjet-dotnet first-process-wall-s 0.10 max-rss-kb 40880
+2 pdfjet-dotnet plex first median-ms 49.93 bytes 31789
+3 pdfjet-dotnet first-process-wall-s 0.10 max-rss-kb 41272
+3 pdfjet-dotnet plex first median-ms 48.92 bytes 31789
+4 pdfjet-dotnet first-process-wall-s 0.09 max-rss-kb 41036
+4 pdfjet-dotnet plex first median-ms 49.07 bytes 31789
+5 pdfjet-dotnet first-process-wall-s 0.09 max-rss-kb 41132
+5 pdfjet-dotnet plex first median-ms 48.15 bytes 31789

@@ -1,0 +1,9 @@
+Building for production...
+Build complete! (0.38 secs)
+round 1 plex pdfjet-swift
+round 2 plex pdfjet-swift
+round 3 plex pdfjet-swift
+round 1 noto pdfjet-swift
+round 2 noto pdfjet-swift
+round 3 noto pdfjet-swift
+Results in results/runs.txt, results/memory.txt and results/first.txt; the PDFs in out-*/

@@ -1,0 +1,10 @@
+1 pdfjet-go first-process-wall-s 0.00 max-rss-kb 10200
+1 pdfjet-go plex first median-ms 4.37 bytes 32405
+2 pdfjet-go first-process-wall-s 0.00 max-rss-kb 10328
+2 pdfjet-go plex first median-ms 4.38 bytes 32405
+3 pdfjet-go first-process-wall-s 0.00 max-rss-kb 9816
+3 pdfjet-go plex first median-ms 3.61 bytes 32405
+4 pdfjet-go first-process-wall-s 0.00 max-rss-kb 10072
+4 pdfjet-go plex first median-ms 4.32 bytes 32405
+5 pdfjet-go first-process-wall-s 0.00 max-rss-kb 10200
+5 pdfjet-go plex first median-ms 4.12 bytes 32405

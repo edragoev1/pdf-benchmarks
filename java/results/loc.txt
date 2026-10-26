@@ -1,0 +1,8 @@
+lib       invoice  statement  report  letters multilingual  helpers  total
+PDFjet         31         25      32       20           17       37    162
+IText          39         30      22       17           17       45    170
+OpenPDF        57         37      32       25           23       65    239
+PDFBox         28         26      53       23           24       90    244
+C#             32         25      32       20           17       35    161
+Go             36         26      35       23           20       35    175
+Swift          29         22      31       18           15       45    160

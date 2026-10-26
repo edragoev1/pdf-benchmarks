@@ -1,0 +1,40 @@
+4 PDFjetFair first-process-wall-s 0.08 max-rss-kb 53084
+4 pdfjet plex first median-ms 49.90 bytes 31789
+4 ITextFair first-process-wall-s 0.31 max-rss-kb 88816
+4 itext plex first median-ms 252.82 bytes 24086
+2 ITextFair first-process-wall-s 0.31 max-rss-kb 90048
+2 itext plex first median-ms 251.47 bytes 24086
+3 PDFBoxFair first-process-wall-s 0.28 max-rss-kb 84948
+3 pdfbox plex first median-ms 223.96 bytes 18784
+5 PDFjetFair first-process-wall-s 0.08 max-rss-kb 53100
+5 pdfjet plex first median-ms 49.95 bytes 31789
+3 OpenPDFFair first-process-wall-s 0.24 max-rss-kb 82672
+3 openpdf plex first median-ms 193.37 bytes 22166
+5 ITextFair first-process-wall-s 0.30 max-rss-kb 89568
+5 itext plex first median-ms 252.20 bytes 24086
+1 ITextFair first-process-wall-s 0.31 max-rss-kb 88868
+1 itext plex first median-ms 251.24 bytes 24086
+1 PDFBoxFair first-process-wall-s 0.28 max-rss-kb 85324
+1 pdfbox plex first median-ms 225.67 bytes 18784
+2 PDFBoxFair first-process-wall-s 0.28 max-rss-kb 84948
+2 pdfbox plex first median-ms 226.38 bytes 18784
+2 PDFjetFair first-process-wall-s 0.08 max-rss-kb 53220
+2 pdfjet plex first median-ms 49.89 bytes 31789
+3 PDFjetFair first-process-wall-s 0.08 max-rss-kb 53244
+3 pdfjet plex first median-ms 50.30 bytes 31789
+5 OpenPDFFair first-process-wall-s 0.25 max-rss-kb 81208
+5 openpdf plex first median-ms 196.03 bytes 22166
+1 OpenPDFFair first-process-wall-s 0.24 max-rss-kb 82024
+1 openpdf plex first median-ms 191.84 bytes 22166
+3 ITextFair first-process-wall-s 0.31 max-rss-kb 88784
+3 itext plex first median-ms 255.31 bytes 24086
+2 OpenPDFFair first-process-wall-s 0.24 max-rss-kb 81724
+2 openpdf plex first median-ms 191.11 bytes 22166
+4 PDFBoxFair first-process-wall-s 0.28 max-rss-kb 85348
+4 pdfbox plex first median-ms 223.65 bytes 18784
+1 PDFjetFair first-process-wall-s 0.08 max-rss-kb 52972
+1 pdfjet plex first median-ms 49.95 bytes 31789
+4 OpenPDFFair first-process-wall-s 0.24 max-rss-kb 81464
+4 openpdf plex first median-ms 192.29 bytes 22166
+5 PDFBoxFair first-process-wall-s 0.29 max-rss-kb 84608
+5 pdfbox plex first median-ms 237.99 bytes 18784

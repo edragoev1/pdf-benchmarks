@@ -1,9 +1,9 @@
 /*
  * Report.java
  *
- * The report of the benchmark, as a landscape PDF made with PDFjet: a first
- * page of bar charts, one for each document, the best of each in navy, and
- * after it the article, drawn from its Markdown. The figures of the charts
+ * The report of the benchmark, as a landscape PDF made with PDFjet: pages of
+ * bar charts, one for each measurement, the best of each in navy, and after
+ * them the article, drawn from its Markdown, with its tables in an appendix. The figures of the charts
  * come from charts.txt and the tables of the article from the raw results,
  * both written by make-tables.py, so that no figure is typed by hand.
  *
@@ -32,7 +32,20 @@ public class Report {
         pdf.setTitle("Generating PDFs in Java: a reproducible benchmark of four libraries");
 
         List<Page> pages = new ArrayList<>();
-        pages.add(chartsPage(pdf, Files.readAllLines(Paths.get(chartsFile), StandardCharsets.UTF_8)));
+        // charts.txt: the charts of the first page, then for each other page a
+        // line "#page|heading|note" and its charts; "#row" starts a new row
+        List<List<String>> groups = new ArrayList<>();
+        groups.add(new ArrayList<>());
+        for (String line : Files.readAllLines(Paths.get(chartsFile), StandardCharsets.UTF_8)) {
+            if (line.startsWith("#page|")) {
+                groups.add(new ArrayList<>());
+            }
+            groups.get(groups.size() - 1).add(line);
+        }
+        pages.add(chartsPage(pdf, groups.get(0)));
+        for (int i = 1; i < groups.size(); i++) {
+            pages.add(moreChartsPage(pdf, groups.get(i)));
+        }
 
         // The article, in the fonts and colors of md2pdf, in a column of
         // reading width
@@ -48,7 +61,14 @@ public class Report {
                 .setFullWidthTables(true)
                 .setMargins(96f, 48f, 96f, 54f);
         String text = new String(Files.readAllBytes(Paths.get(markdownFile)), StandardCharsets.UTF_8);
-        markdown.drawOn(pdf, text, pages, Letter.LANDSCAPE);
+        // The appendix starts on a page of its own, as each drawOn does
+        int appendix = text.indexOf("\n## Appendix");
+        if (appendix == -1) {
+            markdown.drawOn(pdf, text, pages, Letter.LANDSCAPE);
+        } else {
+            markdown.drawOn(pdf, text.substring(0, appendix), pages, Letter.LANDSCAPE);
+            markdown.drawOn(pdf, text.substring(appendix + 1), pages, Letter.LANDSCAPE);
+        }
 
         Font small = font(pdf, "IBMPlexSans/IBMPlexSans-Regular.ttf", 8f);
         for (int i = 0; i < pages.size(); i++) {
@@ -59,13 +79,12 @@ public class Report {
         pdf.complete();
     }
 
-    // The first page: the title, who made the benchmark, and a bar chart for
-    // each line of charts.txt, five to a row, the best of each highlighted.
+    // The first page: the title, who made the benchmark, a bar chart for each
+    // of its lines of charts.txt, and the libraries compared.
     static Page chartsPage(PDF pdf, List<String> charts) throws Exception {
         Page page = new Page(pdf, Letter.LANDSCAPE, Page.DETACHED);
         Font title = font(pdf, "IBMPlexSans/IBMPlexSans-SemiBold.ttf", 22f);
         Font semi = font(pdf, "IBMPlexSans/IBMPlexSans-SemiBold.ttf", 10f);
-        Font regular = font(pdf, "IBMPlexSans/IBMPlexSans-Regular.ttf", 8.5f);
         Font note = font(pdf, "IBMPlexSans/IBMPlexSans-Regular.ttf", 10f);
 
         page.setBrushColor(NAVY);
@@ -76,25 +95,66 @@ public class Report {
         intro.add(new Paragraph(new TextLine(note, "Five business documents and a batch of letters, made by "
                 + "each library the way its own documentation shows, every PDF checked, in IBM Plex Sans. "
                 + "Lower is better in every chart, and the best is in navy. Written by the author of "
-                + "PDFjet, with everything needed to run it again published; the tables, the method and "
-                + "where PDFjet loses are on the pages after this one.").setTextColor(MUTED)));
+                + "PDFjet, with everything needed to run it again published; the other measurements, "
+                + "the features of each library, the method and the tables of every figure are on the "
+                + "pages after this one.").setTextColor(MUTED)));
         new TextFrame(intro).setLocation(M, M + 34f).setWidth(TW).drawOn(page);
 
+        float bottom = drawCharts(pdf, page, charts, M + 84f);
+        libraries(page, bottom + 24f, semi, note);
+        return page;
+    }
+
+    // A page of more charts, under its heading and a note on what they show.
+    static Page moreChartsPage(PDF pdf, List<String> charts) throws Exception {
+        Page page = new Page(pdf, Letter.LANDSCAPE, Page.DETACHED);
+        Font semi = font(pdf, "IBMPlexSans/IBMPlexSans-SemiBold.ttf", 15f);
+        Font note = font(pdf, "IBMPlexSans/IBMPlexSans-Regular.ttf", 10f);
+        String[] head = charts.get(0).split("\\|", 3);
+        page.setBrushColor(NAVY);
+        page.fillRect(M, M - 6f, 36f, 4f);
+        new TextLine(semi, head[1]).setTextColor(INK)
+                .setStructureType(StructElem.H2).setLocation(M, M + 16f).drawOn(page);
+        List<Paragraph> paragraphs = new ArrayList<>();
+        paragraphs.add(new Paragraph(new TextLine(note, head[2] + " Lower is better, and the best is in navy.")
+                .setTextColor(MUTED)));
+        new TextFrame(paragraphs).setLocation(M, M + 28f).setWidth(TW).drawOn(page);
+        drawCharts(pdf, page, charts.subList(1, charts.size()), M + 72f);
+        return page;
+    }
+
+    // A bar chart for each line, five to a row and a new row at "#row", the
+    // best (the lowest) of each highlighted. Returns the bottom of the last row.
+    static float drawCharts(PDF pdf, Page page, List<String> charts, float top) throws Exception {
+        Font semi = font(pdf, "IBMPlexSans/IBMPlexSans-SemiBold.ttf", 10f);
+        Font regular = font(pdf, "IBMPlexSans/IBMPlexSans-Regular.ttf", 8.5f);
         float gap = 12f;
         int perRow = 5;
         float cw = (TW - (perRow - 1) * gap) / perRow;
-        float top = M + 84f;
         float rowBottom = top;
-        for (int c = 0; c < charts.size(); c++) {
-            String[] fields = charts.get(c).split("\\|");
-            if (c % perRow == 0 && c > 0) {
-                top = rowBottom + gap;
+        int column = 0;
+        for (String line : charts) {
+            if (line.equals("#row") || column == perRow) {
+                top = rowBottom + 2 * gap;
+                column = 0;
+                if (line.equals("#row")) {
+                    continue;
+                }
             }
-            float x = M + (c % perRow) * (cw + gap);
-            boolean seconds = fields[1].contains(", s");
+            String[] fields = line.split("\\|");
+            float x = M + column * (cw + gap);
+            column++;
+            // As many decimals as the figures of the tables have
+            int digits = 0;
+            for (int i = 2; i < fields.length; i++) {
+                String label = fields[i].split("=", 3)[2].split(" ")[0];
+                if (label.contains(".")) {
+                    digits = Math.max(digits, label.length() - label.indexOf('.') - 1);
+                }
+            }
             SimpleBarChart chart = new SimpleBarChart(semi, regular)
                     .setTitle(fields[0]).setSubtitle(fields[1])
-                    .setFractionDigits(seconds ? 2 : (fields[1].equals("KB") || fields[0].equals("Lines of code")) ? 0 : 1);
+                    .setFractionDigits(digits);
             int best = 0;
             float bestValue = Float.MAX_VALUE;
             for (int i = 2; i < fields.length; i++) {
@@ -110,28 +170,24 @@ public class Report {
             float[] xy = chart.drawOn(page);
             rowBottom = Math.max(rowBottom, xy[1]);
         }
-        summary(page, rowBottom + 24f, semi, note);
-        return page;
+        return rowBottom;
     }
 
-    // When to use which, in short, in two columns under the charts.
-    static void summary(Page page, float y, Font semi, Font note) throws Exception {
+    // The libraries compared, with their versions and licenses, in two
+    // columns under the charts.
+    static void libraries(Page page, float y, Font semi, Font note) throws Exception {
         String[][] uses = {
-            {"Apache PDFBox", "to read, edit, render or extract text from existing PDFs, and for the "
-                    + "smallest files. The most used of the four."},
-            {"iText", "for the most features in one library, and the shortest code for flowing "
-                    + "documents, under the AGPL or a commercial license."},
-            {"OpenPDF", "for multilingual text, a large font and SVG with Batik, under the LGPL "
-                    + "or MPL, on Java 21."},
-            {"PDFjet", "to generate business documents fast, with a fast first PDF, tagged PDF/UA, "
-                    + "SVG and barcodes in one jar, under MIT, in Java, C#, Go and Swift."},
+            {"Apache PDFBox 3.0.8", "Apache License 2.0, Java 8 and later."},
+            {"iText Core 9.8.0", "AGPL-3.0 or a commercial license, Java 8 and later."},
+            {"OpenPDF 3.0.5", "LGPL-2.1 or MPL-2.0, Java 21 and later."},
+            {"PDFjet 9.1.5", "MIT License, Java 8 and later; also in C#, Go and Swift."},
         };
-        new TextLine(semi, "When to use which").setFontSize(13f).setTextColor(INK)
+        new TextLine(semi, "The libraries").setFontSize(13f).setTextColor(INK)
                 .setStructureType(StructElem.H2).setLocation(M, y).drawOn(page);
         float colW = (TW - 24f) / 2f;
         for (int i = 0; i < uses.length; i++) {
             float x = M + (i % 2) * (colW + 24f);
-            float top = y + 14f + (i / 2) * 44f;
+            float top = y + 14f + (i / 2) * 20f;
             List<Paragraph> paragraphs = new ArrayList<>();
             Paragraph p = new Paragraph();
             p.add(new TextLine(semi, uses[i][0] + ": ").setFontSize(10f).setTextColor(NAVY));

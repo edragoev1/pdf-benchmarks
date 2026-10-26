@@ -236,6 +236,74 @@ def charts(path):
     add("Size, the invoice", "KB", [(name, stat(lib, "plex", "invoice")["kb"],
                                      "{:,.0f}".format(stat(lib, "plex", "invoice")["kb"]))
                                     for lib, name in zip(LIBS, LIB_NAMES)])
+    # The pages of charts after the first: a line "#page|heading|note" starts
+    # a page, the charts after it are on it
+    def page(heading, note):
+        lines.append("#page|%s|%s" % (heading, note))
+
+    def row():
+        lines.append("#row")
+
+    def libs_chart(title, unit, task, font, key, seconds=False, digits=1):
+        values = []
+        for lib, name in zip(LIBS, LIB_NAMES):
+            s = stat(lib, font, task)
+            if key == "ms":
+                v = time_value(s, seconds)
+                values.append((name, v[0], v[1]))
+            elif key == "alloc":
+                values.append((name, s["alloc"], "%.1f" % s["alloc"]))
+            else:
+                values.append((name, s["kb"], "{:,.0f}".format(s["kb"])))
+        add(title, unit, values)
+
+    page("With Noto Sans, a large font, and the memory each document allocates",
+         "Noto Sans has far more glyphs than IBM Plex Sans; the memory is what a document allocates while it is made.")
+    for task, title in [("invoice", "Invoice, Noto Sans"), ("report", "Report, Noto Sans"),
+                        ("multilingual", "Multilingual, Noto Sans")]:
+        libs_chart(title, "warm, ms", task, "noto", "ms")
+    row()
+    for task, title in [("invoice", "Memory, the invoice"), ("statement", "Memory, the statement"),
+                        ("report", "Memory, the report"), ("multilingual", "Memory, the notice"),
+                        ("letters", "Memory, a letter")]:
+        libs_chart(title, "MB allocated", task, "plex", "alloc")
+
+    page("The size of the PDFs, and the first PDF of a process",
+         "The first PDF of a fresh process is what a command-line tool, a serverless function or a server just "
+         "started pays; its peak memory is that of the whole process, mostly the JVM.")
+    for task, title in [("invoice", "Size, the invoice"), ("statement", "Size, the statement"),
+                        ("report", "Size, the report"), ("multilingual", "Size, the notice"),
+                        ("letters", "Size, a letter")]:
+        libs_chart(title, "KB", task, "plex", "kb")
+    row()
+    add("First PDF, the invoice", "ms", [(name, statistics.median(first[lib]), fmt(statistics.median(first[lib])))
+                                         for lib, name in zip(LIBS, LIB_NAMES)])
+    add("First PDF, the whole process", "s", [(name, statistics.median(x[0] for x in process[lib]),
+                                               "%.2f" % statistics.median(x[0] for x in process[lib]))
+                                              for lib, name in zip(LIBS, LIB_NAMES)])
+    add("First PDF, peak memory", "MB, the process",
+        [(name, statistics.median(x[1] for x in process[lib]) * 1024 / 1e6,
+          "%.0f" % (statistics.median(x[1] for x in process[lib]) * 1024 / 1e6)) for lib, name in zip(LIBS, LIB_NAMES)])
+
+    page("PDFjet in Java, C#, Go and Swift",
+         "The same documents made by the same library in its four languages; each port is its own code, so a "
+         "difference can come from a port as well as from its language.")
+    ports = [("pdfjet", "Java"), ("pdfjet-dotnet", "C#"), ("pdfjet-go", "Go"), ("pdfjet-swift", "Swift")]
+    for task, title, seconds in [("invoice", "Invoice, 1 page", False), ("statement", "Statement, 12 pages", False),
+                                 ("report", "Report, 18 pages", False), ("multilingual", "Multilingual notice", False),
+                                 ("letters", "1,000 letters", True), ("svgletters", "1,000 letters, SVG logo", True)]:
+        values = []
+        for lib, name in ports:
+            v = time_value(stat(lib, "plex", task), seconds)
+            values.append((name, v[0], v[1]))
+        add(title, "warm, s" if seconds else "warm, ms", values)
+        if task == "multilingual":
+            row()
+    add("First PDF, the invoice", "ms", [(name, statistics.median(first[lib]), fmt(statistics.median(first[lib])))
+                                         for lib, name in ports])
+    add("First PDF, peak memory", "MB, the process",
+        [(name, statistics.median(x[1] for x in process[lib]) * 1024 / 1e6,
+          "%.0f" % (statistics.median(x[1] for x in process[lib]) * 1024 / 1e6)) for lib, name in ports])
     open(path, "w").write("\n".join(lines) + "\n")
 
 

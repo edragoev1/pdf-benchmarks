@@ -8,3 +8,33 @@ First PDF of a process|ms|PDFBox=225.7=225.7|iText=252.2=252.2|OpenPDF=192.3=192
 Memory, the statement|MB allocated|PDFBox=89.9=89.9|iText=71.5=71.5|OpenPDF=56.0=56.0|PDFjet=4.7=4.7
 Lines of code|all the tasks|PDFBox=244=244|iText=170=170|OpenPDF=239=239|PDFjet=162=162
 Size, the invoice|KB|PDFBox=19=19|iText=24=24|OpenPDF=22=22|PDFjet=32=32
+#page|With Noto Sans, a large font, and the memory each document allocates|Noto Sans has far more glyphs than IBM Plex Sans; the memory is what a document allocates while it is made.
+Invoice, Noto Sans|warm, ms|PDFBox=18.9=18.9 \*|iText=5.9=5.9 \*|OpenPDF=3.6=3.6 \*|PDFjet=5.0=5.0
+Report, Noto Sans|warm, ms|PDFBox=1350=1,350|iText=28.0=28.0|OpenPDF=6.8=6.8 \*|PDFjet=8.8=8.8
+Multilingual, Noto Sans|warm, ms|PDFBox=22.1=22.1|iText=4.2=4.2|OpenPDF=2.0=2.0|PDFjet=4.5=4.5
+#row
+Memory, the invoice|MB allocated|PDFBox=4.0=4.0|iText=3.6=3.6|OpenPDF=2.2=2.2|PDFjet=1.6=1.6
+Memory, the statement|MB allocated|PDFBox=89.9=89.9|iText=71.5=71.5|OpenPDF=56.0=56.0|PDFjet=4.7=4.7
+Memory, the report|MB allocated|PDFBox=232.6=232.6|iText=26.8=26.8|OpenPDF=13.4=13.4|PDFjet=12.1=12.1
+Memory, the notice|MB allocated|PDFBox=5.0=5.0|iText=1.8=1.8|OpenPDF=0.6=0.6|PDFjet=1.1=1.1
+Memory, a letter|MB allocated|PDFBox=5.0=5.0|iText=1.4=1.4|OpenPDF=1.0=1.0|PDFjet=1.5=1.5
+#page|The size of the PDFs, and the first PDF of a process|The first PDF of a fresh process is what a command-line tool, a serverless function or a server just started pays; its peak memory is that of the whole process, mostly the JVM.
+Size, the invoice|KB|PDFBox=19=19|iText=24=24|OpenPDF=22=22|PDFjet=32=32
+Size, the statement|KB|PDFBox=42=42|iText=62=62|OpenPDF=59=59|PDFjet=70=70
+Size, the report|KB|PDFBox=1816=1,816|iText=1824=1,824|OpenPDF=1817=1,817|PDFjet=1829=1,829
+Size, the notice|KB|PDFBox=22=22|iText=30=30|OpenPDF=25=25|PDFjet=35=35
+Size, a letter|KB|PDFBox=13=13|iText=18=18|OpenPDF=17=17|PDFjet=26=26
+#row
+First PDF, the invoice|ms|PDFBox=225.7=225.7|iText=252.2=252.2|OpenPDF=192.3=192.3|PDFjet=50.0=50.0
+First PDF, the whole process|s|PDFBox=0.28=0.28|iText=0.31=0.31|OpenPDF=0.24=0.24|PDFjet=0.08=0.08
+First PDF, peak memory|MB, the process|PDFBox=87=87|iText=91=91|OpenPDF=84=84|PDFjet=54=54
+#page|PDFjet in Java, C#, Go and Swift|The same documents made by the same library in its four languages; each port is its own code, so a difference can come from a port as well as from its language.
+Invoice, 1 page|warm, ms|Java=2.1=2.1|C#=2.0=2.0|Go=1.5=1.5 \*|Swift=2.1=2.1
+Statement, 12 pages|warm, ms|Java=7.6=7.6|C#=8.1=8.1|Go=4.8=4.8|Swift=11.3=11.3
+Report, 18 pages|warm, ms|Java=6.1=6.1 \*|C#=9.0=9.0|Go=6.3=6.3|Swift=12.9=12.9
+Multilingual notice|warm, ms|Java=1.9=1.9|C#=1.7=1.7|Go=1.1=1.1 \*|Swift=1.7=1.7
+#row
+1,000 letters|warm, s|Java=1.84=1.84|C#=1.74=1.74|Go=1.50=1.50|Swift=1.63=1.63
+1,000 letters, SVG logo|warm, s|Java=1.22=1.22|C#=1.17=1.17|Go=1.04=1.04|Swift=1.69=1.69
+First PDF, the invoice|ms|Java=50.0=50.0|C#=49.1=49.1|Go=4.3=4.3|Swift=4.5=4.5
+First PDF, peak memory|MB, the process|Java=54=54|C#=42=42|Go=10=10|Swift=28=28

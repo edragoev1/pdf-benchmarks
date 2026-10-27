@@ -2,7 +2,7 @@
 
 I wrote PDFjet, one of the four libraries compared here, and have been
 writing it since 2001. For the last two months I have worked on it with
-Claude, an AI coding assistant. I commissioned this benchmark; Claude chose
+Claude. I commissioned this benchmark; Claude chose
 the documents, their content and the way each library is used, wrote the
 programs, ran them and wrote the tables. Both are reasons to be suspicious
 of the results, so everything needed to check them is published in

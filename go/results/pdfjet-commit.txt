@@ -1,1 +1,1 @@
-6a295afd BarChart: the look of the simple charts
+3d8e30c3 TODO: three entries brought up to date

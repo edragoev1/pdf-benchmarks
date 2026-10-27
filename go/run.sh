@@ -28,7 +28,7 @@ fi
 } > $ENVFILE
 [ -n "$BUILD_ONLY" ] && { echo "Built."; exit 0; }
 
-tasks() { [ "$1" = noto ] && echo invoice,report,multilingual || echo invoice,statement,report,letters,svgletters,multilingual; }
+tasks() { [ "$1" = noto ] && echo invoice,statement,report,svgletters,multilingual || echo invoice,statement,report,letters,svgletters,multilingual; }
 
 if [ -n "$QUICK" ]; then
     for font in plex noto; do

@@ -112,8 +112,8 @@ in every library:
 - **letters**: 1,000 one-page letters with the logo as SVG, timed as the
   batch.
 
-All in **IBM Plex Sans**, embedded as subsets; the invoice, the report and
-the notice again in **Noto Sans**, a much larger font.
+All in **IBM Plex Sans**, embedded as subsets, and all again in **Noto
+Sans**, a much larger font.
 
 **Method.** Each library in its own fresh JVM, in a random order, three
 rounds. Each task is warmed up for at least 20 runs and 3 seconds, then
@@ -136,11 +136,11 @@ PDFjet in C#, Go and Swift, shown with them but not ranked against them.
 <!-- table java-plex -->
 | Document | PDFBox | iText | OpenPDF | PDFjet Java | PDFjet C# | PDFjet Go | PDFjet Swift |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| invoice, 1 page | 4.2 | 4.8 | 2.7 | **1.6** | 1.7 \* | 1.5 \* | 1.9 \* |
-| statement, 12 pages | 43.5 | 70.2 \* | 17.3 | **5.5** | 7.8 | 4.8 | 11.0 \* |
-| report, 18 pages | 230.3 | 24.6 | 6.0 | **5.3** | 8.6 \* | 6.0 | 13.2 \* |
-| multilingual, 1 page | 3.5 | 2.6 | 1.5 | **1.4** | 1.4 | 1.0 \* | 1.6 |
-| 1,000 letters, s | 2.69 | 1.95 | 1.03 | **0.90** | 0.93 | 0.91 | 1.51 |
+| invoice, 1 page | 4.3 \* | 4.8 \* | 2.9 \* | **1.6 \*** | 1.8 \* | 1.7 \* | 2.0 \* |
+| statement, 12 pages | 43.2 | 70.0 \* | 18.0 | **5.5 \*** | 7.8 | 4.9 \* | 11.0 |
+| report, 18 pages | 230.4 | 24.5 | 6.0 | **5.6** | 8.5 \* | 6.4 | 13.4 |
+| multilingual, 1 page | 3.5 \* | 2.6 | 1.5 | **1.4** | 1.5 \* | 1.2 \* | 1.6 |
+| 1,000 letters, s | 2.68 | 1.98 | 1.04 \* | **0.89** | 0.93 \* | 0.96 | 1.53 |
 <!-- end java-plex -->
 
 To draw the SVG logo the others need another module or library, and each
@@ -155,14 +155,16 @@ was given the one its users would choose:
 | PDFjet | nothing else |
 <!-- end svg-needs -->
 
-With Noto Sans, a large font, ms:
+With Noto Sans, a large font, ms (the letters: the batch of 1,000, s):
 
 <!-- table java-noto -->
 | Document | PDFBox | iText | OpenPDF | PDFjet Java | PDFjet C# | PDFjet Go | PDFjet Swift |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| invoice | 17.7 | 5.9 | 3.6 \* | **2.6** | 2.7 | 2.4 \* | 2.7 \* |
-| report | 1,320 | 27.8 | 6.9 | **6.5** | 10.0 \* | 7.2 | 14.6 |
-| multilingual | 21.8 | 4.3 | **2.1** | 2.1 | 2.3 | 1.8 | 2.3 |
+| invoice | 19.0 | 6.4 \* | 3.6 \* | **2.6** | 2.6 | 2.3 | 3.0 \* |
+| statement | 523.8 \* | 75.3 \* | 18.4 | **6.7 \*** | 9.1 | 5.8 \* | 12.2 \* |
+| report | 1,340 | 28.0 | 6.9 | **6.7 \*** | 10.4 \* | 7.6 \* | 14.6 |
+| multilingual | 22.1 | 4.3 \* | **2.1** | 2.1 | 2.4 | 1.9 \* | 2.4 \* |
+| 1,000 letters, s | 22.01 | 3.20 | 1.91 | **1.88** | 2.06 | 1.82 \* | 2.43 \* |
 <!-- end java-noto -->
 
 The first PDF of a fresh process, each of the five documents, as a
@@ -172,16 +174,16 @@ ms; then the peak memory of the whole process, mostly the JVM itself, MB:
 <!-- table first-pdf -->
 | | PDFBox | iText | OpenPDF | PDFjet Java | PDFjet C# | PDFjet Go | PDFjet Swift |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| the invoice, ms | 224.7 | 251.9 | 189.5 | **49.4** | 50.1 | 3.5 | 4.1 |
-| the statement, ms | 357.7 | 553.3 | 253.9 | **86.7** | 64.3 | 7.8 | 14.7 |
-| the report, ms | 683.4 | 370.7 | 186.0 | **80.7** | 66.3 | 8.8 | 18.3 |
-| the notice, ms | 198.5 | 206.4 | 128.2 | **35.4** | 38.5 | 2.6 | 5.9 |
-| a letter, ms | 360.3 | 356.9 | 426.5 | **39.0** | 51.0 | 2.4 | 3.4 |
-| the invoice, peak memory, MB | 87 | 89 | 84 | **54** | 42 | 9 | 28 |
-| the statement, peak memory, MB | 157 | 169 | 136 | **65** | 47 | 11 | 35 |
-| the report, peak memory, MB | 327 | 139 | 102 | **73** | 52 | 14 | 35 |
-| the notice, peak memory, MB | 87 | 85 | 72 | **54** | 41 | 8 | 29 |
-| a letter, peak memory, MB | 113 | 131 | 135 | **54** | 42 | 8 | 28 |
+| the invoice, ms | 245.0 | 265.2 | 199.5 | **50.0** | 48.6 | 3.6 | 4.1 |
+| the statement, ms | 372.9 | 580.5 | 265.9 | **90.3** | 63.1 | 8.0 | 14.8 |
+| the report, ms | 674.4 | 393.6 | 199.7 | **81.9** | 63.8 | 9.4 | 18.5 |
+| the notice, ms | 199.5 | 219.5 | 135.1 | **37.4** | 38.4 | 2.7 | 5.7 |
+| a letter, ms | 373.7 | 357.8 | 454.2 | **39.6** | 49.8 | 2.4 | 3.4 |
+| the invoice, peak memory, MB | 88 | 89 | 84 | **55** | 42 | 9 | 28 |
+| the statement, peak memory, MB | 155 | 169 | 136 | **65** | 46 | 11 | 35 |
+| the report, peak memory, MB | 326 | 134 | 102 | **72** | 52 | 14 | 35 |
+| the notice, peak memory, MB | 86 | 85 | 71 | **54** | 41 | 8 | 29 |
+| a letter, peak memory, MB | 113 | 132 | 135 | **54** | 42 | 9 | 29 |
 <!-- end first-pdf -->
 
 Memory allocated per document, MB:
@@ -190,8 +192,8 @@ Memory allocated per document, MB:
 | Document | PDFBox | iText | OpenPDF | PDFjet Java | PDFjet C# | PDFjet Go | PDFjet Swift |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | invoice | 4.0 | 3.7 | 2.1 | **1.6** | 1.4 | 2.6 | — |
-| statement | 89.6 | 71.7 | 55.8 | **4.6** | 5.4 | 4.7 | — |
-| report | 231.8 | 26.9 | 13.4 | **12.0** | 12.5 | 9.1 | — |
+| statement | 90.1 | 71.7 | 55.8 | **4.6** | 5.4 | 4.7 | — |
+| report | 233.2 | 26.8 | 13.4 | **12.0** | 12.5 | 9.1 | — |
 | multilingual | 5.0 | 1.9 | **0.5** | 1.0 | 1.0 | 1.3 | — |
 | a letter | 4.9 | 2.5 | **0.5** | 1.0 | 0.9 | 1.5 | — |
 <!-- end memory -->
@@ -272,3 +274,4 @@ make-tables.py makes every table of this report from the results.
   PDFBox.
 - PDFjet's Noto report is 21 pages to the others' 20: it spaces lines by the
   font's own height.
+

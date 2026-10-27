@@ -200,7 +200,8 @@ def lines_of_code():
 TABLES = {
     "java-plex": lambda: times(ALL, ALL_NAMES, "plex", DOCS),
     "java-noto": lambda: times(ALL, ALL_NAMES, "noto",
-                               [("invoice", "invoice"), ("report", "report"), ("multilingual", "multilingual")]),
+                               [("invoice", "invoice"), ("statement", "statement"), ("report", "report"),
+                                ("multilingual", "multilingual"), ("svgletters", "1,000 letters, s")]),
     "first-pdf": lambda: first_pdf(ALL, ALL_NAMES),
     "memory": lambda: memory(ALL, ALL_NAMES),
     "sizes": lambda: sizes(ALL, ALL_NAMES),
@@ -281,24 +282,37 @@ def charts(path):
 
     page("With Noto Sans, a large font")
     caption("Time per document, Noto Sans", "These tests use Noto Sans, which has many more glyphs than IBM Plex Sans.")
-    for task, title in [("invoice", "Invoice, Noto Sans"), ("report", "Report, Noto Sans"),
-                        ("multilingual", "Multilingual, Noto Sans")]:
-        libs_chart(title, "warm, ms", task, "noto", "ms")
+    for task, title, seconds in [("invoice", "Invoice, Noto Sans", False), ("statement", "Statement, Noto Sans", False),
+                                 ("report", "Report, Noto Sans", False), ("multilingual", "Multilingual, Noto Sans", False),
+                                 ("svgletters", "1,000 letters, Noto Sans", True)]:
+        libs_chart(title, "warm, s" if seconds else "warm, ms", task, "noto", "ms", seconds)
     page("The lines of code of the programs")
-    caption("Lines of code, all the tasks", "Without blank lines and comments.")
+    caption("Lines of code of each program", "Without blank lines and comments.")
     loc = {}
     for line in subprocess.run([os.path.join(HERE, "java", "loc.sh")], capture_output=True,
                                text=True).stdout.splitlines():
         fields = line.split()
         if fields and fields[0] != "lib":
-            loc[fields[0]] = fields[-1]
-    # loc.sh names iText IText; every other library by its own name
-    add("Lines of code", "all the tasks", [(name, int(loc[{"iText": "IText"}.get(name, name)]),
-                                            loc[{"iText": "IText"}.get(name, name)]) for name in LIB_NAMES])
+            loc[fields[0]] = fields[1:]
+    # loc.sh names iText IText; every other library by its own name. Its
+    # columns: invoice, statement, report, letters, multilingual, helpers, total
+    def loc_chart(title, unit, column):
+        values = []
+        for name in LIB_NAMES:
+            text = loc[{"iText": "IText"}.get(name, name)][column]
+            values.append((name, int(text), text))
+        add(title, unit, values)
 
+    for column, title in [(0, "The invoice"), (1, "The statement"), (2, "The report"),
+                          (4, "The notice"), (3, "The letters")]:
+        loc_chart(title, "lines", column)
+    caption("The helpers the programs share, and the total", "The helpers are counted in the total.")
+    loc_chart("The helpers", "lines", 5)
+    loc_chart("All the programs", "lines", 6)
+
+    ports = [("pdfjet", "Java"), ("pdfjet-dotnet", "C#"), ("pdfjet-go", "Go"), ("pdfjet-swift", "Swift")]
     page("PDFjet in Java, C#, Go and Swift")
     caption("Time per document, the four ports", "These tests use IBM Plex Sans.")
-    ports = [("pdfjet", "Java"), ("pdfjet-dotnet", "C#"), ("pdfjet-go", "Go"), ("pdfjet-swift", "Swift")]
     for task, title, seconds in [("invoice", "Invoice, 1 page", False), ("statement", "Statement, 12 pages", False),
                                  ("report", "Report, 18 pages", False), ("multilingual", "Multilingual notice", False),
                                  ("svgletters", "1,000 letters, SVG logo", True)]:
@@ -307,11 +321,21 @@ def charts(path):
             v = time_value(stat(lib, "plex", task), seconds)
             values.append((name, v[0], v[1]))
         add(title, "warm, s" if seconds else "warm, ms", values)
+    caption("The size of the PDFs, the four ports", "These tests use IBM Plex Sans.")
+    for task, title in [("invoice", "Size, the invoice"), ("statement", "Size, the statement"),
+                        ("report", "Size, the report"), ("multilingual", "Size, the notice"),
+                        ("svgletters", "Size, a letter")]:
+        add(title, "KB", [(name, stat(lib, "plex", task)["kb"], "{:,.0f}".format(stat(lib, "plex", task)["kb"]))
+                          for lib, name in ports])
+
+    page("PDFjet in Java, C#, Go and Swift: the first PDF")
     caption("The first PDF of a fresh process, the four ports", "These tests use IBM Plex Sans.")
-    add("First PDF, the invoice", "ms", [(name, first_ms(lib, "invoice"), fmt(first_ms(lib, "invoice")))
-                                         for lib, name in ports])
-    add("First PDF, peak memory", "MB, the process",
-        [(name, peak_mb(lib, "invoice"), "%.0f" % peak_mb(lib, "invoice")) for lib, name in ports])
+    for doc, label in FIRST_DOCS:
+        add("First PDF, " + label, "ms", [(name, first_ms(lib, doc), fmt(first_ms(lib, doc))) for lib, name in ports])
+    caption("The peak memory of that process", "These tests use IBM Plex Sans.")
+    for doc, label in FIRST_DOCS:
+        add("Peak memory, " + label, "MB, the process", [(name, peak_mb(lib, doc), "%.0f" % peak_mb(lib, doc))
+                                                          for lib, name in ports])
     open(path, "w").write("\n".join(lines) + "\n")
 
 

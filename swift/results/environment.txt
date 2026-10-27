@@ -1,8 +1,5 @@
 Swift version 6.4.1 (swift-6.4.1-RELEASE)
-PDFjet 6a295afd BarChart: the look of the simple charts
+PDFjet 3d8e30c3 TODO: three entries brought up to date
 cpus 12, AMD Ryzen 5 5600G with Radeon Graphics
-2026-10-26T17:20:43-04:00
-2026-10-26T17:24:18-04:00
-The first documents alone, run again:
-2026-10-26T17:27:03-04:00
-2026-10-26T17:27:03-04:00
+2026-10-26T18:30:56-04:00
+2026-10-26T18:34:07-04:00

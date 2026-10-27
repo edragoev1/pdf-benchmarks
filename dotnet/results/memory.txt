@@ -1,6 +1,6 @@
-1 plex pdfjet-dotnet max-rss-kb 99904 wall-s 29.76
-2 plex pdfjet-dotnet max-rss-kb 114020 wall-s 29.37
-3 plex pdfjet-dotnet max-rss-kb 104316 wall-s 29.66
-1 noto pdfjet-dotnet max-rss-kb 100756 wall-s 9.29
-2 noto pdfjet-dotnet max-rss-kb 101172 wall-s 9.28
-3 noto pdfjet-dotnet max-rss-kb 104200 wall-s 9.31
+1 plex pdfjet-dotnet max-rss-kb 101972 wall-s 30.24
+2 plex pdfjet-dotnet max-rss-kb 104944 wall-s 29.73
+3 plex pdfjet-dotnet max-rss-kb 110956 wall-s 29.56
+1 noto pdfjet-dotnet max-rss-kb 99656 wall-s 26.89
+2 noto pdfjet-dotnet max-rss-kb 111532 wall-s 27.19
+3 noto pdfjet-dotnet max-rss-kb 105848 wall-s 27.55

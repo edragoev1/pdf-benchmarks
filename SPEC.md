@@ -8,8 +8,10 @@ documents the same way; the text is generated, so no data file is needed.
 - Page: US Letter portrait, 612 × 792 pt. Margins 50 pt on every side.
 - Fonts: IBM Plex Sans Regular and SemiBold, from
   `~/Projects/pdfjet/fonts/IBMPlexSans/IBMPlexSans-Regular.ttf` and
-  `-SemiBold.ttf`, embedded as subsets. Noto run: NotoSans-Regular.ttf and
-  NotoSans-Bold.ttf from `~/Projects/pdfjet/fonts/NotoSans/`. The font bytes
+  `-SemiBold.ttf`, embedded as subsets. Noto run, of the invoice, the
+  statement, the report, the notice and the letters with the SVG logo:
+  NotoSans-Regular.ttf and NotoSans-Bold.ttf from
+  `~/Projects/pdfjet/fonts/NotoSans/`. The font bytes
   are read from disk once per process into memory; each document creates its
   font objects from those bytes (as a server does, per document).
 - Body text 10 pt, line height about 13 pt; headings SemiBold 16 pt; table

@@ -71,13 +71,13 @@ for port in "${ports[@]}"; do
                 "Invoice INV-2026-0042" "Total 4,859.00" "Service item 15"
         check "$dir/$lib-report.pdf" $font report 16 24 \
                 "Section 4" "Sentence 6 of paragraph 30 in section 4" "Figure 4" "Page @N@"
-        # The statement and the letters are made with Plex alone (SPEC.md)
+        check "$dir/$lib-statement.pdf" $font statement 11 14 \
+                "Transaction 600" "47,155.00" "Page @N@ of @N@"
+        check "$dir/$lib-svgletters.pdf" $font letters 1 1 \
+                "Dear customer 1000,"
+        # The letters with the PNG logo are made with Plex alone (SPEC.md)
         if [ "$font" = plex ]; then
-            check "$dir/$lib-statement.pdf" $font statement 11 14 \
-                    "Transaction 600" "47,155.00" "Page @N@ of @N@"
             check "$dir/$lib-letters.pdf" $font letters 1 1 \
-                    "Dear customer 1000,"
-            check "$dir/$lib-svgletters.pdf" $font letters 1 1 \
                     "Dear customer 1000,"
         fi
         check "$dir/$lib-multilingual.pdf" $font multilingual 1 1 \

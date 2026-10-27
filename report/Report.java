@@ -97,7 +97,7 @@ public class Report {
         text.add(new TextLine(note, "Five business documents and a batch of letters, made by each library "
                 + "the way its own documentation shows, every PDF checked, in").setTextColor(MUTED));
         text.add(new TextLine(semi, "IBM Plex Sans").setTextColor(INK));
-        text.addJoined(new TextLine(note, ", and the invoice, the report and the notice again in").setTextColor(MUTED));
+        text.addJoined(new TextLine(note, ", and all of them again in").setTextColor(MUTED));
         text.add(new TextLine(semi, "Noto Sans").setTextColor(INK));
         text.addJoined(new TextLine(note, ". Written by the "
                 + "author of PDFjet, with everything needed to run it again published; the other "

@@ -273,14 +273,13 @@ def charts(path):
     for doc, label in FIRST_DOCS:
         add("Peak memory, " + label, "MB, the process", [(name, peak_mb(lib, doc), "%.0f" % peak_mb(lib, doc))
                                                           for lib, name in zip(LIBS, LIB_NAMES)])
-    page("The size of the PDFs")
+    page("The size of the PDFs, and time with Noto Sans")
     caption("The size of the PDFs", "These tests use IBM Plex Sans.")
     for task, title in [("invoice", "Size, the invoice"), ("statement", "Size, the statement"),
                         ("report", "Size, the report"), ("multilingual", "Size, the notice"),
                         ("svgletters", "Size, a letter")]:
         libs_chart(title, "KB", task, "plex", "kb")
 
-    page("With Noto Sans, a large font")
     caption("Time per document, Noto Sans", "These tests use Noto Sans, which has many more glyphs than IBM Plex Sans.")
     for task, title, seconds in [("invoice", "Invoice, Noto Sans", False), ("statement", "Statement, Noto Sans", False),
                                  ("report", "Report, Noto Sans", False), ("multilingual", "Multilingual, Noto Sans", False),

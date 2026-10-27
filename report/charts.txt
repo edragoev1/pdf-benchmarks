@@ -23,14 +23,13 @@ Peak memory, the statement|MB, the process|PDFBox=155=155=155.090944|iText=169=1
 Peak memory, the report|MB, the process|PDFBox=326=326=325.742592|iText=134=134=134.320128|OpenPDF=102=102=102.027264|PDFjet=72=72=71.892992
 Peak memory, the notice|MB, the process|PDFBox=86=86=86.07744|iText=85=85=85.34016|OpenPDF=71=71=71.18848|PDFjet=54=54=53.69856
 Peak memory, a letter|MB, the process|PDFBox=113=113=113.086464|iText=132=132=132.493312|OpenPDF=135=135=135.389184|PDFjet=54=54=54.411264
-#page|The size of the PDFs
+#page|The size of the PDFs, and time with Noto Sans
 #caption|The size of the PDFs|These tests use IBM Plex Sans.
 Size, the invoice|KB|PDFBox=19=19=18.784|iText=23=23=22.856|OpenPDF=21=21=21.0|PDFjet=25=25=25.127
 Size, the statement|KB|PDFBox=42=42=42.468|iText=58=58=58.307|OpenPDF=55=55=55.402|PDFjet=64=64=63.63
 Size, the report|KB|PDFBox=1816=1,816=1816.182|iText=1820=1,820=1819.657|OpenPDF=1813=1,813=1812.785|PDFjet=1823=1,823=1823.102
 Size, the notice|KB|PDFBox=22=22=22.014|iText=29=29=28.697|OpenPDF=24=24=24.071|PDFjet=29=29=28.639
 Size, a letter|KB|PDFBox=11=11=10.959|iText=16=16=15.536|OpenPDF=14=14=13.501|PDFjet=18=18=17.646
-#page|With Noto Sans, a large font
 #caption|Time per document, Noto Sans|These tests use Noto Sans, which has many more glyphs than IBM Plex Sans.
 Invoice, Noto Sans|warm, ms|PDFBox=19.0=19.0=18.98|iText=6.4=6.4 \*=6.4|OpenPDF=3.6=3.6 \*=3.56|PDFjet=2.6=2.6=2.58
 Statement, Noto Sans|warm, ms|PDFBox=523.8=523.8 \*=523.8|iText=75.3=75.3 \*=75.34|OpenPDF=18.4=18.4=18.39|PDFjet=6.7=6.7 \*=6.69

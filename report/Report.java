@@ -42,7 +42,15 @@ public class Report {
             }
             groups.get(groups.size() - 1).add(line);
         }
-        pages.add(chartsPage(pdf, groups.get(0)));
+        // The article's first two paragraphs, who wrote the benchmark and the
+        // request to tell us of a library used badly, go on the first page,
+        // above the charts, where every reader sees them
+        String text = new String(Files.readAllBytes(Paths.get(markdownFile)), StandardCharsets.UTF_8);
+        int request = text.indexOf("**If we have configured");
+        int end = text.indexOf("\n\n", request);
+        String[] lead = text.substring(0, end).split("\n\n");
+        text = text.substring(end + 2);
+        pages.add(chartsPage(pdf, groups.get(0), plain(lead[0]), plain(lead[1])));
         for (int i = 1; i < groups.size(); i++) {
             pages.add(moreChartsPage(pdf, groups.get(i)));
         }
@@ -60,7 +68,6 @@ public class Report {
                 .setLinkColor(0x0969DA)
                 .setFullWidthTables(true)
                 .setMargins(96f, 48f, 96f, 54f);
-        String text = new String(Files.readAllBytes(Paths.get(markdownFile)), StandardCharsets.UTF_8);
         // The appendix starts on a page of its own, as each drawOn does
         int appendix = text.indexOf("\n## Appendix");
         if (appendix == -1) {
@@ -79,9 +86,16 @@ public class Report {
         pdf.complete();
     }
 
-    // The first page: the title, who made the benchmark, a bar chart for each
-    // of its lines of charts.txt, and the libraries compared.
-    static Page chartsPage(PDF pdf, List<String> charts) throws Exception {
+    // The first page: the title, what was tested, who made the benchmark and
+    // the request to tell us of a library used badly, and a bar chart for each
+    // of its lines of charts.txt.
+    // The paragraph of Markdown as plain text: its lines joined, its bold
+    // marks left out.
+    static String plain(String markdown) {
+        return markdown.replace("**", "").replaceAll("\\s*\n\\s*", " ").trim();
+    }
+
+    static Page chartsPage(PDF pdf, List<String> charts, String author, String request) throws Exception {
         Page page = new Page(pdf, Letter.LANDSCAPE, Page.DETACHED);
         Font title = font(pdf, "IBMPlexSans/IBMPlexSans-SemiBold.ttf", 22f);
         Font semi = font(pdf, "IBMPlexSans/IBMPlexSans-SemiBold.ttf", 10f);
@@ -99,16 +113,24 @@ public class Report {
         text.add(new TextLine(semi, "IBM Plex Sans").setTextColor(INK));
         text.addJoined(new TextLine(note, ", and all of them again in").setTextColor(MUTED));
         text.add(new TextLine(semi, "Noto Sans").setTextColor(INK));
-        text.addJoined(new TextLine(note, ". Written by the "
-                + "author of PDFjet, with everything needed to run it again published; the other "
-                + "measurements, the features of each library, the method and the tables of every figure "
-                + "are on the pages after this one.").setTextColor(MUTED));
+        text.addJoined(new TextLine(note, ". The other measurements, the features of each library, "
+                + "the method and the tables of every figure are on the pages after this one.").setTextColor(MUTED));
         intro.add(text);
-        new TextFrame(intro).setLocation(M, M + 34f).setWidth(TW).drawOn(page);
-        lowerIsBetter(page, semi, M + 86f);
+        // Who wrote it, and the request, in bold
+        Paragraph who = new Paragraph();
+        who.add(new TextLine(note, author).setTextColor(INK));
+        intro.add(who);
+        Paragraph ask = new Paragraph();
+        ask.add(new TextLine(semi, request).setTextColor(INK));
+        intro.add(ask);
+        TextFrame frame = new TextFrame(intro).setLocation(M, M + 34f).setWidth(TW).setParagraphGap(6f);
+        frame.drawOn(page);
+        float below = frame.getTextBottom() + 16f;
+        lowerIsBetter(page, semi, below);
 
-        float bottom = drawCharts(pdf, page, charts, M + 100f);
-        libraries(page, bottom + 24f, semi, note);
+        // The libraries, their versions and licenses, are in the article's
+        // table of them: the first page has the room for who wrote it instead
+        drawCharts(pdf, page, charts, below + 14f);
         return page;
     }
 
@@ -202,29 +224,5 @@ public class Report {
             rowBottom = Math.max(rowBottom, xy[1]);
         }
         return rowBottom;
-    }
-
-    // The libraries compared, with their versions and licenses, in two
-    // columns under the charts.
-    static void libraries(Page page, float y, Font semi, Font note) throws Exception {
-        String[][] uses = {
-            {"Apache PDFBox 3.0.8", "Apache License 2.0, Java 8 and later."},
-            {"iText Core 9.8.0", "AGPL-3.0 or a commercial license, Java 8 and later."},
-            {"OpenPDF 3.0.5", "LGPL-2.1 or MPL-2.0, Java 21 and later."},
-            {"PDFjet 9.1.5", "MIT License, Java 8 and later; also in C#, Go and Swift."},
-        };
-        new TextLine(semi, "The libraries").setFontSize(13f).setTextColor(INK)
-                .setStructureType(StructElem.H2).setLocation(M, y).drawOn(page);
-        float colW = (TW - 24f) / 2f;
-        for (int i = 0; i < uses.length; i++) {
-            float x = M + (i % 2) * (colW + 24f);
-            float top = y + 14f + (i / 2) * 20f;
-            List<Paragraph> paragraphs = new ArrayList<>();
-            Paragraph p = new Paragraph();
-            p.add(new TextLine(semi, uses[i][0] + ": ").setFontSize(10f).setTextColor(NAVY));
-            p.add(new TextLine(note, uses[i][1]).setTextColor(INK));
-            paragraphs.add(p);
-            new TextFrame(paragraphs).setLocation(x, top).setWidth(colW).drawOn(page);
-        }
     }
 }

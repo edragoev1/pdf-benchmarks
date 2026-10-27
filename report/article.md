@@ -8,8 +8,8 @@ github.com/edragoev1/pdf-benchmarks: the specification of the documents,
 every program, the scripts that run and check them, and the raw results.
 
 **If we have configured a library badly, or used it in a way its users
-would not, please tell us or open an issue, and we will fix the program and
-run the benchmark again.**
+would not, please tell us or open an issue, and we will fix the
+configuration and run the benchmark again.**
 
 ## The libraries
 

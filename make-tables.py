@@ -225,23 +225,10 @@ def charts(path):
         lines.append("|".join([title, unit] + ["%s=%s=%s=%r" % (n, l.replace(" \\*", "").replace(",", ""), l, v)
                                                for n, v, l in values]))
 
-    # The first page: a row of the time of each document, then a row of the
-    # memory each allocates, each under its header
-    lines.append("#caption|Time per document|These tests use IBM Plex Sans.")
-    for task, title, seconds in [("invoice", "Invoice, 1 page", False), ("statement", "Statement, 12 pages", False),
-                                 ("report", "Report, 18 pages", False), ("multilingual", "Multilingual notice", False),
-                                 ("svgletters", "1,000 letters, SVG logo", True)]:
-        values = []
-        for lib, name in zip(LIBS, LIB_NAMES):
-            v = time_value(stat(lib, "plex", task), seconds)
-            values.append((name, v[0], v[1]))
-        add(title, "warm, s" if seconds else "warm, ms", values)
-    lines.append("#caption|Memory allocated per document|These tests use IBM Plex Sans.")
-    for task, title in [("invoice", "Memory, the invoice"), ("statement", "Memory, the statement"),
-                        ("report", "Memory, the report"), ("multilingual", "Memory, the notice"),
-                        ("svgletters", "Memory, a letter")]:
-        add(title, "MB allocated", [(name, stat(lib, "plex", task)["alloc"], "%.1f" % stat(lib, "plex", task)["alloc"])
-                                    for lib, name in zip(LIBS, LIB_NAMES)])
+    # The first page: the time, a row of the time of each document and a row
+    # of the first PDF of a fresh process; the second the memory, a row of
+    # what each document allocates and a row of the peak memory of that
+    # process; each row under its header
     # The pages of charts after the first: a line "#page|heading" starts a
     # page, and "#caption|header|note" a row of charts, under its header and
     # the font its tests use
@@ -264,14 +251,29 @@ def charts(path):
                 values.append((name, s["kb"], "{:,.0f}".format(s["kb"])))
         add(title, unit, values)
 
-    page("The first PDF of a fresh process")
+    lines.append("#caption|Time per document|These tests use IBM Plex Sans.")
+    for task, title, seconds in [("invoice", "Invoice, 1 page", False), ("statement", "Statement, 12 pages", False),
+                                 ("report", "Report, 18 pages", False), ("multilingual", "Multilingual notice", False),
+                                 ("svgletters", "1,000 letters, SVG logo", True)]:
+        values = []
+        for lib, name in zip(LIBS, LIB_NAMES):
+            v = time_value(stat(lib, "plex", task), seconds)
+            values.append((name, v[0], v[1]))
+        add(title, "warm, s" if seconds else "warm, ms", values)
     caption("The first PDF of a fresh process", "These tests use IBM Plex Sans.")
     for doc, label in FIRST_DOCS:
-        add("First PDF, " + label, "ms", [(name, first_ms(lib, doc), fmt(first_ms(lib, doc)))
+        add(label[0].upper() + label[1:], "first PDF, ms", [(name, first_ms(lib, doc), fmt(first_ms(lib, doc)))
                                            for lib, name in zip(LIBS, LIB_NAMES)])
-    caption("The peak memory of that process", "These tests use IBM Plex Sans.")
+    page("Memory")
+    caption("Memory allocated per document", "These tests use IBM Plex Sans.")
+    for task, title in [("invoice", "Memory, the invoice"), ("statement", "Memory, the statement"),
+                        ("report", "Memory, the report"), ("multilingual", "Memory, the notice"),
+                        ("svgletters", "Memory, a letter")]:
+        add(title, "MB allocated", [(name, stat(lib, "plex", task)["alloc"], "%.1f" % stat(lib, "plex", task)["alloc"])
+                                    for lib, name in zip(LIBS, LIB_NAMES)])
+    caption("The peak memory of a fresh process, making its first PDF", "These tests use IBM Plex Sans.")
     for doc, label in FIRST_DOCS:
-        add("Peak memory, " + label, "MB, the process", [(name, peak_mb(lib, doc), "%.0f" % peak_mb(lib, doc))
+        add(label[0].upper() + label[1:], "peak MB, the process", [(name, peak_mb(lib, doc), "%.0f" % peak_mb(lib, doc))
                                                           for lib, name in zip(LIBS, LIB_NAMES)])
     page("The size of the PDFs, and time with Noto Sans")
     caption("The size of the PDFs", "These tests use IBM Plex Sans.")
@@ -330,10 +332,10 @@ def charts(path):
     page("PDFjet in Java, C#, Go and Swift: the first PDF")
     caption("The first PDF of a fresh process, the four ports", "These tests use IBM Plex Sans.")
     for doc, label in FIRST_DOCS:
-        add("First PDF, " + label, "ms", [(name, first_ms(lib, doc), fmt(first_ms(lib, doc))) for lib, name in ports])
-    caption("The peak memory of that process", "These tests use IBM Plex Sans.")
+        add(label[0].upper() + label[1:], "first PDF, ms", [(name, first_ms(lib, doc), fmt(first_ms(lib, doc))) for lib, name in ports])
+    caption("The peak memory of a fresh process, making its first PDF", "These tests use IBM Plex Sans.")
     for doc, label in FIRST_DOCS:
-        add("Peak memory, " + label, "MB, the process", [(name, peak_mb(lib, doc), "%.0f" % peak_mb(lib, doc))
+        add(label[0].upper() + label[1:], "peak MB, the process", [(name, peak_mb(lib, doc), "%.0f" % peak_mb(lib, doc))
                                                           for lib, name in ports])
     open(path, "w").write("\n".join(lines) + "\n")
 

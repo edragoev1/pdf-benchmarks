@@ -1,7 +1,8 @@
 #!/bin/bash
 # Makes the report PDF: the tables of the article and the figures of the
 # charts from the raw results (make-tables.py), then the PDF with PDFjet
-# (Report.java): a page of bar charts and the article, landscape.
+# (Report.java): a page of bar charts and the article, landscape; and the
+# same report as one web page (make-html.py).
 #
 #   ./make-report.sh [article.md]   (default ../ARTICLE.md)
 set -e
@@ -45,3 +46,6 @@ rm -rf classes && mkdir classes
 javac -nowarn -encoding utf-8 -cp classes -d classes Report.java
 java -cp classes Report article.md charts.txt pdf-benchmarks.pdf
 qpdf --check pdf-benchmarks.pdf > /dev/null && echo "pdf-benchmarks.pdf: $(pdfinfo pdf-benchmarks.pdf | awk '/^Pages/ {print $2}') pages, qpdf ok"
+# The same report as one web page, from the same files
+./make-html.py article.md charts.txt pdf-benchmarks.html
+echo "pdf-benchmarks.html: $(grep -o 'class="chart"' pdf-benchmarks.html | wc -l) charts"

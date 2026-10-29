@@ -53,19 +53,32 @@ Statement, 12 pages|warm, ms|Java=5.5=5.5 \*=5.49|C#=7.8=7.8=7.85|Go=4.9=4.9 \*=
 Report, 18 pages|warm, ms|Java=5.6=5.6=5.59|C#=8.5=8.5 \*=8.46|Go=6.4=6.4=6.4|Swift=13.4=13.4=13.44
 Multilingual notice|warm, ms|Java=1.4=1.4=1.35|C#=1.5=1.5 \*=1.5|Go=1.2=1.2 \*=1.21|Swift=1.6=1.6=1.55
 1,000 letters, SVG logo|warm, s|Java=0.89=0.89=0.89398|C#=0.93=0.93 \*=0.92824|Go=0.96=0.96=0.9556399999999999|Swift=1.53=1.53=1.5349300000000001
+#caption|Time per document, Noto Sans, the four ports|These tests use Noto Sans, which has many more glyphs than IBM Plex Sans.
+Invoice, Noto Sans|warm, ms|Java=2.6=2.6=2.58|C#=2.6=2.6=2.6|Go=2.3=2.3=2.27|Swift=3.0=3.0 \*=3.01
+Statement, Noto Sans|warm, ms|Java=6.7=6.7 \*=6.69|C#=9.1=9.1=9.06|Go=5.8=5.8 \*=5.85|Swift=12.2=12.2 \*=12.21
+Report, Noto Sans|warm, ms|Java=6.7=6.7 \*=6.66|C#=10.4=10.4 \*=10.38|Go=7.6=7.6 \*=7.6|Swift=14.6=14.6=14.55
+Multilingual, Noto Sans|warm, ms|Java=2.1=2.1=2.13|C#=2.4=2.4=2.37|Go=1.9=1.9 \*=1.88|Swift=2.4=2.4 \*=2.42
+1,000 letters, Noto Sans|warm, s|Java=1.88=1.88=1.8805999999999998|C#=2.06=2.06=2.05776|Go=1.82=1.82 \*=1.82339|Swift=2.43=2.43 \*=2.4276999999999997
+#page|PDFjet in Java, C#, Go and Swift: the first PDF
 #caption|The first PDF of a fresh process, the four ports|These tests use IBM Plex Sans.
 The invoice|first PDF, ms|Java=50.0=50.0=49.96|C#=48.6=48.6=48.59|Go=3.6=3.6=3.57|Swift=4.1=4.1=4.11
 The statement|first PDF, ms|Java=90.3=90.3=90.29|C#=63.1=63.1=63.14|Go=8.0=8.0=8.0|Swift=14.8=14.8=14.82
 The report|first PDF, ms|Java=81.9=81.9=81.92|C#=63.8=63.8=63.75|Go=9.4=9.4=9.39|Swift=18.5=18.5=18.48
 The notice|first PDF, ms|Java=37.4=37.4=37.41|C#=38.4=38.4=38.35|Go=2.7=2.7=2.7|Swift=5.7=5.7=5.68
 A letter|first PDF, ms|Java=39.6=39.6=39.59|C#=49.8=49.8=49.8|Go=2.4=2.4=2.44|Swift=3.4=3.4=3.43
-#page|PDFjet in Java, C#, Go and Swift: memory and size
 #caption|The peak memory of a fresh process, making its first PDF|These tests use IBM Plex Sans.
 The invoice|peak MB, the process|Java=55=55=54.730752|C#=42=42=42.221568|Go=9=9=9.207808|Swift=28=28=28.397568
 The statement|peak MB, the process|Java=65=65=65.347584|C#=46=46=46.440448|Go=11=11=11.30496|Swift=35=35=34.971648
 The report|peak MB, the process|Java=72=72=71.892992|C#=52=52=51.982336|Go=14=14=13.9264|Swift=35=35=34.906112
 The notice|peak MB, the process|Java=54=54=53.69856|C#=41=41=41.45152|Go=8=8=8.421376|Swift=29=29=28.561408
 A letter|peak MB, the process|Java=54=54=54.411264|C#=42=42=42.102784|Go=9=9=8.552448|Swift=29=29=28.561408
+#page|PDFjet in Java, C#, Go and Swift: memory and size
+#caption|Memory allocated per document, the ports|These tests use IBM Plex Sans. Swift has no measure of it here.
+Memory, the invoice|MB allocated|Java=1.6=1.6=1.550912|C#=1.4=1.4=1.441376|Go=2.6=2.6=2.640168
+Memory, the statement|MB allocated|Java=4.6=4.6=4.645032|C#=5.4=5.4=5.418096|Go=4.7=4.7=4.674248
+Memory, the report|MB allocated|Java=12.0=12.0=12.040872|C#=12.5=12.5=12.507248|Go=9.1=9.1=9.075456
+Memory, the notice|MB allocated|Java=1.0=1.0=1.035416|C#=1.0=1.0=1.000408|Go=1.3=1.3=1.276208
+Memory, a letter|MB allocated|Java=1.0=1.0=0.994769|C#=0.9=0.9=0.937287|Go=1.5=1.5=1.488375
 #caption|The size of the PDFs, the four ports|These tests use IBM Plex Sans.
 Size, the invoice|KB|Java=25=25=25.127|C#=25=25=24.987|Go=26=26=25.589|Swift=27=27=26.79
 Size, the statement|KB|Java=64=64=63.63|C#=64=64=63.547|Go=63=63=63.079|Swift=71=71=71.396

@@ -322,14 +322,34 @@ def charts(path):
             v = time_value(stat(lib, "plex", task), seconds)
             values.append((name, v[0], v[1]))
         add(title, "warm, s" if seconds else "warm, ms", values)
+    caption("Time per document, Noto Sans, the four ports",
+            "These tests use Noto Sans, which has many more glyphs than IBM Plex Sans.")
+    for task, title, seconds in [("invoice", "Invoice, Noto Sans", False), ("statement", "Statement, Noto Sans", False),
+                                 ("report", "Report, Noto Sans", False), ("multilingual", "Multilingual, Noto Sans", False),
+                                 ("svgletters", "1,000 letters, Noto Sans", True)]:
+        values = []
+        for lib, name in ports:
+            v = time_value(stat(lib, "noto", task), seconds)
+            values.append((name, v[0], v[1]))
+        add(title, "warm, s" if seconds else "warm, ms", values)
+    page("PDFjet in Java, C#, Go and Swift: the first PDF")
     caption("The first PDF of a fresh process, the four ports", "These tests use IBM Plex Sans.")
     for doc, label in FIRST_DOCS:
         add(label[0].upper() + label[1:], "first PDF, ms", [(name, first_ms(lib, doc), fmt(first_ms(lib, doc))) for lib, name in ports])
-    page("PDFjet in Java, C#, Go and Swift: memory and size")
     caption("The peak memory of a fresh process, making its first PDF", "These tests use IBM Plex Sans.")
     for doc, label in FIRST_DOCS:
         add(label[0].upper() + label[1:], "peak MB, the process", [(name, peak_mb(lib, doc), "%.0f" % peak_mb(lib, doc))
                                                           for lib, name in ports])
+    page("PDFjet in Java, C#, Go and Swift: memory and size")
+    # Swift has no figure of the memory a document allocates, so its chart
+    # has three bars
+    caption("Memory allocated per document, the ports",
+            "These tests use IBM Plex Sans. Swift has no measure of it here.")
+    for task, title in [("invoice", "Memory, the invoice"), ("statement", "Memory, the statement"),
+                        ("report", "Memory, the report"), ("multilingual", "Memory, the notice"),
+                        ("svgletters", "Memory, a letter")]:
+        add(title, "MB allocated", [(name, stat(lib, "plex", task)["alloc"], "%.1f" % stat(lib, "plex", task)["alloc"])
+                                    for lib, name in ports if stat(lib, "plex", task)["alloc"]])
     caption("The size of the PDFs, the four ports", "These tests use IBM Plex Sans.")
     for task, title in [("invoice", "Size, the invoice"), ("statement", "Size, the statement"),
                         ("report", "Size, the report"), ("multilingual", "Size, the notice"),

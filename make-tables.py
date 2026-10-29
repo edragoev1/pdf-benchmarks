@@ -225,10 +225,10 @@ def charts(path):
         lines.append("|".join([title, unit] + ["%s=%s=%s=%r" % (n, l.replace(" \\*", "").replace(",", ""), l, v)
                                                for n, v, l in values]))
 
-    # The first page: the time, a row of the time of each document and a row
-    # of the first PDF of a fresh process; the second the memory, a row of
-    # what each document allocates and a row of the peak memory of that
-    # process; each row under its header
+    # The charts in the order they matter in real use: the first page the
+    # time of a warm program, with Plex and with Noto; the second the first
+    # PDF of a fresh process and its peak memory; the third the memory each
+    # document allocates and the size of the PDFs; then the lines of code
     # The pages of charts after the first: a line "#page|heading" starts a
     # page, and "#caption|header|note" a row of charts, under its header and
     # the font its tests use
@@ -260,33 +260,32 @@ def charts(path):
             v = time_value(stat(lib, "plex", task), seconds)
             values.append((name, v[0], v[1]))
         add(title, "warm, s" if seconds else "warm, ms", values)
+    caption("Time per document, Noto Sans", "These tests use Noto Sans, which has many more glyphs than IBM Plex Sans.")
+    for task, title, seconds in [("invoice", "Invoice, Noto Sans", False), ("statement", "Statement, Noto Sans", False),
+                                 ("report", "Report, Noto Sans", False), ("multilingual", "Multilingual, Noto Sans", False),
+                                 ("svgletters", "1,000 letters, Noto Sans", True)]:
+        libs_chart(title, "warm, s" if seconds else "warm, ms", task, "noto", "ms", seconds)
+    page("The first PDF of a fresh process")
     caption("The first PDF of a fresh process", "These tests use IBM Plex Sans.")
     for doc, label in FIRST_DOCS:
         add(label[0].upper() + label[1:], "first PDF, ms", [(name, first_ms(lib, doc), fmt(first_ms(lib, doc)))
                                            for lib, name in zip(LIBS, LIB_NAMES)])
-    page("Memory")
+    caption("The peak memory of a fresh process, making its first PDF", "These tests use IBM Plex Sans.")
+    for doc, label in FIRST_DOCS:
+        add(label[0].upper() + label[1:], "peak MB, the process", [(name, peak_mb(lib, doc), "%.0f" % peak_mb(lib, doc))
+                                                          for lib, name in zip(LIBS, LIB_NAMES)])
+    page("Memory and the size of the PDFs")
     caption("Memory allocated per document", "These tests use IBM Plex Sans.")
     for task, title in [("invoice", "Memory, the invoice"), ("statement", "Memory, the statement"),
                         ("report", "Memory, the report"), ("multilingual", "Memory, the notice"),
                         ("svgletters", "Memory, a letter")]:
         add(title, "MB allocated", [(name, stat(lib, "plex", task)["alloc"], "%.1f" % stat(lib, "plex", task)["alloc"])
                                     for lib, name in zip(LIBS, LIB_NAMES)])
-    caption("The peak memory of a fresh process, making its first PDF", "These tests use IBM Plex Sans.")
-    for doc, label in FIRST_DOCS:
-        add(label[0].upper() + label[1:], "peak MB, the process", [(name, peak_mb(lib, doc), "%.0f" % peak_mb(lib, doc))
-                                                          for lib, name in zip(LIBS, LIB_NAMES)])
-    page("The size of the PDFs, and time with Noto Sans")
     caption("The size of the PDFs", "These tests use IBM Plex Sans.")
     for task, title in [("invoice", "Size, the invoice"), ("statement", "Size, the statement"),
                         ("report", "Size, the report"), ("multilingual", "Size, the notice"),
                         ("svgletters", "Size, a letter")]:
         libs_chart(title, "KB", task, "plex", "kb")
-
-    caption("Time per document, Noto Sans", "These tests use Noto Sans, which has many more glyphs than IBM Plex Sans.")
-    for task, title, seconds in [("invoice", "Invoice, Noto Sans", False), ("statement", "Statement, Noto Sans", False),
-                                 ("report", "Report, Noto Sans", False), ("multilingual", "Multilingual, Noto Sans", False),
-                                 ("svgletters", "1,000 letters, Noto Sans", True)]:
-        libs_chart(title, "warm, s" if seconds else "warm, ms", task, "noto", "ms", seconds)
     page("The lines of code of the programs")
     caption("Lines of code of each program", "Without blank lines and comments.")
     loc = {}

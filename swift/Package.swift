@@ -9,6 +9,8 @@ let package = Package(
         .package(path: "../../pdfjet"),
     ],
     targets: [
-        .executableTarget(name: "Bench", dependencies: [.product(name: "PDFjet", package: "pdfjet")]),
+        // Counts the bytes each thread allocates (malloc replaced, Linux)
+        .target(name: "AllocCount"),
+        .executableTarget(name: "Bench", dependencies: ["AllocCount", .product(name: "PDFjet", package: "pdfjet")]),
     ]
 )

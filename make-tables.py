@@ -341,10 +341,11 @@ def charts(path):
         add(label[0].upper() + label[1:], "peak MB, the process", [(name, peak_mb(lib, doc), "%.0f" % peak_mb(lib, doc))
                                                           for lib, name in ports])
     page("PDFjet in Java, C#, Go and Swift: memory and size")
-    # Swift has no figure of the memory a document allocates, so its chart
-    # has three bars
-    caption("Memory allocated per document, the ports",
-            "These tests use IBM Plex Sans. Swift has no measure of it here.")
+    # A port with no figure of the memory a document allocates (Swift, in the
+    # runs before its count) has no bar, and the note says so
+    missing = [name for lib, name in ports if not stat(lib, "plex", "invoice")["alloc"]]
+    caption("Memory allocated per document, the four ports" if not missing else "Memory allocated per document, the ports",
+            "These tests use IBM Plex Sans." + "".join(" %s has no measure of it here." % n for n in missing))
     for task, title in [("invoice", "Memory, the invoice"), ("statement", "Memory, the statement"),
                         ("report", "Memory, the report"), ("multilingual", "Memory, the notice"),
                         ("svgletters", "Memory, one letter")]:

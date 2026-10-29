@@ -3,6 +3,7 @@
 // constants and text generators are in ../java/src/Common.java).
 //
 //   .build/release/Bench <plex|noto> <warm|first> <warm-ups> <runs> [min-warm-seconds] [tasks]
+import AllocCount
 import Foundation
 import PDFjet
 
@@ -407,14 +408,18 @@ for (name, task, docs) in tasks where only.contains(name) {
         i += 1
     }
     var times = [Double]()
+    var allocs = [UInt64]()
     var pdf = Data()
     for _ in 0..<r {
+        let a = alloc_count_thread_bytes()
         let t0 = DispatchTime.now()
         pdf = try task()
         times.append(ms(t0))
+        allocs.append((alloc_count_thread_bytes() - a) / UInt64(docs))
     }
     times.sort()
+    allocs.sort()
     try pdf.write(to: URL(fileURLWithPath: "\(outDir)/\(label)-\(name).pdf"))
-    print(String(format: "%@ %@ %@ median-ms %.2f min-ms %.2f max-ms %.2f bytes %d alloc-bytes 0",
-                 label, family, name, times[r / 2], times[0], times[r - 1], pdf.count))
+    print(String(format: "%@ %@ %@ median-ms %.2f min-ms %.2f max-ms %.2f bytes %d alloc-bytes %llu",
+                 label, family, name, times[r / 2], times[0], times[r - 1], pdf.count, allocs[r / 2]))
 }

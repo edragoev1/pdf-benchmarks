@@ -128,6 +128,9 @@ Also report the wall time of the whole process (GNU time).
 ## Timing
 
 Warm tasks: at least 20 warm-up runs and at least 3 s (letters: 2 warm-up
-batches), then 15 timed runs (letters: 5), the median; Java allocated bytes
-per document from ThreadMXBean. Each program prints one line per task:
+batches), then 15 timed runs (letters: 5), the median; the bytes allocated
+per document: Java from ThreadMXBean, C# from
+GC.GetAllocatedBytesForCurrentThread, Go from runtime.MemStats.TotalAlloc,
+Swift from a count of the bytes asked of malloc by the thread (its malloc
+replaced, swift/Sources/AllocCount). Each program prints one line per task:
 `<lib> <font> <task> median-ms X min-ms X max-ms X bytes N alloc-bytes N`.

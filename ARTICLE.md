@@ -143,7 +143,7 @@ PDFjet in C#, Go and Swift, shown with them but not ranked against them.
 | statement, 12 pages | 43.2 | 70.0 \* | 18.0 | **5.5 \*** | 7.8 | 4.9 \* | 11.0 |
 | report, 18 pages | 230.4 | 24.5 | 6.0 | **5.6** | 8.5 \* | 6.4 | 13.4 |
 | multilingual, 1 page | 3.5 \* | 2.6 | 1.5 | **1.4** | 1.5 \* | 1.2 \* | 1.6 |
-| 1,000 letters, s | 2.68 | 1.98 | 1.04 \* | **0.89** | 0.93 \* | 0.96 | 1.53 |
+| the 1,000 letters, s | 2.68 | 1.98 | 1.04 \* | **0.89** | 0.93 \* | 0.96 | 1.53 |
 <!-- end java-plex -->
 
 To draw the SVG logo the others need another module or library, and each
@@ -167,7 +167,7 @@ With Noto Sans, a large font, ms (the letters: the batch of 1,000, s):
 | statement | 523.8 \* | 75.3 \* | 18.4 | **6.7 \*** | 9.1 | 5.8 \* | 12.2 \* |
 | report | 1,340 | 28.0 | 6.9 | **6.7 \*** | 10.4 \* | 7.6 \* | 14.6 |
 | multilingual | 22.1 | 4.3 \* | **2.1** | 2.1 | 2.4 | 1.9 \* | 2.4 \* |
-| 1,000 letters, s | 22.01 | 3.20 | 1.91 | **1.88** | 2.06 | 1.82 \* | 2.43 \* |
+| the 1,000 letters, s | 22.01 | 3.20 | 1.91 | **1.88** | 2.06 | 1.82 \* | 2.43 \* |
 <!-- end java-noto -->
 
 The first PDF of a fresh process, each of the five documents, as a
@@ -181,12 +181,12 @@ ms; then the peak memory of the whole process, mostly the JVM itself, MB:
 | the statement, ms | 372.9 | 580.5 | 265.9 | **90.3** | 63.1 | 8.0 | 14.8 |
 | the report, ms | 674.4 | 393.6 | 199.7 | **81.9** | 63.8 | 9.4 | 18.5 |
 | the notice, ms | 199.5 | 219.5 | 135.1 | **37.4** | 38.4 | 2.7 | 5.7 |
-| a letter, ms | 373.7 | 357.8 | 454.2 | **39.6** | 49.8 | 2.4 | 3.4 |
+| the first letter, ms | 373.7 | 357.8 | 454.2 | **39.6** | 49.8 | 2.4 | 3.4 |
 | the invoice, peak memory, MB | 88 | 89 | 84 | **55** | 42 | 9 | 28 |
 | the statement, peak memory, MB | 155 | 169 | 136 | **65** | 46 | 11 | 35 |
 | the report, peak memory, MB | 326 | 134 | 102 | **72** | 52 | 14 | 35 |
 | the notice, peak memory, MB | 86 | 85 | 71 | **54** | 41 | 8 | 29 |
-| a letter, peak memory, MB | 113 | 132 | 135 | **54** | 42 | 9 | 29 |
+| the first letter, peak memory, MB | 113 | 132 | 135 | **54** | 42 | 9 | 29 |
 <!-- end first-pdf -->
 
 Memory allocated per document, MB:
@@ -198,7 +198,7 @@ Memory allocated per document, MB:
 | statement | 90.1 | 71.7 | 55.8 | **4.6** | 5.4 | 4.7 | — |
 | report | 233.2 | 26.8 | 13.4 | **12.0** | 12.5 | 9.1 | — |
 | multilingual | 5.0 | 1.9 | **0.5** | 1.0 | 1.0 | 1.3 | — |
-| a letter | 4.9 | 2.5 | **0.5** | 1.0 | 0.9 | 1.5 | — |
+| one letter | 4.9 | 2.5 | **0.5** | 1.0 | 0.9 | 1.5 | — |
 <!-- end memory -->
 
 The size of the PDFs, KB:
@@ -210,7 +210,7 @@ The size of the PDFs, KB:
 | statement | **42** | 58 | 55 | 64 | 64 | 63 | 71 |
 | report | 1,816 | 1,820 | **1,813** | 1,823 | 1,822 | 1,823 | 1,825 |
 | multilingual | **22** | 29 | 24 | 29 | 29 | 29 | 31 |
-| a letter | **11** | 16 | 14 | 18 | 18 | 18 | 19 |
+| one letter | **11** | 16 | 14 | 18 | 18 | 18 | 19 |
 <!-- end sizes -->
 
 Lines of code of each program, without blank lines and comments; "helpers"

@@ -34,6 +34,7 @@ Table, and for the report TextFlow. Fonts are kept the way
 a server would keep them: iText and OpenPDF with their own default caches,
 PDFBox with its TrueType font parsed once and reused, as its API allows;
 PDFjet has no font cache and reads its fonts for each document.
+With its font cache off, iText takes 1 to 5 ms more per document.
 
 ## Features
 

@@ -228,7 +228,8 @@ def charts(path):
     # The charts in the order they matter in real use: the first page the
     # time of a warm program, with Plex and with Noto; the second the first
     # PDF of a fresh process and its peak memory; the third the memory each
-    # document allocates and the size of the PDFs; then the lines of code
+    # document allocates and the size of the PDFs; then the lines of code;
+    # then PDFjet's four ports, in the same order
     # The pages of charts after the first: a line "#page|heading" starts a
     # page, and "#caption|header|note" a row of charts, under its header and
     # the font its tests use
@@ -321,21 +322,20 @@ def charts(path):
             v = time_value(stat(lib, "plex", task), seconds)
             values.append((name, v[0], v[1]))
         add(title, "warm, s" if seconds else "warm, ms", values)
+    caption("The first PDF of a fresh process, the four ports", "These tests use IBM Plex Sans.")
+    for doc, label in FIRST_DOCS:
+        add(label[0].upper() + label[1:], "first PDF, ms", [(name, first_ms(lib, doc), fmt(first_ms(lib, doc))) for lib, name in ports])
+    page("PDFjet in Java, C#, Go and Swift: memory and size")
+    caption("The peak memory of a fresh process, making its first PDF", "These tests use IBM Plex Sans.")
+    for doc, label in FIRST_DOCS:
+        add(label[0].upper() + label[1:], "peak MB, the process", [(name, peak_mb(lib, doc), "%.0f" % peak_mb(lib, doc))
+                                                          for lib, name in ports])
     caption("The size of the PDFs, the four ports", "These tests use IBM Plex Sans.")
     for task, title in [("invoice", "Size, the invoice"), ("statement", "Size, the statement"),
                         ("report", "Size, the report"), ("multilingual", "Size, the notice"),
                         ("svgletters", "Size, a letter")]:
         add(title, "KB", [(name, stat(lib, "plex", task)["kb"], "{:,.0f}".format(stat(lib, "plex", task)["kb"]))
                           for lib, name in ports])
-
-    page("PDFjet in Java, C#, Go and Swift: the first PDF")
-    caption("The first PDF of a fresh process, the four ports", "These tests use IBM Plex Sans.")
-    for doc, label in FIRST_DOCS:
-        add(label[0].upper() + label[1:], "first PDF, ms", [(name, first_ms(lib, doc), fmt(first_ms(lib, doc))) for lib, name in ports])
-    caption("The peak memory of a fresh process, making its first PDF", "These tests use IBM Plex Sans.")
-    for doc, label in FIRST_DOCS:
-        add(label[0].upper() + label[1:], "peak MB, the process", [(name, peak_mb(lib, doc), "%.0f" % peak_mb(lib, doc))
-                                                          for lib, name in ports])
     open(path, "w").write("\n".join(lines) + "\n")
 
 

@@ -102,7 +102,7 @@ question; iText also has a company behind it with paid support.
 | Check existing files for PDF/A | preflight module, PDF/A-1b | no | no | no |
 | No other jars needed | no | no | ✓; Maven adds brotli4j, needed only for Brotli compression | **✓** |
 | Java | 8 and later | 8 and later | 21 and later | 8 and later |
-| Also for | — | .NET | — | C#, Go, Swift |
+| Also for | — | .NET | — | .NET, Go, Swift |
 | License | Apache 2.0 | AGPL-3.0 or commercial | LGPL-2.1 or MPL-2.0 | MIT |
 
 ## What was measured

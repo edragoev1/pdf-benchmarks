@@ -1,5 +1,5 @@
 I wrote PDFjet, one of the four libraries compared here, and have been
-writing it since 2001. For the last two months I have worked on it with
+updating it since 2001. For the last two months I have worked on it using
 Claude. I commissioned this benchmark; Claude chose
 the documents, their content and the way each library is used, wrote the
 programs, ran them and wrote the tables. Both are reasons to be suspicious

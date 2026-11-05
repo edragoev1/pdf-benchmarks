@@ -193,6 +193,11 @@ make-tables.py makes every table of this report from the results.
   their documentation shows for long tables. iText's ordinary Table was
   timed too, and was slower (about 106 ms against 72, in the run of
   26 October).
+- PDFBox's report time is almost all in reading the four photos:
+  `createFromByteArray`, as its documentation shows, decodes each JPEG
+  (about 38 ms here) to read its size and colors, then embeds its bytes
+  unchanged. Building the image object by hand with `DCTDecode` avoids it;
+  few users do.
 - PDFBox draws one rule under each table row and one header rectangle,
   where the others draw a border under each cell: slightly less work for
   PDFBox.

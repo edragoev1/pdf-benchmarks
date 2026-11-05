@@ -55,6 +55,7 @@ mkdir -p classes pdfjet-classes results render out-plex out-noto
 (cd "$PDFJET" && javac -O -encoding utf-8 -nowarn $(find com/pdfjet -name '*.java') \
     -d "$OLDPWD/pdfjet-classes")
 (cd "$PDFJET" && git log --oneline -1 | cat) > results/pdfjet-commit.txt
+(cd "$PDFJET" && git describe --tags --always) > results/pdfjet-version.txt
 javac -nowarn -encoding utf-8 -cp "pdfjet-classes:lib/*" -d classes src/*.java
 CP="classes:pdfjet-classes:lib/*"
 # A run of the first documents alone adds to the environment of the rounds.
@@ -65,7 +66,7 @@ if [ -n "$FIRST_ONLY" ]; then
 fi
 {
     java -version 2>&1 | head -1
-    echo "PDFjet $(cat results/pdfjet-commit.txt)"
+    echo "PDFjet $(cat results/pdfjet-version.txt), $(cat results/pdfjet-commit.txt)"
     echo "iText $IT, OpenPDF $OP, PDFBox $BOX"
     echo "cpus $(nproc), $(grep -m1 'model name' /proc/cpuinfo | sed 's/.*: //')"
 } > $ENVFILE

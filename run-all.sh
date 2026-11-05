@@ -1,5 +1,6 @@
 #!/bin/bash
-# The whole benchmark, overnight, after a fresh reboot: Java (the four
+# The whole benchmark, after a fresh reboot, with PDFjet at its release tag
+# (git describe says v9.1.7, and the results say so): Java (the four
 # libraries), then PDFjet's C#, Go and Swift, one after the other, each as its
 # own run.sh does it, then the checks of every PDF. The computer is kept from
 # sleeping while it runs; everything goes to results/overnight-<date>.log.
@@ -25,7 +26,7 @@ run() {
         status=1
     fi
 }
-step "start, PDFjet $(git -C "${PDFJET:-$HOME/Projects/pdfjet}" log --oneline -1 | cat)"
+step "start, PDFjet $(git -C "${PDFJET:-$HOME/Projects/pdfjet}" describe --tags --always), $(git -C "${PDFJET:-$HOME/Projects/pdfjet}" log --oneline -1 | cat)"
 uptime
 exec_inhibited() {
     status=0

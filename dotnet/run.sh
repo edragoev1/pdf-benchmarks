@@ -15,6 +15,7 @@ PDFJET=${PDFJET:-$HOME/Projects/pdfjet}
 dotnet build -c Release -nologo -v q
 mkdir -p results render out-plex out-noto
 (cd "$PDFJET" && git log --oneline -1 | cat) > results/pdfjet-commit.txt
+(cd "$PDFJET" && git describe --tags --always) > results/pdfjet-version.txt
 # A run of the first documents alone adds to the environment of the rounds.
 ENVFILE=results/environment.txt
 if [ -n "$FIRST_ONLY" ]; then
@@ -23,7 +24,7 @@ if [ -n "$FIRST_ONLY" ]; then
 fi
 {
     dotnet --version
-    echo "PDFjet $(cat results/pdfjet-commit.txt)"
+    echo "PDFjet $(cat results/pdfjet-version.txt), $(cat results/pdfjet-commit.txt)"
     echo "cpus $(nproc), $(grep -m1 'model name' /proc/cpuinfo | sed 's/.*: //')"
 } > $ENVFILE
 [ -n "$BUILD_ONLY" ] && { echo "Built."; exit 0; }

@@ -25,7 +25,15 @@ documents the same way; the text is generated, so no data file is needed.
   left-aligned).
   Image bytes read once into memory.
 - Each document is written to an in-memory buffer and its bytes returned.
-- No tagging, no PDF/A, no encryption, default compression.
+- No tagging, no PDF/A, no encryption. Each library at its default
+  compression: streams compressed by all four; object streams by PDFBox 3
+  alone, whose default they are (smaller files, a little more work); iText
+  and OpenPDF without, as PDFjet (until 5 November 2026 they were set to full
+  compression, which is not their default).
+- PDFBox without glyph substitution (TrueTypeFont.setEnableGsub(false)): the
+  other three do none, and PDFBox 3 does it on every showText by default, a
+  cost that grows with the font's ligature tables. Turned off as a PDFBox
+  user who wants speed does (5 November 2026).
 
 ## invoice (1 page)
 

@@ -123,7 +123,6 @@ public class OpenPDFFair extends Common {
         ByteArrayOutputStream buf = new ByteArrayOutputStream();
         Document doc = new Document(PageSize.LETTER, M, M, M, M);
         PdfWriter writer = PdfWriter.getInstance(doc, buf);
-        writer.setFullCompression();    // Object streams, for smaller files
         doc.open();
         BaseFont regularBase = font(REGULAR, "Regular.ttf");
         Font regular = new Font(regularBase, BODY);
@@ -188,7 +187,6 @@ public class OpenPDFFair extends Common {
         ByteArrayOutputStream buf = new ByteArrayOutputStream();
         Document doc = new Document(PageSize.LETTER, M, M, M, M);
         PdfWriter writer = PdfWriter.getInstance(doc, buf);
-        writer.setFullCompression();    // Object streams, for smaller files
         BaseFont regularBase = font(REGULAR, "Regular.ttf");
         BaseFont boldBase = font(BOLD, "Bold.ttf");
         writer.setPageEvent(new Footer(regularBase, true));
@@ -230,7 +228,6 @@ public class OpenPDFFair extends Common {
         ByteArrayOutputStream buf = new ByteArrayOutputStream();
         Document doc = new Document(PageSize.LETTER, M, M, M, M);
         PdfWriter writer = PdfWriter.getInstance(doc, buf);
-        writer.setFullCompression();    // Object streams, for smaller files
         // An image that does not fit goes to the next page, and the text after
         // it stays after it (OpenPDF's default moves the text up before it).
         writer.setStrictImageSequence(true);
@@ -267,7 +264,7 @@ public class OpenPDFFair extends Common {
     @Override byte[] letter(int n) throws Exception {
         ByteArrayOutputStream buf = new ByteArrayOutputStream();
         Document doc = new Document(PageSize.LETTER, M, M, M, M);
-        PdfWriter.getInstance(doc, buf).setFullCompression();   // Object streams, for smaller files
+        PdfWriter.getInstance(doc, buf);
         doc.open();
         Font body = new Font(font(REGULAR, "Regular.ttf"), BODY);
         Font heading = new Font(font(BOLD, "Bold.ttf"), HEADING);
@@ -295,7 +292,7 @@ public class OpenPDFFair extends Common {
     @Override byte[] multilingual() throws Exception {
         ByteArrayOutputStream buf = new ByteArrayOutputStream();
         Document doc = new Document(PageSize.LETTER, M, M, M, M);
-        PdfWriter.getInstance(doc, buf).setFullCompression();   // Object streams, for smaller files
+        PdfWriter.getInstance(doc, buf);
         BaseFont regularBase = font(REGULAR, "Regular.ttf");
         BaseFont boldBase = font(BOLD, "Bold.ttf");
         doc.open();
@@ -325,7 +322,6 @@ public class OpenPDFFair extends Common {
         ByteArrayOutputStream buf = new ByteArrayOutputStream();
         Document doc = new Document(PageSize.LETTER, M, M, M, M);
         PdfWriter writer = PdfWriter.getInstance(doc, buf);
-        writer.setFullCompression();    // Object streams, for smaller files
         doc.open();
         Font body = new Font(font(REGULAR, "Regular.ttf"), BODY);
         Font heading = new Font(font(BOLD, "Bold.ttf"), HEADING);

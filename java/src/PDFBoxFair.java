@@ -46,6 +46,13 @@ public class PDFBoxFair extends Common {
         TrueTypeFont ttf = PARSED.get(bytes);
         if (ttf == null) {
             ttf = new TTFParser().parse(new RandomAccessReadBuffer(bytes));
+            // No glyph substitution (GSUB), which the other three libraries do
+            // not do either: PDFBox 3 shapes every showText with the font's
+            // ligature tables by default, a cost that grows with the table
+            // (Noto Sans: about 1.7 MB allocated per row of a table). Turned
+            // off as a PDFBox user who wants speed does, for the same work
+            // (the fairness review, 5 November 2026; the owner's choice).
+            ttf.setEnableGsub(false);
             PARSED.put(bytes, ttf);
         }
         return PDType0Font.load(doc, ttf, true);

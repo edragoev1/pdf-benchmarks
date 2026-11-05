@@ -100,6 +100,9 @@ public class Report {
         Font title = font(pdf, "IBMPlexSans/IBMPlexSans-SemiBold.ttf", 22f);
         Font semi = font(pdf, "IBMPlexSans/IBMPlexSans-SemiBold.ttf", 10f);
         Font note = font(pdf, "IBMPlexSans/IBMPlexSans-Regular.ttf", 10f);
+        // Who wrote it, in italic a point larger, so that it stands out (the
+        // owner, 5 November 2026)
+        Font authorFont = font(pdf, "IBMPlexSans/IBMPlexSans-Italic.ttf", 11f);
 
         page.setBrushColor(NAVY);
         page.fillRect(M, M - 6f, 36f, 4f);
@@ -118,19 +121,19 @@ public class Report {
         intro.add(text);
         // Who wrote it, and the request, in bold
         Paragraph who = new Paragraph();
-        who.add(new TextLine(note, author).setTextColor(INK));
+        who.add(new TextLine(authorFont, author).setTextColor(INK));
         intro.add(who);
         Paragraph ask = new Paragraph();
         ask.add(new TextLine(semi, request).setTextColor(INK));
         intro.add(ask);
-        TextFrame frame = new TextFrame(intro).setLocation(M, M + 34f).setWidth(TW).setParagraphGap(6f);
+        TextFrame frame = new TextFrame(intro).setLocation(M, M + 31f).setWidth(TW).setParagraphGap(5f);
         frame.drawOn(page);
         float below = frame.getTextBottom() + 16f;
         lowerIsBetter(page, semi, below);
 
         // The libraries, their versions and licenses, are in the article's
         // table of them: the first page has the room for who wrote it instead
-        drawCharts(pdf, page, charts, below + 14f);
+        drawCharts(pdf, page, charts, below + 10f);
         return page;
     }
 

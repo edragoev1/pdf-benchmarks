@@ -34,6 +34,7 @@ h2 { font-size: 21px; font-weight: 600; margin: 44px 0 8px; }
 .article h3 { color: var(--navy); font-size: 17px; font-weight: 600; margin: 28px 0 6px; }
 .lead { color: var(--muted); margin: 0 0 10px; max-width: 980px; }
 .lead b { color: var(--ink); font-weight: 600; }
+.author { font-style: italic; font-size: 16px; }
 p { margin: 0 0 12px; }
 .how { font-weight: 600; margin: 18px 0 6px; }
 .caption { margin: 22px 0 10px; }
@@ -207,7 +208,7 @@ def main():
             "its own documentation shows, every PDF checked, in <b>IBM Plex Sans</b>, and all of them again in "
             "<b>Noto Sans</b>. The other measurements, the features of each library, the method and the tables "
             "of every figure are further down this page.</p>",
-            "<p>%s</p>" % inline(plain(author)), "<p>%s</p>" % inline(plain(ask)),
+            "<p class=\"author\">%s</p>" % inline(plain(author)), "<p>%s</p>" % inline(plain(ask)),
             '<p class="how">Lower is better, and the best is in navy.</p>', charts(groups[0])]
     for group in groups[1:]:
         heading = group[0].split("|", 1)[1]

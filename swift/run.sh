@@ -9,7 +9,7 @@
 # Sans (invoice and report), as ../java/run.sh; the peak resident size and the
 # wall time of each process from GNU time; then the invoice as the first
 # document of 5 fresh processes. Nothing else should run.
-set -e
+set -eo pipefail
 cd "$(dirname "$0")"
 PDFJET=${PDFJET:-$HOME/Projects/pdfjet}
 swift build -c release

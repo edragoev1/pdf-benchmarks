@@ -9,7 +9,7 @@
 # Sans (invoice and report), as ../java/run.sh; the peak resident size and the
 # wall time of each process from GNU time; then the invoice as the first
 # document of 5 fresh processes. Nothing else should run.
-set -e
+set -eo pipefail
 cd "$(dirname "$0")"
 PDFJET=${PDFJET:-$HOME/Projects/pdfjet}
 # .NET 10, the current long-term release (the fairness review and the owner,
@@ -37,7 +37,7 @@ tasks() { [ "$1" = noto ] && echo invoice,statement,report,svgletters,multilingu
 
 if [ -n "$QUICK" ]; then
     for font in plex noto; do
-        dotnet bin/Release/net10.0/Bench.dll $font warm 1 1 0
+        "$DOTNET" bin/Release/net10.0/Bench.dll $font warm 1 1 0
     done
     exit 0
 fi
@@ -51,7 +51,7 @@ for font in plex noto; do
     for round in 1 2 3; do
         echo "round $round $font pdfjet-dotnet" >&2
         /usr/bin/time -f "$round $font pdfjet-dotnet max-rss-kb %M wall-s %e" -a -o results/memory.txt \
-            dotnet bin/Release/net10.0/Bench.dll $font warm 20 15 3 "$(tasks $font)" 2>&1 \
+            "$DOTNET" bin/Release/net10.0/Bench.dll $font warm 20 15 3 "$(tasks $font)" 2>&1 \
             | sed "s/^/$round /" >> results/runs.txt
     done
 done
@@ -66,7 +66,7 @@ FIRSTS="invoice statement report multilingual svgletters"
 for job in $(for i in 1 2 3 4 5; do for d in $FIRSTS; do echo $i:$d; done; done | shuf); do
     i=${job%%:*}; doc=${job#*:}
     /usr/bin/time -f "$i pdfjet-dotnet $doc first-process-wall-s %e max-rss-kb %M" -a -o results/first.txt \
-        dotnet bin/Release/net10.0/Bench.dll plex first 0 0 0 $doc 2>&1 | sed "s/^/$i /" >> results/first.txt
+        "$DOTNET" bin/Release/net10.0/Bench.dll plex first 0 0 0 $doc 2>&1 | sed "s/^/$i /" >> results/first.txt
 done
 date -Iseconds >> results/environment.txt
 echo "Results in results/runs.txt, results/memory.txt and results/first.txt; the PDFs in out-*/"

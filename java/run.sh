@@ -10,7 +10,7 @@
 # for IBM Plex Sans (all tasks) and Noto Sans (invoice and report); then the
 # first document of 5 fresh JVMs per library. Needs a JDK (21 or later for
 # OpenPDF 3), curl, GNU time, and ~/Projects/pdfjet. Nothing else should run.
-set -e
+set -eo pipefail
 cd "$(dirname "$0")"
 PDFJET=${PDFJET:-$HOME/Projects/pdfjet}
 export PDFJET
@@ -65,7 +65,7 @@ if [ -n "$FIRST_ONLY" ]; then
     echo "The first documents alone, run again:" >> results/environment.txt
 fi
 {
-    java -version 2>&1 | head -1
+    java -version 2>&1 | sed -n 1p
     echo "PDFjet $(cat results/pdfjet-version.txt), $(cat results/pdfjet-commit.txt)"
     echo "iText $IT, OpenPDF $OP, PDFBox $BOX"
     echo "cpus $(nproc), $(grep -m1 'model name' /proc/cpuinfo | sed 's/.*: //')"

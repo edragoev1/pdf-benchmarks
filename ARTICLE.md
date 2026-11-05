@@ -92,7 +92,7 @@ question; iText also has a company behind it with paid support.
 | Change existing PDFs | **✓** | **✓** | **✓** | add content, merge, split |
 | Fill or create form fields | **✓** | forms module | **✓** | no |
 | Digital signatures | ✓ with Bouncy Castle | sign module, with Bouncy Castle | ✓ with Bouncy Castle, PKCS #7, not PAdES | Pro, commercial |
-| Long-term signatures, PAdES B-LT and B-LTA | in its examples only | sign module | no | Pro, commercial |
+| Long-term signatures, PAdES B-LT and B-LTA | by copying its example code (AddValidationInformation), not in the library | sign module | no | Pro, commercial |
 | Password encryption, AES-256 | **✓** | **✓** | **✓** | **✓** |
 | Certificate encryption | ✓ with Bouncy Castle | ✓ with Bouncy Castle | ✓ with Bouncy Castle | no |
 | PDF 2.0 | a 2.0 header, setVersion | **✓** | a 2.0 header by default | no, PDF 1.7 |

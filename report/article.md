@@ -198,8 +198,11 @@ make-tables.py makes every table of this report from the results.
 - PDFBox draws one rule under each table row and one header rectangle,
   where the others draw a border under each cell: slightly less work for
   PDFBox.
-- PDFjet's Noto report is 21 pages to the others' 20: it spaces lines by the
-  font's own height.
+- With Noto Sans, PDFjet's report is 21 pages to the others' 20, and its
+  statement 13 to their 12: PDFjet spaces lines and table rows by the
+  font's own height, and Noto's is larger than Plex's, so PDFjet makes a page
+  more of each. With Plex every library makes the same pages (java/check.sh
+  prints the counts side by side).
 
 ## Appendix: the tables
 

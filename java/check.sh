@@ -9,6 +9,7 @@ cd "$(dirname "$0")"
 TOTAL="4,859.00"        # invoice: subtotal 4,300.00 + tax 13%
 BALANCE="47,155.00"     # statement: 10,000.00 + credits 112,530.00 - debits 75,375.00
 fail=0
+declare -A PAGES        # font/task/library -> pages, for the table at the end
 printf "%-28s %5s %-6s %-5s %-6s %-5s %s\n" file pages mupdf text fonts qpdf notes
 for f in out-*/*.pdf; do
     [ -f "$f" ] || continue
@@ -33,6 +34,7 @@ for f in out-*/*.pdf; do
                       okpages=$([ "$pages" = 1 ] && echo y);;
         *) want=(); okpages=;;
     esac
+    PAGES[$font/$task/${name%%-*}]=$pages
     [ -n "$okpages" ] || notes="$notes unexpected page count;"
     textok=ok
     for s in "${want[@]}"; do
@@ -51,5 +53,17 @@ for f in out-*/*.pdf; do
     [ -n "$notes" ] && fail=1
     printf "%-28s %5s %-6s %-5s %-6s %-5s %s\n" "$f" "$pages" $mupdf $textok $fontsok $qpdfok "$notes"
 done
+# The page counts side by side: the libraries lay out the same text, so a
+# count that differs is shown, and explained in the article; not a failure,
+# as each library spaces lines by its own rules
+echo
+printf "%-24s %7s %7s %7s %7s\n" "pages" pdfbox itext openpdf pdfjet
+for key in $(printf "%s\n" "${!PAGES[@]}" | sed 's|/[^/]*$||' | sort -u); do
+    counts=()
+    for lib in pdfbox itext openpdf pdfjet; do counts+=("${PAGES[$key/$lib]:--}"); done
+    same=$(printf "%s\n" "${counts[@]}" | sort -u | wc -l)
+    printf "%-24s %7s %7s %7s %7s %s\n" "$key" "${counts[@]}" "$([ "$same" = 1 ] || echo differs)"
+done
+echo
 [ $fail = 0 ] && echo "All checks pass." || echo "Some checks FAILED."
 exit $fail

@@ -2,8 +2,9 @@
 
 Apache PDFBox, iText, OpenPDF and PDFjet, making the same business documents
 the way each library's own documentation shows, with PDFjet's C#, Go and
-Swift versions alongside. **The report: [report/pdf-benchmarks.pdf](report/pdf-benchmarks.pdf)**
-([ARTICLE.md](ARTICLE.md) is its text).
+Swift versions alongside. **The report: [report/pdf-benchmarks.html](report/pdf-benchmarks.html)**,
+also as a PDF, [report/pdf-benchmarks.pdf](report/pdf-benchmarks.pdf) ([ARTICLE.md](ARTICLE.md) is
+its text).
 
 Written by the author of PDFjet, so everything needed to check it is here:
 
@@ -11,9 +12,10 @@ Written by the author of PDFjet, so everything needed to check it is here:
 |---|---|
 | [SPEC.md](SPEC.md) | the documents, exactly |
 | [multilingual.txt](multilingual.txt), [images/](images/) | their text and photos |
-| [java/](java/) | a program for each Java library, `run.sh` to run them (about 30 minutes), `check.sh` to check every PDF |
+| [run-all.sh](run-all.sh) | the whole run, as for these results: the four Java libraries, PDFjet's other versions, the checks (about 20 minutes, after a reboot, nothing else running) |
+| [java/](java/) | a program for each Java library, `run.sh` to run them (about 15 minutes), `check.sh` to check every PDF |
 | [dotnet/](dotnet/), [go/](go/), [swift/](swift/) | PDFjet's other versions, run the same way |
-| `*/results/` | the raw results and the logs of the checks |
+| `*/results/`, [results/](results/) | the raw results, and the log of the run of 5 November 2026 with its checks |
 | [make-tables.py](make-tables.py), [report/](report/) | the tables and the report, made from the results |
 
 If a program does not use a library the way its users should, please open an

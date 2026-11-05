@@ -1,7 +1,0 @@
-round 1 plex pdfjet-go
-round 2 plex pdfjet-go
-round 3 plex pdfjet-go
-round 1 noto pdfjet-go
-round 2 noto pdfjet-go
-round 3 noto pdfjet-go
-Results in results/runs.txt, results/memory.txt and results/first.txt; the PDFs in out-*/

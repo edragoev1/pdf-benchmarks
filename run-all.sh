@@ -38,6 +38,7 @@ uptime
 # The machine, as a reader of the report would ask about it
 echo "CPU: $(lscpu | sed -n 's/^Model name: *//p'), $(nproc) threads"
 echo "Kernel: $(uname -r)"
+echo "Memory: $(free -g | awk '/^Mem:/ {print $2}') GB; the JVMs run with their default heap, the same for all four"
 echo "Java: $(java -version 2>&1 | head -1)"
 echo "Libraries: $(ls java/lib | grep -E '^(pdfbox|kernel|layout|openpdf)-[0-9]' | tr '\n' ' ')"
 exec_inhibited() {

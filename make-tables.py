@@ -32,7 +32,7 @@ PORTS = ["pdfjet", "pdfjet-dotnet", "pdfjet-go", "pdfjet-swift"]
 PORT_NAMES = ["Java (OpenJDK 25)", "C# (.NET)", "Go", "Swift"]
 DOCS = [("invoice", "invoice, 1 page"), ("statement", "statement, 12 pages"),
         ("report", "report, 18 pages"), ("multilingual", "multilingual, 1 page"),
-        ("svgletters", "the 1,000 letters, s")]
+        ("letters", "the 1,000 letters, PNG logo, s"), ("svgletters", "the 1,000 letters, SVG logo, s")]
 # What a library needs to draw SVG, for the letters with an SVG logo
 SVG_NEEDS = {"pdfjet": "", "itext": "iText's svg module", "openpdf": "Apache Batik",
              "pdfbox": "Apache Batik and pdfbox-graphics2d"}
@@ -160,6 +160,12 @@ def first_pdf(libs, names):
     out = ["| | %s |" % " | ".join(names), "|---|%s" % ("---:|" * len(names))]
     for doc, label in FIRST_DOCS:
         out.append(row(label + ", ms", [(first_ms(l, doc), fmt(first_ms(l, doc))) for l in libs], RANKED))
+    # The whole process of the invoice, the runtime's start included, which
+    # the first-PDF figures leave out; /usr/bin/time counts in 10 ms steps
+    def whole(l):
+        v = statistics.median(x[0] for x in process[(l, "invoice")]) * 1000
+        return (v, "%.0f" % v if v >= 10 else "under 10")
+    out.append(row("the invoice, the whole process, ms", [whole(l) for l in libs], RANKED))
     for doc, label in FIRST_DOCS:
         out.append(row(label + ", peak memory, MB", [(peak_mb(l, doc), "%.0f" % peak_mb(l, doc)) for l in libs],
                        RANKED))
@@ -255,7 +261,7 @@ def charts(path):
     lines.append("#caption|Time per document|These tests use IBM Plex Sans.")
     for task, title, seconds in [("invoice", "Invoice, 1 page", False), ("statement", "Statement, 12 pages", False),
                                  ("report", "Report, 18 pages", False), ("multilingual", "Multilingual notice", False),
-                                 ("svgletters", "The 1,000 letters", True)]:
+                                 ("svgletters", "1,000 letters, SVG logo", True)]:
         values = []
         for lib, name in zip(LIBS, LIB_NAMES):
             v = time_value(stat(lib, "plex", task), seconds)
@@ -264,7 +270,7 @@ def charts(path):
     caption("Time per document, Noto Sans", "These tests use Noto Sans, which has many more glyphs than IBM Plex Sans.")
     for task, title, seconds in [("invoice", "Invoice, Noto Sans", False), ("statement", "Statement, Noto Sans", False),
                                  ("report", "Report, Noto Sans", False), ("multilingual", "Multilingual, Noto Sans", False),
-                                 ("svgletters", "The 1,000 letters", True)]:
+                                 ("svgletters", "1,000 letters, SVG logo", True)]:
         libs_chart(title, "warm, s" if seconds else "warm, ms", task, "noto", "ms", seconds)
     page("The first PDF of a fresh process")
     caption("The first PDF of a fresh process", "These tests use IBM Plex Sans.")
@@ -316,7 +322,7 @@ def charts(path):
     caption("Time per document, the four ports", "These tests use IBM Plex Sans.")
     for task, title, seconds in [("invoice", "Invoice, 1 page", False), ("statement", "Statement, 12 pages", False),
                                  ("report", "Report, 18 pages", False), ("multilingual", "Multilingual notice", False),
-                                 ("svgletters", "The 1,000 letters", True)]:
+                                 ("svgletters", "1,000 letters, SVG logo", True)]:
         values = []
         for lib, name in ports:
             v = time_value(stat(lib, "plex", task), seconds)
@@ -326,7 +332,7 @@ def charts(path):
             "These tests use Noto Sans, which has many more glyphs than IBM Plex Sans.")
     for task, title, seconds in [("invoice", "Invoice, Noto Sans", False), ("statement", "Statement, Noto Sans", False),
                                  ("report", "Report, Noto Sans", False), ("multilingual", "Multilingual, Noto Sans", False),
-                                 ("svgletters", "The 1,000 letters", True)]:
+                                 ("svgletters", "1,000 letters, SVG logo", True)]:
         values = []
         for lib, name in ports:
             v = time_value(stat(lib, "noto", task), seconds)

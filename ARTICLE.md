@@ -17,12 +17,12 @@ configuration and run the benchmark again.**
 
 | Library | Version | License | Java |
 |---|---|---|---|
-| PDFjet (core) | 9.1.5 (main at 6a295afd until the release) | MIT | 8 and later |
+| PDFjet (core) | 9.1.7 | MIT | 8 and later |
 | Apache PDFBox | 3.0.8 | Apache 2.0 | 8 and later |
 | iText Core | 9.8.0 | AGPL-3.0 or commercial | 8 and later |
 | OpenPDF | 3.0.5 | LGPL-2.1 or MPL-2.0 | 21 and later |
 
-The newest releases on Maven Central on 26 October 2026. For the letters
+The newest releases on Maven Central on 5 November 2026. For the letters
 with an SVG logo, the modules the others need to draw SVG, each at its
 newest release: iText's svg module 9.8.0, Apache Batik 1.20, and for PDFBox
 the pdfbox-graphics2d bridge 3.0.5.
@@ -30,10 +30,12 @@ the pdfbox-graphics2d bridge 3.0.5.
 Each library is used the way its own documentation shows: iText's and
 OpenPDF's `Document` for flowing text, PDFBox's content streams with lines
 wrapped by hand, as it has no layout of its own, and PDFjet's TextFrame and
-Table, and for the report TextFlow. Fonts are kept the way
-a server would keep them: iText and OpenPDF with their own default caches,
-PDFBox with its TrueType font parsed once and reused, as its API allows;
-PDFjet has no font cache and reads its fonts for each document.
+Table, and for the report TextFlow. Every program reads the
+font files from disk once, into memory, and each document makes its fonts
+from those bytes, as a server would: iText and OpenPDF with their own
+default caches, PDFBox with its TrueType font parsed once and reused, as its
+API allows; PDFjet has no font cache and parses the bytes for each
+document.
 We ran iText both with its font cache and without it: without it,
 iText takes 1 to 5 ms more per document. The results here are with font
 caching.
@@ -77,8 +79,8 @@ question; iText also has a company behind it with paid support.
 | Markdown to PDF | no | no | no | **✓** |
 | HTML to PDF | no | pdfHTML add-on | openpdf-html module | no |
 | Images | JPEG, PNG, GIF, BMP, TIFF | those, WMF, JPEG 2000, JBIG2, WebP | those, WMF, JPEG 2000 | JPEG, PNG, BMP |
-| Kerning | no | pdfCalligraph, commercial | through Java AWT or Apache FOP | **✓** |
-| Ligatures (GSUB) | **✓** | pdfCalligraph, commercial | through Java AWT or Apache FOP | no |
+| Kerning | no | pdfCalligraph, commercial | the old kern table only, which neither font here has; GPOS through Java AWT or Apache FOP | **✓** |
+| Ligatures (GSUB) | ✓ by default, turned off here | pdfCalligraph, commercial | through Java AWT or Apache FOP | no |
 | Arabic | no | pdfCalligraph, commercial | **✓** | **✓** |
 | Devanagari and other Indic scripts | some | pdfCalligraph, commercial | through Java AWT or Apache FOP | no |
 | Hyphenation | no | hyph module | ✓ patterns not included | soft hyphens only |
@@ -89,7 +91,7 @@ question; iText also has a company behind it with paid support.
 | Digital signatures | ✓ with Bouncy Castle | sign module, with Bouncy Castle | ✓ with Bouncy Castle | no |
 | Password encryption, AES-256 | **✓** | **✓** | **✓** | **✓** |
 | Certificate encryption | ✓ with Bouncy Castle | ✓ with Bouncy Castle | ✓ with Bouncy Castle | no |
-| PDF 2.0 | no option found | **✓** | a 2.0 header by default | no, PDF 1.7 |
+| PDF 2.0 | a 2.0 header, setVersion | **✓** | a 2.0 header by default | no, PDF 1.7 |
 | Object streams, for smaller files | ✓ by default | ✓ an option | ✓ an option | no |
 | Redaction | no | pdfSweep add-on | no | no |
 | OCR | no | pdfOCR add-on | no | no |
@@ -112,19 +114,21 @@ in every library:
   of 1870 × 2420 pixels, 1.8 MB in all.
 - **multilingual**: 1 page, a notice in eight languages: English, French,
   German, Polish, Turkish, Greek, Bulgarian and Ukrainian.
-- **letters**: 1,000 one-page letters with the logo as SVG, timed as the
-  batch.
+- **letters**: 1,000 one-page letters with the logo as PNG, and again as
+  SVG, timed as the batch (with Noto, the SVG logo only).
 
 All in **IBM Plex Sans**, embedded as subsets, and all again in **Noto
 Sans**, a much larger font.
 
 **Method.** Each library in its own fresh JVM, in a random order, three
-rounds. Each task is warmed up for at least 20 runs and 3 seconds, then
+rounds; within a JVM the tasks run in the same fixed order for every
+library. Each task is warmed up for at least 20 runs and 3 seconds, then
 timed over 15 runs (the letters: 2 warm-up batches, 5 timed); the figure is
 the median of the three round medians. An asterisk (\*) marks a figure
 whose rounds differ by more than 5%. The first PDF of a fresh process is the
-median of 5 processes. OpenJDK 25, AMD Ryzen 5 5600G, Linux, nothing else
-running. After the run every PDF is checked, and the log is published:
+median of 5 processes. OpenJDK 25, .NET 10, Go 1.27, Swift 6.4, on an AMD
+Ryzen 5 5600G with Linux, after a reboot, in the performance power profile,
+nothing else running. After the run every PDF is checked, and the log is published:
 MuPDF opens it with no warning, it has the expected pages, the check
 strings of SPEC.md are in its text (the last sentence of every language for
 the notice), both fonts are embedded as subsets, and qpdf --check passes.
@@ -139,11 +143,12 @@ PDFjet in C#, Go and Swift, shown with them but not ranked against them.
 <!-- table java-plex -->
 | Document | PDFBox | iText | OpenPDF | PDFjet Java | PDFjet C# | PDFjet Go | PDFjet Swift |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| invoice, 1 page | 4.3 \* | 4.8 \* | 2.9 \* | **1.6 \*** | 1.8 \* | 1.7 \* | 2.0 \* |
-| statement, 12 pages | 43.2 | 70.0 \* | 18.0 | **5.5 \*** | 7.8 | 4.9 \* | 11.0 |
-| report, 18 pages | 230.4 | 24.5 | 6.0 | **5.6** | 8.5 \* | 6.4 | 13.4 |
-| multilingual, 1 page | 3.5 \* | 2.6 | 1.5 | **1.4** | 1.5 \* | 1.2 \* | 1.6 |
-| the 1,000 letters, s | 2.68 | 1.98 | 1.04 \* | **0.89** | 0.93 \* | 0.96 | 1.53 |
+| invoice, 1 page | 3.0 \* | 4.4 | 2.5 | **1.6** | 1.1 \* | 1.6 | 1.7 \* |
+| statement, 12 pages | 5.8 \* | 70.3 \* | 17.0 | **5.5** | 6.0 \* | 4.8 | 11.0 |
+| report, 18 pages | 151.9 | 24.1 | 5.8 | **5.3** | 7.4 | 5.9 \* | 13.5 |
+| multilingual, 1 page | 2.0 | 2.5 | 1.4 | **1.3** | 0.8 \* | 1.1 \* | 1.6 |
+| the 1,000 letters, PNG logo, s | 2.49 | 1.97 | 1.91 | **1.35** | 1.03 | 1.37 | 1.50 |
+| the 1,000 letters, SVG logo, s | 1.30 | 1.89 | 1.00 | **0.88** | 0.67 | 0.93 | 1.58 |
 <!-- end java-plex -->
 
 To draw the SVG logo the others need another module or library, and each
@@ -163,11 +168,11 @@ With Noto Sans, a large font, ms (the letters: the batch of 1,000, s):
 <!-- table java-noto -->
 | Document | PDFBox | iText | OpenPDF | PDFjet Java | PDFjet C# | PDFjet Go | PDFjet Swift |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| invoice | 19.0 | 6.4 \* | 3.6 \* | **2.6** | 2.6 | 2.3 | 3.0 \* |
-| statement | 523.8 \* | 75.3 \* | 18.4 | **6.7 \*** | 9.1 | 5.8 \* | 12.2 \* |
-| report | 1,340 | 28.0 | 6.9 | **6.7 \*** | 10.4 \* | 7.6 \* | 14.6 |
-| multilingual | 22.1 | 4.3 \* | **2.1** | 2.1 | 2.4 | 1.9 \* | 2.4 \* |
-| the 1,000 letters, s | 22.01 | 3.20 | 1.91 | **1.88** | 2.06 | 1.82 \* | 2.43 \* |
+| invoice | 3.1 \* | 5.8 | 3.4 | **2.6** | 1.5 | 2.4 \* | 2.6 \* |
+| statement | **5.4 \*** | 73.6 \* | 18.2 | 6.5 | 6.5 | 5.6 | 13.0 |
+| report | 149.8 | 28.6 | 6.8 | **6.5** | 7.9 \* | 6.8 \* | 14.9 |
+| multilingual | **1.7** | 4.2 | 2.0 | 2.1 | 1.4 \* | 1.8 \* | 2.5 |
+| the 1,000 letters, s | **1.23** | 3.08 | 1.83 | 1.84 | 1.28 | 1.66 | 2.54 |
 <!-- end java-noto -->
 
 The first PDF of a fresh process, each of the five documents, as a
@@ -177,28 +182,31 @@ ms; then the peak memory of the whole process, mostly the JVM itself, MB:
 <!-- table first-pdf -->
 | | PDFBox | iText | OpenPDF | PDFjet Java | PDFjet C# | PDFjet Go | PDFjet Swift |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| the invoice, ms | 245.0 | 265.2 | 199.5 | **50.0** | 48.6 | 3.6 | 4.1 |
-| the statement, ms | 372.9 | 580.5 | 265.9 | **90.3** | 63.1 | 8.0 | 14.8 |
-| the report, ms | 674.4 | 393.6 | 199.7 | **81.9** | 63.8 | 9.4 | 18.5 |
-| the notice, ms | 199.5 | 219.5 | 135.1 | **37.4** | 38.4 | 2.7 | 5.7 |
-| the first letter, ms | 373.7 | 357.8 | 454.2 | **39.6** | 49.8 | 2.4 | 3.4 |
-| the invoice, peak memory, MB | 88 | 89 | 84 | **55** | 42 | 9 | 28 |
-| the statement, peak memory, MB | 155 | 169 | 136 | **65** | 46 | 11 | 35 |
-| the report, peak memory, MB | 326 | 134 | 102 | **72** | 52 | 14 | 35 |
-| the notice, peak memory, MB | 86 | 85 | 71 | **54** | 41 | 8 | 29 |
-| the first letter, peak memory, MB | 113 | 132 | 135 | **54** | 42 | 9 | 29 |
+| the invoice, ms | 189.9 | 249.8 | 190.4 | **49.8** | 54.5 | 3.4 | 3.5 |
+| the statement, ms | 203.9 | 540.2 | 251.9 | **85.9** | 64.4 | 7.5 | 14.7 |
+| the report, ms | 401.4 | 368.2 | 184.8 | **82.4** | 69.6 | 8.5 | 18.9 |
+| the notice, ms | 159.0 | 205.0 | 127.4 | **38.3** | 42.6 | 2.6 | 5.5 |
+| the first letter, ms | 321.6 | 352.7 | 432.8 | **40.5** | 55.9 | 2.2 | 3.3 |
+| the invoice, the whole process, ms | 240 | 300 | 230 | **80** | 80 | under 10 | 10 |
+| the invoice, peak memory, MB | 82 | 89 | 83 | **54** | 44 | 10 | 28 |
+| the statement, peak memory, MB | 91 | 168 | 135 | **65** | 48 | 12 | 34 |
+| the report, peak memory, MB | 121 | 140 | 101 | **71** | 53 | 14 | 34 |
+| the notice, peak memory, MB | 80 | 85 | 71 | **53** | 43 | 9 | 27 |
+| the first letter, peak memory, MB | 107 | 133 | 140 | **54** | 44 | 9 | 27 |
 <!-- end first-pdf -->
 
-Memory allocated per document, MB:
+Memory allocated per document, MB. Each runtime counts it its own way:
+Java and C# the bytes the timing thread allocates, Go every allocation of
+the process (Go's TotalAlloc), Swift every malloc of the thread:
 
 <!-- table memory -->
 | Document | PDFBox | iText | OpenPDF | PDFjet Java | PDFjet C# | PDFjet Go | PDFjet Swift |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| invoice | 4.0 | 3.7 | 2.1 | **1.6** | 1.4 | 2.6 | — |
-| statement | 90.1 | 71.7 | 55.8 | **4.6** | 5.4 | 4.7 | — |
-| report | 233.2 | 26.8 | 13.4 | **12.0** | 12.5 | 9.1 | — |
-| multilingual | 5.0 | 1.9 | **0.5** | 1.0 | 1.0 | 1.3 | — |
-| one letter | 4.9 | 2.5 | **0.5** | 1.0 | 0.9 | 1.5 | — |
+| invoice | **1.5** | 3.6 | 2.2 | 1.6 | 1.4 | 2.6 | 4.0 |
+| statement | 5.6 | 71.6 | 56.0 | **4.7** | 5.5 | 4.8 | 7.3 |
+| report | 29.8 | 26.9 | 13.4 | **12.0** | 12.5 | 9.0 | 18.1 |
+| multilingual | 1.8 | 1.8 | **0.6** | 1.0 | 1.0 | 1.3 | 2.8 |
+| one letter | 1.4 | 2.4 | **0.5** | 1.0 | 0.9 | 1.5 | 2.7 |
 <!-- end memory -->
 
 The size of the PDFs, KB:
@@ -206,11 +214,11 @@ The size of the PDFs, KB:
 <!-- table sizes -->
 | Document | PDFBox | iText | OpenPDF | PDFjet Java | PDFjet C# | PDFjet Go | PDFjet Swift |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| invoice | **19** | 23 | 21 | 25 | 25 | 26 | 27 |
-| statement | **42** | 58 | 55 | 64 | 64 | 63 | 71 |
-| report | 1,816 | 1,820 | **1,813** | 1,823 | 1,822 | 1,823 | 1,825 |
-| multilingual | **22** | 29 | 24 | 29 | 29 | 29 | 31 |
-| one letter | **11** | 16 | 14 | 18 | 18 | 18 | 19 |
+| invoice | **19** | 24 | 22 | 25 | 25 | 26 | 27 |
+| statement | **42** | 62 | 59 | 64 | 63 | 63 | 71 |
+| report | **1,816** | 1,824 | 1,817 | 1,823 | 1,822 | 1,823 | 1,825 |
+| multilingual | **22** | 30 | 25 | 29 | 29 | 29 | 31 |
+| one letter | **11** | 17 | 15 | 18 | 18 | 18 | 19 |
 <!-- end sizes -->
 
 Lines of code of each program, without blank lines and comments; "helpers"
@@ -220,9 +228,9 @@ wrapping), counted in the total:
 <!-- table loc -->
 | | invoice | statement | report | letters | multilingual | helpers | total |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| PDFBox | **28** | 26 | 53 | 34 | 24 | 90 | 255 |
+| PDFBox | **28** | 26 | 53 | 34 | 24 | 91 | 256 |
 | iText | 39 | 30 | **22** | **17** | **17** | 45 | 170 |
-| OpenPDF | 58 | 38 | 33 | 33 | 23 | 65 | 250 |
+| OpenPDF | 57 | 37 | 32 | 32 | 23 | 65 | 246 |
 | PDFjet Java | 31 | **25** | 32 | 20 | **17** | **37** | **162** |
 | PDFjet C# | 32 | 25 | 32 | 20 | 17 | 35 | 161 |
 | PDFjet Go | 36 | 26 | 35 | 26 | 20 | 35 | 178 |
@@ -256,8 +264,8 @@ again.
 Everything is in github.com/edragoev1/pdf-benchmarks: SPEC.md, the text of
 the notice, the logo and the photos, the program of each library and port,
 the run and check scripts, and the raw results with their logs. java/run.sh
-runs the four Java libraries (about 30 minutes) and java/check.sh checks
-every PDF; dotnet/, go/ and swift/ run PDFjet's other ports the same way;
+runs the four Java libraries (about 15 minutes) and java/check.sh checks
+every PDF; run-all.sh runs everything, as for these results; dotnet/, go/ and swift/ run PDFjet's other ports the same way;
 make-tables.py makes every table of this report from the results.
 
 ## Judgment calls
@@ -267,11 +275,18 @@ make-tables.py makes every table of this report from the results.
   match it, as without it their page counts differ.
 - OpenPDF uses `setStrictImageSequence(true)`, or it moves text above a
   photo that goes to the next page.
-- iText and OpenPDF write object streams, which make smaller files, as
-  PDFBox does by default; PDFjet writes none.
+- Every library is at its default compression: all four compress their
+  streams, and PDFBox alone writes object streams, its default, which make
+  its files smaller; iText and OpenPDF can write them too, as an option.
+- PDFBox shapes ligatures (GSUB) by default on every showText, a cost that
+  grows with the font's tables; the others do none, so it is turned off here
+  (setEnableGsub(false)), as a PDFBox user who wants speed does. In the
+  run of 26 October, with it on, PDFBox took 43 ms for the statement in
+  Plex and 524 ms in Noto; without it, 5.8 and 5.4 ms.
 - iText and OpenPDF use their large-table modes for the statement, as
   their documentation shows for long tables. iText's ordinary Table was
-  timed too, and was slower (about 106 ms against 72).
+  timed too, and was slower (about 106 ms against 72, in the run of
+  26 October).
 - PDFBox draws one rule under each table row and one header rectangle,
   where the others draw a border under each cell: slightly less work for
   PDFBox.

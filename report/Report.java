@@ -18,7 +18,7 @@ import java.util.*;
 public class Report {
     static final float W = 792f, H = 612f, M = 48f, TW = W - 2 * M;
     static final int INK = 0x22262B, MUTED = 0x5F6873, NAVY = 0x1F3A5F;
-    static final String FONTS = System.getProperty("user.home") + "/Projects/pdfjet/fonts/";
+    static final String FONTS = System.getProperty("user.home") + "/Projects/pdfjet/resources/fonts/";
 
     static Font font(PDF pdf, String file, float size) throws Exception {
         Font font = new Font(pdf, new FileInputStream(FONTS + file));
@@ -63,7 +63,7 @@ public class Report {
                 font(pdf, "IBMPlexSans/IBMPlexSans-SemiBold.ttf", size),
                 font(pdf, "IBMPlexSans/IBMPlexSans-Italic.ttf", size),
                 font(pdf, "IBMPlexSans/IBMPlexSans-SemiBoldItalic.ttf", size),
-                font(pdf, "IBMPlexMono/IBMPlexMono-Regular.ttf", size * 0.86f))
+                font(pdf, "CascadiaMono/CascadiaMono-Regular.ttf", size * 0.86f))
                 .setHeadingColor(NAVY)
                 .setLinkColor(0x0969DA)
                 .setFullWidthTables(true)

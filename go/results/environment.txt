@@ -1,5 +1,5 @@
 go version go1.27.2 linux/amd64
-PDFjet 3d8e30c3 TODO: three entries brought up to date
+PDFjet v9.1.7, bb9d9feea 9.1.7: the CHANGELOG dated 2026-11-05
 cpus 12, AMD Ryzen 5 5600G with Radeon Graphics
-2026-10-26T18:25:13-04:00
-2026-10-26T18:27:56-04:00
+2026-11-05T12:46:32-05:00
+2026-11-05T12:49:09-05:00

@@ -1,1 +1,1 @@
-3d8e30c3 TODO: three entries brought up to date
+bb9d9feea 9.1.7: the CHANGELOG dated 2026-11-05

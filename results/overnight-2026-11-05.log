@@ -1,0 +1,157 @@
+
+== 12:32:40 start, PDFjet v9.1.7, bb9d9feea 9.1.7: the CHANGELOG dated 2026-11-05
+ 12:32:40 up 1 min,  1 user,  load average: 1.07, 0.57, 0.22
+CPU: AMD Ryzen 5 5600G with Radeon Graphics, 12 threads
+Kernel: 7.0.0-42-generic
+Memory: 30 GB; the JVMs run with their default heap, the same for all four
+Java: openjdk version "25.0.4.1" 2026-08-18 LTS
+Libraries: kernel-9.8.0.jar layout-9.8.0.jar openpdf-3.0.5.jar pdfbox-3.0.8.jar 
+Power profile: performance; governor: performance; boost: 1
+
+== 12:32:40 java
+round 1 plex OpenPDFFair
+round 1 plex PDFBoxFair
+round 1 plex ITextFair
+round 1 plex PDFjetFair
+round 2 plex PDFjetFair
+round 2 plex OpenPDFFair
+round 2 plex PDFBoxFair
+round 2 plex ITextFair
+round 3 plex PDFBoxFair
+round 3 plex OpenPDFFair
+round 3 plex ITextFair
+round 3 plex PDFjetFair
+round 1 noto PDFjetFair
+round 1 noto OpenPDFFair
+round 1 noto ITextFair
+round 1 noto PDFBoxFair
+round 2 noto PDFjetFair
+round 2 noto OpenPDFFair
+round 2 noto ITextFair
+round 2 noto PDFBoxFair
+round 3 noto PDFBoxFair
+round 3 noto OpenPDFFair
+round 3 noto ITextFair
+round 3 noto PDFjetFair
+Results in results/runs.txt, results/memory.txt and results/first.txt; the PDFs in out-*/
+
+== 12:46:11 java check
+file                         pages mupdf  text  fonts  qpdf  notes
+out-noto/itext-invoice.pdf       1 ok     ok    ok     ok    
+out-noto/itext-multilingual.pdf     1 ok     ok    ok     ok    
+out-noto/itext-report.pdf       20 ok     ok    ok     ok    
+out-noto/itext-statement.pdf    12 ok     ok    ok     ok    
+out-noto/itext-svgletters.pdf     1 ok     ok    ok     ok    
+out-noto/openpdf-invoice.pdf     1 ok     ok    ok     ok    
+out-noto/openpdf-multilingual.pdf     1 ok     ok    ok     ok    
+out-noto/openpdf-report.pdf     20 ok     ok    ok     ok    
+out-noto/openpdf-statement.pdf    12 ok     ok    ok     ok    
+out-noto/openpdf-svgletters.pdf     1 ok     ok    ok     ok    
+out-noto/pdfbox-invoice.pdf      1 ok     ok    ok     ok    
+out-noto/pdfbox-multilingual.pdf     1 ok     ok    ok     ok    
+out-noto/pdfbox-report.pdf      20 ok     ok    ok     ok    
+out-noto/pdfbox-statement.pdf    12 ok     ok    ok     ok    
+out-noto/pdfbox-svgletters.pdf     1 ok     ok    ok     ok    
+out-noto/pdfjet-invoice.pdf      1 ok     ok    ok     ok    
+out-noto/pdfjet-multilingual.pdf     1 ok     ok    ok     ok    
+out-noto/pdfjet-report.pdf      21 ok     ok    ok     ok    
+out-noto/pdfjet-statement.pdf    13 ok     ok    ok     ok    
+out-noto/pdfjet-svgletters.pdf     1 ok     ok    ok     ok    
+out-plex/itext-invoice.pdf       1 ok     ok    ok     ok    
+out-plex/itext-letters.pdf       1 ok     ok    ok     ok    
+out-plex/itext-multilingual.pdf     1 ok     ok    ok     ok    
+out-plex/itext-report.pdf       18 ok     ok    ok     ok    
+out-plex/itext-statement.pdf    12 ok     ok    ok     ok    
+out-plex/itext-svgletters.pdf     1 ok     ok    ok     ok    
+out-plex/openpdf-invoice.pdf     1 ok     ok    ok     ok    
+out-plex/openpdf-letters.pdf     1 ok     ok    ok     ok    
+out-plex/openpdf-multilingual.pdf     1 ok     ok    ok     ok    
+out-plex/openpdf-report.pdf     18 ok     ok    ok     ok    
+out-plex/openpdf-statement.pdf    12 ok     ok    ok     ok    
+out-plex/openpdf-svgletters.pdf     1 ok     ok    ok     ok    
+out-plex/pdfbox-invoice.pdf      1 ok     ok    ok     ok    
+out-plex/pdfbox-letters.pdf      1 ok     ok    ok     ok    
+out-plex/pdfbox-multilingual.pdf     1 ok     ok    ok     ok    
+out-plex/pdfbox-report.pdf      18 ok     ok    ok     ok    
+out-plex/pdfbox-statement.pdf    12 ok     ok    ok     ok    
+out-plex/pdfbox-svgletters.pdf     1 ok     ok    ok     ok    
+out-plex/pdfjet-invoice.pdf      1 ok     ok    ok     ok    
+out-plex/pdfjet-letters.pdf      1 ok     ok    ok     ok    
+out-plex/pdfjet-multilingual.pdf     1 ok     ok    ok     ok    
+out-plex/pdfjet-report.pdf      18 ok     ok    ok     ok    
+out-plex/pdfjet-statement.pdf    12 ok     ok    ok     ok    
+out-plex/pdfjet-svgletters.pdf     1 ok     ok    ok     ok    
+All checks pass.
+
+== 12:46:25 dotnet
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:05.48
+round 1 plex pdfjet-dotnet
+round 2 plex pdfjet-dotnet
+round 3 plex pdfjet-dotnet
+round 1 noto pdfjet-dotnet
+round 2 noto pdfjet-dotnet
+round 3 noto pdfjet-dotnet
+Results in results/runs.txt, results/memory.txt and results/first.txt; the PDFs in out-*/
+
+== 12:46:31 go
+round 1 plex pdfjet-go
+round 2 plex pdfjet-go
+round 3 plex pdfjet-go
+round 1 noto pdfjet-go
+round 2 noto pdfjet-go
+round 3 noto pdfjet-go
+Results in results/runs.txt, results/memory.txt and results/first.txt; the PDFs in out-*/
+
+== 12:49:09 swift
+Building for production...
+Build complete! (0.51 secs)
+round 1 plex pdfjet-swift
+round 2 plex pdfjet-swift
+round 3 plex pdfjet-swift
+round 1 noto pdfjet-swift
+round 2 noto pdfjet-swift
+round 3 noto pdfjet-swift
+Results in results/runs.txt, results/memory.txt and results/first.txt; the PDFs in out-*/
+
+== 12:52:25 ports check
+dotnet/out-plex/pdfjet-dotnet-invoice.pdf          1 pages
+dotnet/out-plex/pdfjet-dotnet-report.pdf          18 pages
+dotnet/out-plex/pdfjet-dotnet-statement.pdf       12 pages
+dotnet/out-plex/pdfjet-dotnet-svgletters.pdf       1 pages
+dotnet/out-plex/pdfjet-dotnet-letters.pdf          1 pages
+dotnet/out-plex/pdfjet-dotnet-multilingual.pdf     1 pages
+dotnet/out-noto/pdfjet-dotnet-invoice.pdf          1 pages
+dotnet/out-noto/pdfjet-dotnet-report.pdf          21 pages
+dotnet/out-noto/pdfjet-dotnet-statement.pdf       13 pages
+dotnet/out-noto/pdfjet-dotnet-svgletters.pdf       1 pages
+dotnet/out-noto/pdfjet-dotnet-multilingual.pdf     1 pages
+go/out-plex/pdfjet-go-invoice.pdf                  1 pages
+go/out-plex/pdfjet-go-report.pdf                  18 pages
+go/out-plex/pdfjet-go-statement.pdf               12 pages
+go/out-plex/pdfjet-go-svgletters.pdf               1 pages
+go/out-plex/pdfjet-go-letters.pdf                  1 pages
+go/out-plex/pdfjet-go-multilingual.pdf             1 pages
+go/out-noto/pdfjet-go-invoice.pdf                  1 pages
+go/out-noto/pdfjet-go-report.pdf                  21 pages
+go/out-noto/pdfjet-go-statement.pdf               13 pages
+go/out-noto/pdfjet-go-svgletters.pdf               1 pages
+go/out-noto/pdfjet-go-multilingual.pdf             1 pages
+swift/out-plex/pdfjet-swift-invoice.pdf            1 pages
+swift/out-plex/pdfjet-swift-report.pdf            18 pages
+swift/out-plex/pdfjet-swift-statement.pdf         12 pages
+swift/out-plex/pdfjet-swift-svgletters.pdf         1 pages
+swift/out-plex/pdfjet-swift-letters.pdf            1 pages
+swift/out-plex/pdfjet-swift-multilingual.pdf       1 pages
+swift/out-noto/pdfjet-swift-invoice.pdf            1 pages
+swift/out-noto/pdfjet-swift-report.pdf            21 pages
+swift/out-noto/pdfjet-swift-statement.pdf         13 pages
+swift/out-noto/pdfjet-swift-svgletters.pdf         1 pages
+swift/out-noto/pdfjet-swift-multilingual.pdf       1 pages
+All checks passed
+
+== 12:52:32 done (every step passed)

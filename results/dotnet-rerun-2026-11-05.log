@@ -1,0 +1,13 @@
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.81
+round 1 plex pdfjet-dotnet
+round 2 plex pdfjet-dotnet
+round 3 plex pdfjet-dotnet
+round 1 noto pdfjet-dotnet
+round 2 noto pdfjet-dotnet
+round 3 noto pdfjet-dotnet
+Results in results/runs.txt, results/memory.txt and results/first.txt; the PDFs in out-*/

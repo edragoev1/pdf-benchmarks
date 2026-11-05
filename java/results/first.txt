@@ -1,200 +1,200 @@
-5 OpenPDFFair invoice first-process-wall-s 0.24 max-rss-kb 82368
-5 openpdf plex first invoice median-ms 197.25 bytes 20999
-3 PDFjetFair report first-process-wall-s 0.13 max-rss-kb 69672
-3 pdfjet plex first report median-ms 81.92 bytes 1823102
-1 PDFBoxFair report first-process-wall-s 0.77 max-rss-kb 316088
-1 pdfbox plex first report median-ms 685.10 bytes 1816182
-4 PDFjetFair statement first-process-wall-s 0.13 max-rss-kb 63816
-4 pdfjet plex first statement median-ms 86.59 bytes 63630
-3 ITextFair svgletters first-process-wall-s 0.42 max-rss-kb 131224
-3 itext plex first svgletters median-ms 356.00 bytes 15328
-4 PDFjetFair invoice first-process-wall-s 0.09 max-rss-kb 53448
-4 pdfjet plex first invoice median-ms 52.32 bytes 25127
-5 PDFjetFair svgletters first-process-wall-s 0.08 max-rss-kb 53148
-5 pdfjet plex first svgletters median-ms 39.33 bytes 17418
-2 OpenPDFFair svgletters first-process-wall-s 0.66 max-rss-kb 124016
-2 openpdf plex first svgletters median-ms 428.15 bytes 13309
-5 OpenPDFFair svgletters first-process-wall-s 0.79 max-rss-kb 132216
-5 openpdf plex first svgletters median-ms 433.22 bytes 13309
-5 PDFBoxFair svgletters first-process-wall-s 0.57 max-rss-kb 110092
-5 pdfbox plex first svgletters median-ms 370.24 bytes 10734
-5 OpenPDFFair multilingual first-process-wall-s 0.18 max-rss-kb 69888
-5 openpdf plex first multilingual median-ms 129.60 bytes 24070
-5 ITextFair svgletters first-process-wall-s 0.42 max-rss-kb 129388
-5 itext plex first svgletters median-ms 357.77 bytes 15329
-5 PDFBoxFair statement first-process-wall-s 0.44 max-rss-kb 149776
-5 pdfbox plex first statement median-ms 372.95 bytes 42468
-3 PDFjetFair svgletters first-process-wall-s 0.08 max-rss-kb 52576
-3 pdfjet plex first svgletters median-ms 40.82 bytes 17418
-4 ITextFair svgletters first-process-wall-s 0.43 max-rss-kb 127768
-4 itext plex first svgletters median-ms 362.07 bytes 15327
-2 OpenPDFFair multilingual first-process-wall-s 0.18 max-rss-kb 69520
-2 openpdf plex first multilingual median-ms 130.09 bytes 24069
-1 PDFjetFair report first-process-wall-s 0.12 max-rss-kb 70780
-1 pdfjet plex first report median-ms 80.65 bytes 1823102
-4 PDFjetFair multilingual first-process-wall-s 0.08 max-rss-kb 52440
-4 pdfjet plex first multilingual median-ms 37.09 bytes 28639
-5 PDFBoxFair report first-process-wall-s 0.76 max-rss-kb 319912
-5 pdfbox plex first report median-ms 680.81 bytes 1816182
-3 PDFBoxFair report first-process-wall-s 0.76 max-rss-kb 318108
-3 pdfbox plex first report median-ms 674.38 bytes 1816182
-4 ITextFair invoice first-process-wall-s 0.30 max-rss-kb 87204
-4 itext plex first invoice median-ms 248.39 bytes 22854
-4 ITextFair statement first-process-wall-s 0.67 max-rss-kb 164700
-4 itext plex first statement median-ms 547.11 bytes 58307
-2 PDFjetFair statement first-process-wall-s 0.13 max-rss-kb 63484
-2 pdfjet plex first statement median-ms 90.29 bytes 63630
-3 PDFjetFair invoice first-process-wall-s 0.08 max-rss-kb 53512
-3 pdfjet plex first invoice median-ms 49.96 bytes 25127
-4 PDFBoxFair report first-process-wall-s 0.76 max-rss-kb 316472
-4 pdfbox plex first report median-ms 671.38 bytes 1816182
-5 ITextFair multilingual first-process-wall-s 0.26 max-rss-kb 83344
-5 itext plex first multilingual median-ms 208.31 bytes 28697
-2 ITextFair report first-process-wall-s 0.43 max-rss-kb 131172
-2 itext plex first report median-ms 368.00 bytes 1819657
-1 ITextFair report first-process-wall-s 0.46 max-rss-kb 140200
-1 itext plex first report median-ms 370.81 bytes 1819656
-4 OpenPDFFair statement first-process-wall-s 0.34 max-rss-kb 132564
-4 openpdf plex first statement median-ms 257.40 bytes 55402
-5 PDFBoxFair multilingual first-process-wall-s 0.25 max-rss-kb 84676
-5 pdfbox plex first multilingual median-ms 195.72 bytes 22014
-5 OpenPDFFair report first-process-wall-s 0.25 max-rss-kb 100188
-5 openpdf plex first report median-ms 199.65 bytes 1812784
-3 PDFBoxFair invoice first-process-wall-s 0.30 max-rss-kb 86088
-3 pdfbox plex first invoice median-ms 238.18 bytes 18784
-5 ITextFair invoice first-process-wall-s 0.33 max-rss-kb 87148
-5 itext plex first invoice median-ms 267.35 bytes 22855
-1 ITextFair multilingual first-process-wall-s 0.27 max-rss-kb 82924
-1 itext plex first multilingual median-ms 219.53 bytes 28698
-5 PDFjetFair report first-process-wall-s 0.13 max-rss-kb 70208
-5 pdfjet plex first report median-ms 80.35 bytes 1823102
-2 PDFBoxFair statement first-process-wall-s 0.43 max-rss-kb 154528
-2 pdfbox plex first statement median-ms 362.99 bytes 42468
-1 OpenPDFFair multilingual first-process-wall-s 0.19 max-rss-kb 70100
-1 openpdf plex first multilingual median-ms 139.21 bytes 24071
-1 PDFBoxFair svgletters first-process-wall-s 0.53 max-rss-kb 110436
-1 pdfbox plex first svgletters median-ms 410.59 bytes 10734
-3 PDFjetFair multilingual first-process-wall-s 0.08 max-rss-kb 52468
-3 pdfjet plex first multilingual median-ms 37.74 bytes 28639
-4 ITextFair report first-process-wall-s 0.46 max-rss-kb 129048
-4 itext plex first report median-ms 393.56 bytes 1819657
-5 PDFjetFair invoice first-process-wall-s 0.08 max-rss-kb 53000
-5 pdfjet plex first invoice median-ms 49.93 bytes 25127
-1 PDFBoxFair invoice first-process-wall-s 0.33 max-rss-kb 85588
-1 pdfbox plex first invoice median-ms 264.19 bytes 18784
-2 ITextFair statement first-process-wall-s 0.74 max-rss-kb 165636
-2 itext plex first statement median-ms 613.76 bytes 58307
-4 PDFBoxFair multilingual first-process-wall-s 0.25 max-rss-kb 84084
-4 pdfbox plex first multilingual median-ms 197.73 bytes 22014
-1 PDFjetFair invoice first-process-wall-s 0.08 max-rss-kb 53236
-1 pdfjet plex first invoice median-ms 49.27 bytes 25127
-3 PDFBoxFair svgletters first-process-wall-s 0.67 max-rss-kb 110780
-3 pdfbox plex first svgletters median-ms 371.67 bytes 10734
-1 ITextFair svgletters first-process-wall-s 0.41 max-rss-kb 128500
-1 itext plex first svgletters median-ms 351.33 bytes 15328
-5 PDFjetFair statement first-process-wall-s 0.13 max-rss-kb 63768
-5 pdfjet plex first statement median-ms 90.08 bytes 63630
-2 PDFBoxFair multilingual first-process-wall-s 0.26 max-rss-kb 83956
-2 pdfbox plex first multilingual median-ms 199.49 bytes 22014
-2 PDFBoxFair report first-process-wall-s 0.75 max-rss-kb 321580
-2 pdfbox plex first report median-ms 669.52 bytes 1816182
-2 PDFjetFair svgletters first-process-wall-s 0.08 max-rss-kb 53188
-2 pdfjet plex first svgletters median-ms 38.62 bytes 17418
-3 OpenPDFFair report first-process-wall-s 0.25 max-rss-kb 98864
-3 openpdf plex first report median-ms 203.82 bytes 1812784
-1 OpenPDFFair invoice first-process-wall-s 0.25 max-rss-kb 81544
-1 openpdf plex first invoice median-ms 199.62 bytes 20999
-1 PDFBoxFair multilingual first-process-wall-s 0.28 max-rss-kb 84060
-1 pdfbox plex first multilingual median-ms 219.19 bytes 22014
-4 OpenPDFFair invoice first-process-wall-s 0.25 max-rss-kb 82768
-4 openpdf plex first invoice median-ms 199.47 bytes 21000
-3 ITextFair multilingual first-process-wall-s 0.27 max-rss-kb 83472
-3 itext plex first multilingual median-ms 221.01 bytes 28698
-3 ITextFair invoice first-process-wall-s 0.32 max-rss-kb 87404
-3 itext plex first invoice median-ms 256.60 bytes 22857
-1 PDFjetFair multilingual first-process-wall-s 0.08 max-rss-kb 52556
-1 pdfjet plex first multilingual median-ms 36.67 bytes 28639
-3 OpenPDFFair svgletters first-process-wall-s 0.60 max-rss-kb 134976
-3 openpdf plex first svgletters median-ms 469.17 bytes 13309
-2 PDFBoxFair svgletters first-process-wall-s 0.55 max-rss-kb 110748
-2 pdfbox plex first svgletters median-ms 382.35 bytes 10734
-4 PDFBoxFair svgletters first-process-wall-s 0.59 max-rss-kb 109788
-4 pdfbox plex first svgletters median-ms 373.67 bytes 10734
-4 OpenPDFFair svgletters first-process-wall-s 0.74 max-rss-kb 131404
-4 openpdf plex first svgletters median-ms 476.28 bytes 13308
-1 PDFjetFair statement first-process-wall-s 0.13 max-rss-kb 63912
-1 pdfjet plex first statement median-ms 91.57 bytes 63630
-2 PDFBoxFair invoice first-process-wall-s 0.31 max-rss-kb 86264
-2 pdfbox plex first invoice median-ms 245.03 bytes 18784
-5 PDFjetFair multilingual first-process-wall-s 0.08 max-rss-kb 52344
-5 pdfjet plex first multilingual median-ms 37.50 bytes 28639
-5 OpenPDFFair statement first-process-wall-s 0.33 max-rss-kb 133436
-5 openpdf plex first statement median-ms 265.88 bytes 55404
-4 PDFjetFair svgletters first-process-wall-s 0.09 max-rss-kb 53136
-4 pdfjet plex first svgletters median-ms 43.99 bytes 17418
-2 ITextFair svgletters first-process-wall-s 0.44 max-rss-kb 130796
-2 itext plex first svgletters median-ms 377.81 bytes 15329
-1 OpenPDFFair svgletters first-process-wall-s 0.60 max-rss-kb 133072
-1 openpdf plex first svgletters median-ms 454.19 bytes 13308
-4 PDFjetFair report first-process-wall-s 0.13 max-rss-kb 71080
-4 pdfjet plex first report median-ms 82.05 bytes 1823102
-2 ITextFair invoice first-process-wall-s 0.32 max-rss-kb 86896
-2 itext plex first invoice median-ms 265.16 bytes 22856
-4 OpenPDFFair multilingual first-process-wall-s 0.18 max-rss-kb 69280
-4 openpdf plex first multilingual median-ms 135.08 bytes 24070
-3 OpenPDFFair invoice first-process-wall-s 0.25 max-rss-kb 82396
-3 openpdf plex first invoice median-ms 198.69 bytes 21000
-1 PDFjetFair svgletters first-process-wall-s 0.08 max-rss-kb 52788
-1 pdfjet plex first svgletters median-ms 39.59 bytes 17418
-1 ITextFair statement first-process-wall-s 0.69 max-rss-kb 161836
-1 itext plex first statement median-ms 559.90 bytes 58306
-2 ITextFair multilingual first-process-wall-s 0.27 max-rss-kb 83280
-2 itext plex first multilingual median-ms 211.88 bytes 28698
-3 OpenPDFFair statement first-process-wall-s 0.33 max-rss-kb 133204
-3 openpdf plex first statement median-ms 267.13 bytes 55405
-1 ITextFair invoice first-process-wall-s 0.34 max-rss-kb 89304
-1 itext plex first invoice median-ms 288.62 bytes 22855
-4 PDFBoxFair invoice first-process-wall-s 0.32 max-rss-kb 85664
-4 pdfbox plex first invoice median-ms 262.88 bytes 18784
-3 PDFBoxFair statement first-process-wall-s 0.46 max-rss-kb 150468
-3 pdfbox plex first statement median-ms 380.98 bytes 42468
-3 OpenPDFFair multilingual first-process-wall-s 0.19 max-rss-kb 69288
-3 openpdf plex first multilingual median-ms 142.79 bytes 24069
-1 OpenPDFFair statement first-process-wall-s 0.33 max-rss-kb 133992
-1 openpdf plex first statement median-ms 261.55 bytes 55402
-3 PDFBoxFair multilingual first-process-wall-s 0.26 max-rss-kb 82660
-3 pdfbox plex first multilingual median-ms 206.28 bytes 22014
-4 ITextFair multilingual first-process-wall-s 0.28 max-rss-kb 83340
-4 itext plex first multilingual median-ms 225.03 bytes 28698
-4 PDFBoxFair statement first-process-wall-s 0.45 max-rss-kb 151456
-4 pdfbox plex first statement median-ms 372.92 bytes 42468
-5 PDFBoxFair invoice first-process-wall-s 0.29 max-rss-kb 86156
-5 pdfbox plex first invoice median-ms 237.19 bytes 18784
-4 OpenPDFFair report first-process-wall-s 0.25 max-rss-kb 100288
-4 openpdf plex first report median-ms 193.10 bytes 1812782
-3 ITextFair statement first-process-wall-s 0.71 max-rss-kb 165540
-3 itext plex first statement median-ms 583.85 bytes 58307
-5 ITextFair statement first-process-wall-s 0.71 max-rss-kb 165328
-5 itext plex first statement median-ms 580.45 bytes 58310
-5 ITextFair report first-process-wall-s 0.47 max-rss-kb 137012
-5 itext plex first report median-ms 393.81 bytes 1819658
-2 OpenPDFFair invoice first-process-wall-s 0.26 max-rss-kb 82304
-2 openpdf plex first invoice median-ms 207.94 bytes 21001
-2 OpenPDFFair report first-process-wall-s 0.26 max-rss-kb 99636
-2 openpdf plex first report median-ms 204.31 bytes 1812786
-1 PDFBoxFair statement first-process-wall-s 0.46 max-rss-kb 152724
-1 pdfbox plex first statement median-ms 382.96 bytes 42468
-2 PDFjetFair report first-process-wall-s 0.14 max-rss-kb 69388
-2 pdfjet plex first report median-ms 92.13 bytes 1823102
-2 PDFjetFair multilingual first-process-wall-s 0.08 max-rss-kb 52368
-2 pdfjet plex first multilingual median-ms 37.41 bytes 28639
-2 PDFjetFair invoice first-process-wall-s 0.09 max-rss-kb 53564
-2 pdfjet plex first invoice median-ms 53.78 bytes 25127
-3 ITextFair report first-process-wall-s 0.46 max-rss-kb 128572
-3 itext plex first report median-ms 395.69 bytes 1819657
-3 PDFjetFair statement first-process-wall-s 0.13 max-rss-kb 64052
-3 pdfjet plex first statement median-ms 90.64 bytes 63630
-1 OpenPDFFair report first-process-wall-s 0.24 max-rss-kb 98240
-1 openpdf plex first report median-ms 191.29 bytes 1812784
-2 OpenPDFFair statement first-process-wall-s 0.36 max-rss-kb 132224
-2 openpdf plex first statement median-ms 274.27 bytes 55404
+4 PDFjetFair multilingual first-process-wall-s 0.08 max-rss-kb 51908
+4 pdfjet plex first multilingual median-ms 37.97 bytes 28639
+5 OpenPDFFair invoice first-process-wall-s 0.24 max-rss-kb 81076
+5 openpdf plex first invoice median-ms 191.47 bytes 22166
+1 ITextFair statement first-process-wall-s 0.65 max-rss-kb 161636
+1 itext plex first statement median-ms 534.07 bytes 61988
+4 OpenPDFFair report first-process-wall-s 0.23 max-rss-kb 99548
+4 openpdf plex first report median-ms 184.84 bytes 1816566
+2 PDFjetFair multilingual first-process-wall-s 0.08 max-rss-kb 51824
+2 pdfjet plex first multilingual median-ms 38.26 bytes 28639
+1 PDFBoxFair multilingual first-process-wall-s 0.21 max-rss-kb 77816
+1 pdfbox plex first multilingual median-ms 158.85 bytes 21922
+4 ITextFair multilingual first-process-wall-s 0.25 max-rss-kb 82300
+4 itext plex first multilingual median-ms 205.30 bytes 30162
+4 ITextFair svgletters first-process-wall-s 0.40 max-rss-kb 130112
+4 itext plex first svgletters median-ms 352.70 bytes 16431
+4 PDFBoxFair invoice first-process-wall-s 0.24 max-rss-kb 79804
+4 pdfbox plex first invoice median-ms 190.71 bytes 18660
+1 OpenPDFFair multilingual first-process-wall-s 0.17 max-rss-kb 68996
+1 openpdf plex first multilingual median-ms 127.76 bytes 25461
+3 ITextFair invoice first-process-wall-s 0.30 max-rss-kb 89168
+3 itext plex first invoice median-ms 248.76 bytes 24086
+5 ITextFair multilingual first-process-wall-s 0.26 max-rss-kb 83088
+5 itext plex first multilingual median-ms 205.66 bytes 30162
+2 PDFjetFair report first-process-wall-s 0.12 max-rss-kb 68972
+2 pdfjet plex first report median-ms 82.67 bytes 1823102
+3 OpenPDFFair svgletters first-process-wall-s 0.65 max-rss-kb 136820
+3 openpdf plex first svgletters median-ms 425.40 bytes 14322
+2 OpenPDFFair invoice first-process-wall-s 0.23 max-rss-kb 81788
+2 openpdf plex first invoice median-ms 190.44 bytes 22166
+2 PDFBoxFair invoice first-process-wall-s 0.24 max-rss-kb 80828
+2 pdfbox plex first invoice median-ms 188.57 bytes 18660
+5 ITextFair svgletters first-process-wall-s 0.41 max-rss-kb 132928
+5 itext plex first svgletters median-ms 350.41 bytes 16431
+4 PDFjetFair report first-process-wall-s 0.12 max-rss-kb 69304
+4 pdfjet plex first report median-ms 82.08 bytes 1823102
+2 OpenPDFFair multilingual first-process-wall-s 0.17 max-rss-kb 69216
+2 openpdf plex first multilingual median-ms 126.56 bytes 25461
+4 PDFjetFair invoice first-process-wall-s 0.08 max-rss-kb 52572
+4 pdfjet plex first invoice median-ms 49.69 bytes 25127
+1 PDFBoxFair invoice first-process-wall-s 0.24 max-rss-kb 79740
+1 pdfbox plex first invoice median-ms 188.00 bytes 18660
+1 PDFjetFair multilingual first-process-wall-s 0.08 max-rss-kb 51584
+1 pdfjet plex first multilingual median-ms 42.24 bytes 28639
+3 OpenPDFFair multilingual first-process-wall-s 0.17 max-rss-kb 69316
+3 openpdf plex first multilingual median-ms 127.40 bytes 25461
+5 PDFjetFair report first-process-wall-s 0.12 max-rss-kb 68864
+5 pdfjet plex first report median-ms 82.36 bytes 1823102
+5 OpenPDFFair statement first-process-wall-s 0.32 max-rss-kb 133204
+5 openpdf plex first statement median-ms 245.57 bytes 58516
+5 PDFBoxFair report first-process-wall-s 0.46 max-rss-kb 118032
+5 pdfbox plex first report median-ms 406.04 bytes 1816182
+2 PDFjetFair invoice first-process-wall-s 0.08 max-rss-kb 52196
+2 pdfjet plex first invoice median-ms 49.79 bytes 25127
+1 PDFBoxFair report first-process-wall-s 0.46 max-rss-kb 113656
+1 pdfbox plex first report median-ms 410.07 bytes 1816182
+2 ITextFair report first-process-wall-s 0.43 max-rss-kb 134336
+2 itext plex first report median-ms 366.96 bytes 1824238
+5 PDFBoxFair statement first-process-wall-s 0.26 max-rss-kb 89308
+5 pdfbox plex first statement median-ms 210.80 bytes 42468
+2 PDFjetFair statement first-process-wall-s 0.12 max-rss-kb 60892
+2 pdfjet plex first statement median-ms 87.41 bytes 63630
+1 ITextFair invoice first-process-wall-s 0.29 max-rss-kb 86616
+1 itext plex first invoice median-ms 247.39 bytes 24086
+2 PDFBoxFair report first-process-wall-s 0.46 max-rss-kb 112712
+2 pdfbox plex first report median-ms 399.26 bytes 1816182
+3 PDFBoxFair invoice first-process-wall-s 0.24 max-rss-kb 80000
+3 pdfbox plex first invoice median-ms 189.86 bytes 18660
+5 ITextFair invoice first-process-wall-s 0.30 max-rss-kb 94412
+5 itext plex first invoice median-ms 251.39 bytes 24086
+5 PDFBoxFair invoice first-process-wall-s 0.24 max-rss-kb 80712
+5 pdfbox plex first invoice median-ms 191.62 bytes 18660
+3 PDFBoxFair report first-process-wall-s 0.46 max-rss-kb 118052
+3 pdfbox plex first report median-ms 399.60 bytes 1816182
+2 ITextFair statement first-process-wall-s 0.66 max-rss-kb 164480
+2 itext plex first statement median-ms 540.17 bytes 61988
+5 PDFjetFair invoice first-process-wall-s 0.08 max-rss-kb 52304
+5 pdfjet plex first invoice median-ms 49.65 bytes 25127
+3 PDFjetFair svgletters first-process-wall-s 0.08 max-rss-kb 52828
+3 pdfjet plex first svgletters median-ms 40.42 bytes 17418
+5 PDFjetFair svgletters first-process-wall-s 0.08 max-rss-kb 52712
+5 pdfjet plex first svgletters median-ms 39.93 bytes 17418
+5 OpenPDFFair report first-process-wall-s 0.23 max-rss-kb 99036
+5 openpdf plex first report median-ms 184.58 bytes 1816566
+1 PDFBoxFair statement first-process-wall-s 0.25 max-rss-kb 89160
+1 pdfbox plex first statement median-ms 203.60 bytes 42468
+1 OpenPDFFair invoice first-process-wall-s 0.23 max-rss-kb 81108
+1 openpdf plex first invoice median-ms 189.47 bytes 22166
+2 PDFBoxFair statement first-process-wall-s 0.25 max-rss-kb 88744
+2 pdfbox plex first statement median-ms 203.86 bytes 42468
+3 OpenPDFFair statement first-process-wall-s 0.32 max-rss-kb 132036
+3 openpdf plex first statement median-ms 252.30 bytes 58516
+1 OpenPDFFair svgletters first-process-wall-s 0.61 max-rss-kb 136368
+1 openpdf plex first svgletters median-ms 432.75 bytes 14322
+2 ITextFair svgletters first-process-wall-s 0.42 max-rss-kb 127092
+2 itext plex first svgletters median-ms 360.85 bytes 16431
+2 PDFjetFair svgletters first-process-wall-s 0.08 max-rss-kb 52592
+2 pdfjet plex first svgletters median-ms 40.46 bytes 17418
+2 OpenPDFFair svgletters first-process-wall-s 0.61 max-rss-kb 136280
+2 openpdf plex first svgletters median-ms 433.96 bytes 14322
+3 OpenPDFFair report first-process-wall-s 0.23 max-rss-kb 98792
+3 openpdf plex first report median-ms 184.17 bytes 1816566
+4 ITextFair invoice first-process-wall-s 0.30 max-rss-kb 86444
+4 itext plex first invoice median-ms 251.11 bytes 24086
+4 OpenPDFFair svgletters first-process-wall-s 0.65 max-rss-kb 136292
+4 openpdf plex first svgletters median-ms 432.45 bytes 14322
+4 PDFBoxFair multilingual first-process-wall-s 0.21 max-rss-kb 78148
+4 pdfbox plex first multilingual median-ms 158.55 bytes 21922
+2 OpenPDFFair statement first-process-wall-s 0.32 max-rss-kb 131496
+2 openpdf plex first statement median-ms 244.17 bytes 58516
+3 PDFBoxFair svgletters first-process-wall-s 0.55 max-rss-kb 103972
+3 pdfbox plex first svgletters median-ms 316.59 bytes 10734
+4 OpenPDFFair statement first-process-wall-s 0.33 max-rss-kb 130808
+4 openpdf plex first statement median-ms 251.87 bytes 58516
+4 PDFBoxFair svgletters first-process-wall-s 0.62 max-rss-kb 104320
+4 pdfbox plex first svgletters median-ms 321.01 bytes 10734
+3 PDFjetFair statement first-process-wall-s 0.12 max-rss-kb 63352
+3 pdfjet plex first statement median-ms 85.00 bytes 63630
+1 ITextFair svgletters first-process-wall-s 0.41 max-rss-kb 130044
+1 itext plex first svgletters median-ms 350.91 bytes 16431
+3 PDFBoxFair statement first-process-wall-s 0.25 max-rss-kb 89188
+3 pdfbox plex first statement median-ms 204.91 bytes 42468
+5 ITextFair statement first-process-wall-s 0.67 max-rss-kb 161320
+5 itext plex first statement median-ms 549.07 bytes 61988
+2 ITextFair invoice first-process-wall-s 0.30 max-rss-kb 86148
+2 itext plex first invoice median-ms 249.85 bytes 24086
+4 PDFBoxFair report first-process-wall-s 0.46 max-rss-kb 118252
+4 pdfbox plex first report median-ms 401.42 bytes 1816182
+1 PDFBoxFair svgletters first-process-wall-s 0.47 max-rss-kb 103940
+1 pdfbox plex first svgletters median-ms 322.41 bytes 10734
+1 PDFjetFair report first-process-wall-s 0.12 max-rss-kb 69080
+1 pdfjet plex first report median-ms 82.92 bytes 1823102
+1 ITextFair report first-process-wall-s 0.45 max-rss-kb 135812
+1 itext plex first report median-ms 369.20 bytes 1824238
+1 ITextFair multilingual first-process-wall-s 0.25 max-rss-kb 82672
+1 itext plex first multilingual median-ms 204.40 bytes 30162
+3 PDFjetFair report first-process-wall-s 0.12 max-rss-kb 69836
+3 pdfjet plex first report median-ms 82.38 bytes 1823102
+4 PDFBoxFair statement first-process-wall-s 0.25 max-rss-kb 89228
+4 pdfbox plex first statement median-ms 202.47 bytes 42468
+1 OpenPDFFair report first-process-wall-s 0.23 max-rss-kb 97284
+1 openpdf plex first report median-ms 188.57 bytes 1816566
+5 OpenPDFFair svgletters first-process-wall-s 0.66 max-rss-kb 135284
+5 openpdf plex first svgletters median-ms 433.77 bytes 14322
+2 PDFBoxFair multilingual first-process-wall-s 0.21 max-rss-kb 78220
+2 pdfbox plex first multilingual median-ms 159.04 bytes 21922
+5 ITextFair report first-process-wall-s 0.45 max-rss-kb 139220
+5 itext plex first report median-ms 368.19 bytes 1824238
+5 PDFjetFair multilingual first-process-wall-s 0.08 max-rss-kb 51648
+5 pdfjet plex first multilingual median-ms 40.12 bytes 28639
+4 PDFjetFair statement first-process-wall-s 0.12 max-rss-kb 63384
+4 pdfjet plex first statement median-ms 85.87 bytes 63630
+1 PDFjetFair svgletters first-process-wall-s 0.08 max-rss-kb 52328
+1 pdfjet plex first svgletters median-ms 40.53 bytes 17418
+5 PDFBoxFair multilingual first-process-wall-s 0.21 max-rss-kb 78080
+5 pdfbox plex first multilingual median-ms 160.83 bytes 21922
+2 OpenPDFFair report first-process-wall-s 0.23 max-rss-kb 98792
+2 openpdf plex first report median-ms 184.77 bytes 1816566
+5 OpenPDFFair multilingual first-process-wall-s 0.17 max-rss-kb 68984
+5 openpdf plex first multilingual median-ms 127.20 bytes 25461
+4 OpenPDFFair multilingual first-process-wall-s 0.18 max-rss-kb 68824
+4 openpdf plex first multilingual median-ms 133.46 bytes 25461
+3 ITextFair report first-process-wall-s 0.45 max-rss-kb 136360
+3 itext plex first report median-ms 366.70 bytes 1824238
+1 OpenPDFFair statement first-process-wall-s 0.33 max-rss-kb 133508
+1 openpdf plex first statement median-ms 257.85 bytes 58516
+4 PDFjetFair svgletters first-process-wall-s 0.08 max-rss-kb 52628
+4 pdfjet plex first svgletters median-ms 41.95 bytes 17418
+4 OpenPDFFair invoice first-process-wall-s 0.23 max-rss-kb 81720
+4 openpdf plex first invoice median-ms 190.56 bytes 22166
+3 PDFjetFair invoice first-process-wall-s 0.08 max-rss-kb 52280
+3 pdfjet plex first invoice median-ms 49.94 bytes 25127
+4 ITextFair statement first-process-wall-s 0.65 max-rss-kb 167940
+4 itext plex first statement median-ms 548.89 bytes 61988
+2 PDFBoxFair svgletters first-process-wall-s 0.62 max-rss-kb 104332
+2 pdfbox plex first svgletters median-ms 322.24 bytes 10734
+5 PDFBoxFair svgletters first-process-wall-s 0.48 max-rss-kb 104604
+5 pdfbox plex first svgletters median-ms 321.65 bytes 10734
+3 ITextFair statement first-process-wall-s 0.66 max-rss-kb 171088
+3 itext plex first statement median-ms 531.05 bytes 61988
+1 PDFjetFair statement first-process-wall-s 0.12 max-rss-kb 63528
+1 pdfjet plex first statement median-ms 85.08 bytes 63630
+2 ITextFair multilingual first-process-wall-s 0.25 max-rss-kb 82652
+2 itext plex first multilingual median-ms 204.93 bytes 30162
+1 PDFjetFair invoice first-process-wall-s 0.08 max-rss-kb 52404
+1 pdfjet plex first invoice median-ms 50.45 bytes 25127
+3 ITextFair svgletters first-process-wall-s 0.41 max-rss-kb 133276
+3 itext plex first svgletters median-ms 355.42 bytes 16431
+4 ITextFair report first-process-wall-s 0.47 max-rss-kb 138628
+4 itext plex first report median-ms 391.34 bytes 1824238
+3 PDFjetFair multilingual first-process-wall-s 0.08 max-rss-kb 52140
+3 pdfjet plex first multilingual median-ms 37.95 bytes 28639
+3 PDFBoxFair multilingual first-process-wall-s 0.21 max-rss-kb 77360
+3 pdfbox plex first multilingual median-ms 162.35 bytes 21922
+3 OpenPDFFair invoice first-process-wall-s 0.24 max-rss-kb 81356
+3 openpdf plex first invoice median-ms 190.23 bytes 22166
+3 ITextFair multilingual first-process-wall-s 0.25 max-rss-kb 82656
+3 itext plex first multilingual median-ms 204.96 bytes 30162
+5 PDFjetFair statement first-process-wall-s 0.13 max-rss-kb 63540
+5 pdfjet plex first statement median-ms 87.31 bytes 63630

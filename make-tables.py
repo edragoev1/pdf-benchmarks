@@ -292,7 +292,7 @@ def charts(path):
         add(title, "MB allocated", [(name, stat(lib, "plex", task)["alloc"], "%.1f" % stat(lib, "plex", task)["alloc"])
                                     for lib, name in zip(LIBS, LIB_NAMES)])
     page("The first PDF of a fresh process")
-    caption("The first PDF of a fresh process", "These tests use IBM Plex Sans.")
+    caption("The first PDF of a fresh process, as on a cold start", "These tests use IBM Plex Sans.")
     for doc, label in FIRST_DOCS:
         add(label[0].upper() + label[1:], "first PDF, ms", [(name, first_ms(lib, doc), fmt(first_ms(lib, doc)))
                                            for lib, name in zip(LIBS, LIB_NAMES)])
@@ -363,7 +363,7 @@ def charts(path):
         add(title, "MB allocated", [(name, stat(lib, "plex", task)["alloc"], "%.1f" % stat(lib, "plex", task)["alloc"])
                                     for lib, name in ports if stat(lib, "plex", task)["alloc"]])
     page("PDFjet in Java, C#, Go and Swift: the first PDF")
-    caption("The first PDF of a fresh process, the four ports", "These tests use IBM Plex Sans.")
+    caption("The first PDF of a fresh process, as on a cold start, the four ports", "These tests use IBM Plex Sans.")
     for doc, label in FIRST_DOCS:
         add(label[0].upper() + label[1:], "first PDF, ms", [(name, first_ms(lib, doc), fmt(first_ms(lib, doc))) for lib, name in ports])
     caption("The peak memory of a fresh process, making its first PDF", "These tests use IBM Plex Sans.")

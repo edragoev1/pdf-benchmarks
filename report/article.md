@@ -270,8 +270,8 @@ the process (Go's TotalAlloc), Swift every malloc of the thread:
 ### The first PDF of a process
 
 The first PDF of a fresh process, each of the five documents, as a
-command-line tool, a serverless function or a server just started pays it,
-ms; then the peak memory of the whole process, mostly the JVM itself, MB:
+serverless function or a newly started container pays it on a cold start,
+or a desktop app on its first export, ms; then the peak memory of the whole process, mostly the JVM itself, MB:
 
 | | PDFBox | iText | OpenPDF | PDFjet Java | PDFjet C# | PDFjet Go | PDFjet Swift |
 |---|---:|---:|---:|---:|---:|---:|---:|

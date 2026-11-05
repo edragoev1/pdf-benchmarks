@@ -59,9 +59,9 @@ p { margin: 0 0 12px; }
 .chart h4 { font-size: 13px; font-weight: 600; margin: 0; }
 .chart .unit { font-size: 10.5px; color: var(--muted); margin: 0 0 8px; }
 .row { display: grid; grid-template-columns: 62px minmax(0, 1fr); align-items: center;
-  font-size: 12.5px; color: var(--muted); height: 32px; }
+  font-size: 12.5px; color: var(--muted); height: 30px; }
 .track { display: flex; align-items: center; gap: 5px; min-width: 0; }
-.bar { height: 26px; background: var(--bar); min-width: 3px; flex: none; }
+.bar { height: 24px; background: var(--bar); min-width: 3px; flex: none; }
 .value { white-space: nowrap; font-variant-numeric: tabular-nums; }
 .row.best { color: var(--navy); font-weight: 600; }
 .row.best .bar { background: var(--navy); }

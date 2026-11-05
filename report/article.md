@@ -68,7 +68,7 @@ question; iText also has a company behind it with paid support.
 | Tables | no | layout module | **✓** | **✓** |
 | Text wrapped into paragraphs | no, by hand | layout module | **✓** | **✓** |
 | Text flowing onto new pages | no | layout module | **✓** | **✓** |
-| Tagged PDF, PDF/UA-1 | tags by hand | ✓ tags; pdfua module for PDF/UA | tags by hand | **✓** |
+| Tagged PDF, PDF/UA-1 | by hand: your code builds the structure tree, numbers the marked content and builds the parent tree | ✓ tags; pdfua module for PDF/UA | by hand: your code marks the content of each element; OpenPDF builds the parent tree | **✓** |
 | PDF/UA-2 | no | pdfua module | no | no |
 | PDF/A | by hand; xmpbox module for the metadata | pdfa module, 1a to 4f | 1a to 3u | 1a to 3b |
 | SVG | through Apache Batik and pdfbox-graphics2d | svg module | through Apache Batik | **✓** |

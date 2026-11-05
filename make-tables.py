@@ -129,6 +129,11 @@ def times(libs, names, font, docs):
         if all(v is None for v in values):
             continue
         out.append(row(label, values, RANKED if len(libs) > RANKED else None))
+    # The asterisk explained under the table that uses it, where a reader
+    # looks for it
+    if any("\\*" in line for line in out[2:]):
+        out.append("\n\\* The three rounds of this figure differ by more than 5%; the figure is"
+                   " their median.")
     return "\n".join(out)
 
 
@@ -207,7 +212,7 @@ TABLES = {
     "java-plex": lambda: times(ALL, ALL_NAMES, "plex", DOCS),
     "java-noto": lambda: times(ALL, ALL_NAMES, "noto",
                                [("invoice", "invoice"), ("statement", "statement"), ("report", "report"),
-                                ("multilingual", "multilingual"), ("svgletters", "the 1,000 letters, s")]),
+                                ("multilingual", "multilingual"), ("svgletters", "the 1,000 letters, SVG logo, s")]),
     "first-pdf": lambda: first_pdf(ALL, ALL_NAMES),
     "memory": lambda: memory(ALL, ALL_NAMES),
     "sizes": lambda: sizes(ALL, ALL_NAMES),

@@ -220,6 +220,8 @@ PDFjet in C#, Go and Swift, shown with them but not ranked against them.
 | the 1,000 letters, PNG logo, s | 2.49 | 1.97 | 1.91 | **1.35** | 1.03 | 1.37 | 1.50 |
 | the 1,000 letters, SVG logo, s | 1.30 | 1.89 | 1.00 | **0.88** | 0.67 | 0.93 | 1.58 |
 
+\* The three rounds of this figure differ by more than 5%; the figure is their median.
+
 ### Time per document, Noto Sans
 
 With Noto Sans, a large font, ms (the letters: the batch of 1,000, s):
@@ -230,7 +232,9 @@ With Noto Sans, a large font, ms (the letters: the batch of 1,000, s):
 | statement | **5.4 \*** | 73.6 \* | 18.2 | 6.5 | 6.5 | 5.6 | 13.0 |
 | report | 149.8 | 28.6 | 6.8 | **6.5** | 7.9 \* | 6.8 \* | 14.9 |
 | multilingual | **1.7** | 4.2 | 2.0 | 2.1 | 1.4 \* | 1.8 \* | 2.5 |
-| the 1,000 letters, s | **1.23** | 3.08 | 1.83 | 1.84 | 1.28 | 1.66 | 2.54 |
+| the 1,000 letters, SVG logo, s | **1.23** | 3.08 | 1.83 | 1.84 | 1.28 | 1.66 | 2.54 |
+
+\* The three rounds of this figure differ by more than 5%; the figure is their median.
 
 ### The size of the PDFs
 

@@ -53,8 +53,11 @@ and the page numbers in a second pass once the pages are counted.*
 The other jars each of the others needs at run time, from its POM: PDFBox pdfbox-io,
 fontbox and commons-logging; iText io, commons, jackson-databind, slf4j-api
 and bouncy-castle-connector, and its layout jar for tables and flowing text;
-OpenPDF brotli4j with a native jar for the platform. pdfCalligraph,
-pdfRender, pdfHTML, pdfSweep and pdfOCR are iText add-ons.
+OpenPDF none: Maven adds brotli4j, its service jar and a native jar for the
+platform, needed only for Brotli compression (OpenPDF ran here without
+them). pdfHTML, pdfSweep and pdfOCR are iText add-ons under the same terms
+as iText Core, AGPL or commercial; pdfCalligraph, pdfRender and pdfXFA are
+commercial only. PDFjet Pro is PDFjet's add-on, commercial.
 
 Far more people have worked on PDFBox, iText and OpenPDF than on PDFjet,
 and far more people use them, with more answers on the web for every
@@ -62,39 +65,42 @@ question; iText also has a company behind it with paid support.
 
 | Feature | PDFBox | iText | OpenPDF | PDFjet |
 |---|---|---|---|---|
-| Tables | no | **✓** | **✓** | **✓** |
-| Text wrapped into paragraphs | no, by hand | **✓** | **✓** | **✓** |
-| Text flowing onto new pages | no | **✓** | **✓** | **✓** |
-| Tagged PDF, PDF/UA-1 | tags by hand | **✓** | tags by hand | **✓** |
-| PDF/UA-2 | no | **✓** | no | no |
-| PDF/A | metadata by hand | 1a to 4f | 1a to 3u | 1a to 3b |
-| SVG | no | svg module | no | **✓** |
-| Barcodes, 1D | no | **✓** | **✓** | **✓** |
-| QR codes | no | **✓** | no | **✓** |
-| Data Matrix | no | **✓** | **✓** | **✓** |
-| PDF417 | no | **✓** | **✓** | **✓** |
+| Tables | no | layout module | **✓** | **✓** |
+| Text wrapped into paragraphs | no, by hand | layout module | **✓** | **✓** |
+| Text flowing onto new pages | no | layout module | **✓** | **✓** |
+| Tagged PDF, PDF/UA-1 | tags by hand | ✓ tags; pdfua module for PDF/UA | tags by hand | **✓** |
+| PDF/UA-2 | no | pdfua module | no | no |
+| PDF/A | by hand; xmpbox module for the metadata | pdfa module, 1a to 4f | 1a to 3u | 1a to 3b |
+| SVG | through Apache Batik and pdfbox-graphics2d | svg module | through Apache Batik | **✓** |
+| Barcodes, 1D | no | barcodes module | **✓** | **✓** |
+| QR codes | no | barcodes module | no | **✓** |
+| Data Matrix | no | barcodes module | **✓** | **✓** |
+| PDF417 | no | barcodes module | **✓** | **✓** |
 | Charts | no | no | no | bar, line, scatter, donut |
 | Markdown to PDF | no | no | no | **✓** |
 | HTML to PDF | no | pdfHTML add-on | openpdf-html module | no |
-| Images | JPEG, PNG, GIF, BMP, TIFF | those, WMF, JPEG 2000, JBIG2, WebP | those, WMF, JPEG 2000 | JPEG, PNG, BMP |
+| Images | JPEG, PNG, GIF, BMP, TIFF | those, WMF, JPEG 2000, JBIG2; WebP with the webp-image-support module | those, WMF, JPEG 2000 | JPEG, PNG, BMP |
 | Kerning | no | pdfCalligraph, commercial | the old kern table only, which neither font here has; GPOS through Java AWT or Apache FOP | **✓** |
 | Ligatures (GSUB) | ✓ by default, turned off here | pdfCalligraph, commercial | through Java AWT or Apache FOP | no |
 | Arabic | no | pdfCalligraph, commercial | **✓** | **✓** |
-| Devanagari and other Indic scripts | some | pdfCalligraph, commercial | through Java AWT or Apache FOP | no |
-| Hyphenation | no | hyph module | ✓ patterns not included | soft hyphens only |
+| Devanagari and other Indic scripts | Devanagari, Bengali, Gujarati, without mark positioning | pdfCalligraph, commercial | through Java AWT or Apache FOP | no |
+| Hyphenation | no | hyph module | ✓ patterns not included | soft hyphens; five languages in Pro, commercial |
 | Extract text | **✓** | **✓** | **✓** | no |
 | Render a page to an image | **✓** | pdfRender, commercial | openpdf-renderer module | no |
 | Change existing PDFs | **✓** | **✓** | **✓** | add content, merge, split |
-| Fill or create form fields | **✓** | **✓** | **✓** | no |
-| Digital signatures | ✓ with Bouncy Castle | sign module, with Bouncy Castle | ✓ with Bouncy Castle | no |
+| Fill or create form fields | **✓** | forms module | **✓** | no |
+| Digital signatures | ✓ with Bouncy Castle | sign module, with Bouncy Castle | ✓ with Bouncy Castle, PKCS #7, not PAdES | Pro, commercial |
+| Long-term signatures, PAdES B-LT and B-LTA | in its examples only | sign module | no | Pro, commercial |
 | Password encryption, AES-256 | **✓** | **✓** | **✓** | **✓** |
 | Certificate encryption | ✓ with Bouncy Castle | ✓ with Bouncy Castle | ✓ with Bouncy Castle | no |
 | PDF 2.0 | a 2.0 header, setVersion | **✓** | a 2.0 header by default | no, PDF 1.7 |
 | Object streams, for smaller files | ✓ by default | ✓ an option | ✓ an option | no |
 | Redaction | no | pdfSweep add-on | no | no |
 | OCR | no | pdfOCR add-on | no | no |
-| XFA forms | reads the data | fills the data; flattens, commercial | reads, fills the data | no |
-| No other jars needed | no | no | no | **✓** |
+| XFA forms | reads the data | fills the data, forms module; flattens, pdfXFA, commercial | reads, fills the data | no |
+| Electronic invoices: ZUGFeRD, Factur-X, XRechnung | by hand: PDF/A-3 with the XML attached | by hand, with the pdfa module | by hand | by hand; ready-made in Pro, commercial |
+| Check existing files for PDF/A | preflight module, PDF/A-1b | no | no | no |
+| No other jars needed | no | no | ✓; Maven adds brotli4j, needed only for Brotli compression | **✓** |
 | Java | 8 and later | 8 and later | 21 and later | 8 and later |
 | Also for | — | .NET | — | C#, Go, Swift |
 | License | Apache 2.0 | AGPL-3.0 or commercial | LGPL-2.1 or MPL-2.0 | MIT |

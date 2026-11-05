@@ -100,7 +100,7 @@ question; iText also has a company behind it with paid support.
 | Redaction | no | pdfSweep add-on | no | no |
 | OCR | no | pdfOCR add-on | no | no |
 | XFA forms | reads the data | fills the data, forms module; flattens, pdfXFA, commercial | reads, fills the data | no |
-| Electronic invoices: ZUGFeRD, Factur-X, XRechnung | by hand: PDF/A-3 with the XML attached | by hand, with the pdfa module | by hand | by hand; ready-made in Pro, commercial |
+| Electronic invoices: ZUGFeRD, Factur-X, XRechnung | by hand: PDF/A-3 with the XML attached | by hand, with the pdfa module | by hand | Pro, commercial |
 | Check existing files for PDF/A | preflight module, PDF/A-1b | no | no | no |
 | No other jars needed | no | no | ✓; Maven adds brotli4j, needed only for Brotli compression | **✓** |
 | Java | 8 and later | 8 and later | 21 and later | 8 and later |

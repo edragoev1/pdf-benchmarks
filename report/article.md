@@ -165,14 +165,6 @@ for Swift: Swift offers none on Linux, so the Swift port has an encoder of
 its own, which searches less than zlib. Its PDFs, the largest of the four,
 are larger because of that encoder, not because of Swift.
 
-The ports are not Java in other syntax. Each is written for its language,
-with its own standard library and idioms, and the results show it: one
-design translated would rank the same in every document, and these do not.
-If you find an omission that puts your favorite language at a disadvantage,
-a slow way of doing something where the language has a faster one, please
-tell us: we will be happy to adopt it in the library and run the test
-again.
-
 ## Reproduce it
 
 Everything is in github.com/edragoev1/pdf-benchmarks: SPEC.md, the text of

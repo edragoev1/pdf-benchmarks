@@ -26,3 +26,5 @@ Plex Sans and Noto Sans under the SIL Open Font License, with their licenses,
 and the PDFjet logo in [images/](images/): every library reads the same files.
 PDFjet itself is built from its source, which the run scripts expect at
 `~/Projects/pdfjet` (the v9.1.7 tag).
+
+PDFjet: [pdfjet.com](https://pdfjet.com)

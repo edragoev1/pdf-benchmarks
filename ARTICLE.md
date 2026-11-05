@@ -175,6 +175,32 @@ With Noto Sans, a large font, ms (the letters: the batch of 1,000, s):
 | the 1,000 letters, s | **1.23** | 3.08 | 1.83 | 1.84 | 1.28 | 1.66 | 2.54 |
 <!-- end java-noto -->
 
+The size of the PDFs, KB:
+
+<!-- table sizes -->
+| Document | PDFBox | iText | OpenPDF | PDFjet Java | PDFjet C# | PDFjet Go | PDFjet Swift |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| invoice | **19** | 24 | 22 | 25 | 25 | 26 | 27 |
+| statement | **42** | 62 | 59 | 64 | 63 | 63 | 71 |
+| report | **1,816** | 1,824 | 1,817 | 1,823 | 1,822 | 1,823 | 1,825 |
+| multilingual | **22** | 30 | 25 | 29 | 29 | 29 | 31 |
+| one letter | **11** | 17 | 15 | 18 | 18 | 18 | 19 |
+<!-- end sizes -->
+
+Memory allocated per document, MB. Each runtime counts it its own way:
+Java and C# the bytes the timing thread allocates, Go every allocation of
+the process (Go's TotalAlloc), Swift every malloc of the thread:
+
+<!-- table memory -->
+| Document | PDFBox | iText | OpenPDF | PDFjet Java | PDFjet C# | PDFjet Go | PDFjet Swift |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| invoice | **1.5** | 3.6 | 2.2 | 1.6 | 1.4 | 2.6 | 4.0 |
+| statement | 5.6 | 71.6 | 56.0 | **4.7** | 5.5 | 4.8 | 7.3 |
+| report | 29.8 | 26.9 | 13.4 | **12.0** | 12.5 | 9.0 | 18.1 |
+| multilingual | 1.8 | 1.8 | **0.6** | 1.0 | 1.0 | 1.3 | 2.8 |
+| one letter | 1.4 | 2.4 | **0.5** | 1.0 | 0.9 | 1.5 | 2.7 |
+<!-- end memory -->
+
 The first PDF of a fresh process, each of the five documents, as a
 command-line tool, a serverless function or a server just started pays it,
 ms; then the peak memory of the whole process, mostly the JVM itself, MB:
@@ -194,32 +220,6 @@ ms; then the peak memory of the whole process, mostly the JVM itself, MB:
 | the notice, peak memory, MB | 80 | 85 | 71 | **53** | 43 | 9 | 27 |
 | the first letter, peak memory, MB | 107 | 133 | 140 | **54** | 44 | 9 | 27 |
 <!-- end first-pdf -->
-
-Memory allocated per document, MB. Each runtime counts it its own way:
-Java and C# the bytes the timing thread allocates, Go every allocation of
-the process (Go's TotalAlloc), Swift every malloc of the thread:
-
-<!-- table memory -->
-| Document | PDFBox | iText | OpenPDF | PDFjet Java | PDFjet C# | PDFjet Go | PDFjet Swift |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| invoice | **1.5** | 3.6 | 2.2 | 1.6 | 1.4 | 2.6 | 4.0 |
-| statement | 5.6 | 71.6 | 56.0 | **4.7** | 5.5 | 4.8 | 7.3 |
-| report | 29.8 | 26.9 | 13.4 | **12.0** | 12.5 | 9.0 | 18.1 |
-| multilingual | 1.8 | 1.8 | **0.6** | 1.0 | 1.0 | 1.3 | 2.8 |
-| one letter | 1.4 | 2.4 | **0.5** | 1.0 | 0.9 | 1.5 | 2.7 |
-<!-- end memory -->
-
-The size of the PDFs, KB:
-
-<!-- table sizes -->
-| Document | PDFBox | iText | OpenPDF | PDFjet Java | PDFjet C# | PDFjet Go | PDFjet Swift |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| invoice | **19** | 24 | 22 | 25 | 25 | 26 | 27 |
-| statement | **42** | 62 | 59 | 64 | 63 | 63 | 71 |
-| report | **1,816** | 1,824 | 1,817 | 1,823 | 1,822 | 1,823 | 1,825 |
-| multilingual | **22** | 30 | 25 | 29 | 29 | 29 | 31 |
-| one letter | **11** | 17 | 15 | 18 | 18 | 18 | 19 |
-<!-- end sizes -->
 
 Lines of code of each program, without blank lines and comments; "helpers"
 are the methods a library's tasks share (fonts, cells, footers, word

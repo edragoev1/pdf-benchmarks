@@ -216,11 +216,11 @@ def main():
             "<b>Noto Sans</b>. The other measurements, the features of each library, the method and the tables "
             "of every figure are further down this page.</p>",
             "<p class=\"author\">%s</p>" % inline(plain(author)), "<p>%s</p>" % inline(plain(ask)),
-            '<p class="how">Lower is better, and the best is in navy.</p>', charts(groups[0])]
+            '<p class="how">Lower is better, and the best is in navy. Each chart starts at zero and is scaled to its own largest value.</p>', charts(groups[0])]
     for group in groups[1:]:
         heading = group[0].split("|", 1)[1]
         page += ['<section><h2>%s</h2>' % html.escape(heading),
-                 '<p class="how">Lower is better, and the best is in navy.</p>', charts(group[1:]), "</section>"]
+                 '<p class="how">Lower is better, and the best is in navy. Each chart starts at zero and is scaled to its own largest value.</p>', charts(group[1:]), "</section>"]
     page += ['<div class="article">', markdown(text), "</div>",
              '<footer>The same results as the PDF report, made from the same files by make-html.py. '
              'Everything needed to check them is in <a href="https://%s">%s</a>.</footer>' % (REPOSITORY, REPOSITORY),

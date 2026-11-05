@@ -139,7 +139,7 @@ public class Report {
 
     // The line on every page of charts, in bold, that says how to read them.
     static void lowerIsBetter(Page page, Font semi, float y) throws Exception {
-        new TextLine(semi, "Lower is better, and the best is in navy.").setTextColor(INK)
+        new TextLine(semi, "Lower is better, and the best is in navy. Each chart starts at zero and is scaled to its own largest value.").setTextColor(INK)
                 .setLocation(M, y).drawOn(page);
     }
 

@@ -42,7 +42,8 @@ static class Bench {
 
     // The bytes of the fonts and the images, read once into memory.
     static void ReadInputs(string family) {
-        string root = Environment.GetEnvironmentVariable("HOME") + "/Projects/pdfjet/";
+        // The benchmark's folder, run from dotnet/: the fonts and the logo of this benchmark, in its own fonts/ and images/ (5 November 2026: PDFjet 9.1.7 moved its fonts, and has no Noto Sans)
+        string root = "../";
         if (family == "plex") {
             REGULAR = File.ReadAllBytes(root + "fonts/IBMPlexSans/IBMPlexSans-Regular.ttf");
             BOLD = File.ReadAllBytes(root + "fonts/IBMPlexSans/IBMPlexSans-SemiBold.ttf");
@@ -52,8 +53,8 @@ static class Bench {
         } else {
             throw new ArgumentException(family);
         }
-        LOGO = File.ReadAllBytes(root + "images/readme/pdfjet-logo.png");
-        SVG_LOGO = File.ReadAllBytes(root + "images/readme/pdfjet-logo.svg");
+        LOGO = File.ReadAllBytes(root + "images/pdfjet-logo.png");
+        SVG_LOGO = File.ReadAllBytes(root + "images/pdfjet-logo.svg");
         string[] photos = {"photo-1.jpg", "photo-2.jpg", "photo-3.jpg", "photo-4.jpg"};
         for (int i = 0; i < 4; i++) {
             PHOTOS[i] = File.ReadAllBytes("../images/" + photos[i]);

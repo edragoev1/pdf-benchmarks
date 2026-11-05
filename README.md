@@ -19,6 +19,8 @@ Written by the author of PDFjet, so everything needed to check it is here:
 If a program does not use a library the way its users should, please open an
 issue, and the benchmark will be fixed and run again.
 
-The programs are under the MIT license. The fonts come from the PDFjet
-repository (IBM Plex Sans and Noto Sans, under the SIL Open Font License),
-which the run scripts expect at `~/Projects/pdfjet`.
+The programs are under the MIT license. The fonts are in [fonts/](fonts/), IBM
+Plex Sans and Noto Sans under the SIL Open Font License, with their licenses,
+and the PDFjet logo in [images/](images/): every library reads the same files.
+PDFjet itself is built from its source, which the run scripts expect at
+`~/Projects/pdfjet` (the v9.1.7 tag).

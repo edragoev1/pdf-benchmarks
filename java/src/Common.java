@@ -15,8 +15,8 @@ import java.util.*;
 // font is plex or noto; tasks a comma-separated list of invoice, statement,
 // report, letters.
 abstract class Common {
-    static final String ROOT = System.getenv().getOrDefault("PDFJET",
-            System.getProperty("user.home") + "/Projects/pdfjet") + "/";
+    // The benchmark's folder, run from java/: the fonts and the logo of this benchmark, in its own fonts/ and images/ (5 November 2026: PDFjet 9.1.7 moved its fonts, and has no Noto Sans)
+    static final String ROOT = "../";
 
     // The font bytes and the image bytes, read once.
     static byte[] REGULAR, BOLD, LOGO, SVG_LOGO;
@@ -195,7 +195,7 @@ abstract class Common {
         } else {
             throw new IllegalArgumentException(font);
         }
-        LOGO = Files.readAllBytes(Paths.get(ROOT + "images/readme/pdfjet-logo.png"));
+        LOGO = Files.readAllBytes(Paths.get(ROOT + "images/pdfjet-logo.png"));
         List<String[]> languages = new ArrayList<>();
         for (String line : Files.readAllLines(Paths.get("../multilingual.txt"), StandardCharsets.UTF_8)) {
             if (!line.isEmpty()) {
@@ -203,7 +203,7 @@ abstract class Common {
             }
         }
         LANGUAGES = languages.toArray(new String[0][]);
-        SVG_LOGO = Files.readAllBytes(Paths.get(ROOT + "images/readme/pdfjet-logo.svg"));
+        SVG_LOGO = Files.readAllBytes(Paths.get(ROOT + "images/pdfjet-logo.svg"));
         for (int i = 0; i < 4; i++) {
             PHOTOS[i] = Files.readAllBytes(Paths.get("../images/" + PHOTO_FILES[i]));
         }

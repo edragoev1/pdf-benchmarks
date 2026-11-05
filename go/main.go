@@ -37,7 +37,8 @@ const nameSize = 13
 
 // load reads the bytes of the fonts and the images once into memory.
 func load(family string) {
-	home := os.Getenv("HOME") + "/Projects/pdfjet/"
+	// The benchmark's folder, run from go/: the fonts and the logo of this benchmark, in its own fonts/ and images/ (5 November 2026: PDFjet 9.1.7 moved its fonts, and has no Noto Sans)
+	home := "../"
 	read := func(path string) []byte {
 		b, err := os.ReadFile(home + path)
 		if err != nil {
@@ -52,8 +53,8 @@ func load(family string) {
 		regularBytes = read("fonts/NotoSans/NotoSans-Regular.ttf")
 		boldBytes = read("fonts/NotoSans/NotoSans-Bold.ttf")
 	}
-	logoBytes = read("images/readme/pdfjet-logo.png")
-	svgLogoBytes = read("images/readme/pdfjet-logo.svg")
+	logoBytes = read("images/pdfjet-logo.png")
+	svgLogoBytes = read("images/pdfjet-logo.svg")
 	for _, name := range []string{"photo-1.jpg", "photo-2.jpg", "photo-3.jpg", "photo-4.jpg"} {
 		b, err := os.ReadFile("../images/" + name)
 		if err != nil {

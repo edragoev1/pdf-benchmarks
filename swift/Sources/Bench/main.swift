@@ -28,7 +28,8 @@ let STATEMENT_WIDTHS: [Float] = [80, 252, 60, 60, 60]
 let STATEMENT_RIGHT = [false, false, true, true, true]
 
 // The bytes of the fonts and the images, read once into memory.
-let root = ProcessInfo.processInfo.environment["HOME"]! + "/Projects/pdfjet/"
+// The benchmark's folder, run from swift/: the fonts and the logo of this benchmark, in its own fonts/ and images/ (5 November 2026: PDFjet 9.1.7 moved its fonts, and has no Noto Sans)
+let root = "../"
 func read(_ path: String) -> Data {
     FileManager.default.contents(atPath: root + path)!
 }
@@ -36,8 +37,8 @@ let args = CommandLine.arguments
 let family = args[1]
 let REGULAR = read(family == "plex" ? "fonts/IBMPlexSans/IBMPlexSans-Regular.ttf" : "fonts/NotoSans/NotoSans-Regular.ttf")
 let BOLD = read(family == "plex" ? "fonts/IBMPlexSans/IBMPlexSans-SemiBold.ttf" : "fonts/NotoSans/NotoSans-Bold.ttf")
-let LOGO = read("images/readme/pdfjet-logo.png")
-let SVG_LOGO = read("images/readme/pdfjet-logo.svg")
+let LOGO = read("images/pdfjet-logo.png")
+let SVG_LOGO = read("images/pdfjet-logo.svg")
 let PHOTOS = ["photo-1.jpg", "photo-2.jpg", "photo-3.jpg", "photo-4.jpg"].map { FileManager.default.contents(atPath: "../images/" + $0)! }
 // The bytes of the images, for Image(pdf, bytes), made once
 let LOGO_BYTES = [UInt8](LOGO)

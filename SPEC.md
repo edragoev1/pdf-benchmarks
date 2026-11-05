@@ -6,17 +6,17 @@ documents the same way; the text is generated, so no data file is needed.
 ## Shared
 
 - Page: US Letter portrait, 612 × 792 pt. Margins 50 pt on every side.
-- Fonts: IBM Plex Sans Regular and SemiBold, from
-  `~/Projects/pdfjet/fonts/IBMPlexSans/IBMPlexSans-Regular.ttf` and
-  `-SemiBold.ttf`, embedded as subsets. Noto run, of the invoice, the
-  statement, the report, the notice and the letters with the SVG logo:
-  NotoSans-Regular.ttf and NotoSans-Bold.ttf from
-  `~/Projects/pdfjet/fonts/NotoSans/`. The font bytes
+- Fonts: IBM Plex Sans Regular and SemiBold, from this benchmark's
+  `fonts/IBMPlexSans/IBMPlexSans-Regular.ttf` and `-SemiBold.ttf` (version
+  3.005, as PDFjet 9.1.7 carries them), embedded as subsets. Noto run, of the
+  invoice, the statement, the report, the notice and the letters with the SVG
+  logo: NotoSans-Regular.ttf and NotoSans-Bold.ttf (version 2.015) from
+  `fonts/NotoSans/`. Every library reads the same files. The font bytes
   are read from disk once per process into memory; each document creates its
   font objects from those bytes (as a server does, per document).
 - Body text 10 pt, line height about 13 pt; headings SemiBold 16 pt; table
   header SemiBold 9 pt, table body Regular 9 pt.
-- Images: logo `~/Projects/pdfjet/images/readme/pdfjet-logo.png` (the PDFjet
+- Images: logo `images/pdfjet-logo.png` of this benchmark (the PDFjet
   logo, RGBA, 224 × 72 pixels) drawn 112 × 36
   pt; photos `images/photo-1.jpg` to `photo-4.jpg` of this benchmark, pages of
   PDFjet's Example_20, 22, 25 and 26 rendered at 220 dpi as JPEG (1870 × 2420

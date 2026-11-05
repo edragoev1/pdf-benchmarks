@@ -46,6 +46,17 @@ rm -rf classes && mkdir classes
 javac -nowarn -encoding utf-8 -cp classes -d classes Report.java
 java -cp classes Report article.md charts.txt pdf-benchmarks.pdf
 qpdf --check pdf-benchmarks.pdf > /dev/null && echo "pdf-benchmarks.pdf: $(pdfinfo pdf-benchmarks.pdf | awk '/^Pages/ {print $2}') pages, qpdf ok"
-# The same report as one web page, from the same files
+# The same report as one web page, from the same files, with its fonts in
+# fonts/ beside it: PDFjet's IBM Plex Sans and Cascadia Mono, subset to Latin
+# and the signs the page uses, as WOFF2, with their licenses
+mkdir -p fonts
+for f in IBMPlexSans/IBMPlexSans-Regular IBMPlexSans/IBMPlexSans-SemiBold IBMPlexSans/IBMPlexSans-Italic \
+         IBMPlexSans/IBMPlexSans-SemiBoldItalic CascadiaMono/CascadiaMono-Regular; do
+    pyftsubset "$PDFJET/resources/fonts/$f.ttf" --output-file="fonts/${f#*/}.woff2" --flavor=woff2 \
+        --unicodes="U+0020-007E,U+00A0-017F,U+2010-2027,U+2030-203A,U+20AC,U+2190-2193,U+2212,U+2713" \
+        --layout-features='kern,liga,calt' --no-hinting --drop-tables+=meta
+done
+cp -p "$PDFJET/resources/fonts/IBMPlexSans/license.txt" fonts/IBMPlexSans-license.txt
+cp -p "$PDFJET/resources/fonts/CascadiaMono/LICENSE" fonts/CascadiaMono-license.txt
 ./make-html.py article.md charts.txt pdf-benchmarks.html
 echo "pdf-benchmarks.html: $(grep -o 'class="chart"' pdf-benchmarks.html | wc -l) charts"

@@ -20,7 +20,18 @@ ON_ONE_PAGE = [
     ("Every measurement is drawn as a chart on the first pages,", "Every measurement is drawn as a chart above,"),
 ]
 
-STYLE = """
+# The fonts from the page's own fonts/ folder (make-report.sh subsets them
+# from PDFjet's), so that a reader's browser asks no other site for anything
+FONTS = "".join(
+    '@font-face { font-family: "%s"; font-style: %s; font-weight: %d; font-display: swap; '
+    'src: url("fonts/%s.woff2") format("woff2"); }\n' % face
+    for face in [("IBM Plex Sans", "normal", 400, "IBMPlexSans-Regular"),
+                 ("IBM Plex Sans", "normal", 600, "IBMPlexSans-SemiBold"),
+                 ("IBM Plex Sans", "italic", 400, "IBMPlexSans-Italic"),
+                 ("IBM Plex Sans", "italic", 600, "IBMPlexSans-SemiBoldItalic"),
+                 ("Cascadia Mono", "normal", 400, "CascadiaMono-Regular")])
+
+STYLE = FONTS + """
 :root { --ink: #22262b; --muted: #5f6873; --navy: #1f3a5f; --bar: #a7b0bb; --card: #f2f3f5;
   --rule: #d0d4da; --head: #e9ecf0; --link: #0969da; }
 * { box-sizing: border-box; }
@@ -58,7 +69,7 @@ p { margin: 0 0 12px; }
 .article { max-width: 860px; }
 .article ul { padding-left: 22px; margin: 0 0 12px; }
 .article li { margin: 0 0 4px; }
-code { font: 0.88em "IBM Plex Mono", ui-monospace, monospace; background: var(--card); padding: 1px 4px; }
+code { font: 0.88em "Cascadia Mono", ui-monospace, monospace; background: var(--card); padding: 1px 4px; }
 a { color: var(--link); }
 .table { overflow-x: auto; margin: 4px 0 16px; }
 table { border-collapse: collapse; font-size: 13.5px; font-variant-numeric: tabular-nums; }
@@ -198,10 +209,6 @@ def main():
     page = ['<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">',
             '<meta name="viewport" content="width=device-width, initial-scale=1">',
             "<title>%s</title>" % html.escape(TITLE),
-            '<link rel="preconnect" href="https://fonts.googleapis.com">',
-            '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>',
-            '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono'
-            '&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&display=swap">',
             "<style>" + STYLE + "</style>\n</head>\n<body>\n<main>",
             '<div class="mark"></div>', "<h1>%s</h1>" % html.escape(TITLE),
             '<p class="lead">Five business documents and a batch of letters, made by each library the way '

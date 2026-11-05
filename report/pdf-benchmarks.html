@@ -4,10 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Generating PDFs in Java: four libraries compared</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&display=swap">
-<style>
+<style>@font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/IBMPlexSans-Regular.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 600; font-display: swap; src: url("fonts/IBMPlexSans-SemiBold.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Sans"; font-style: italic; font-weight: 400; font-display: swap; src: url("fonts/IBMPlexSans-Italic.woff2") format("woff2"); }
+@font-face { font-family: "IBM Plex Sans"; font-style: italic; font-weight: 600; font-display: swap; src: url("fonts/IBMPlexSans-SemiBoldItalic.woff2") format("woff2"); }
+@font-face { font-family: "Cascadia Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/CascadiaMono-Regular.woff2") format("woff2"); }
+
 :root { --ink: #22262b; --muted: #5f6873; --navy: #1f3a5f; --bar: #a7b0bb; --card: #f2f3f5;
   --rule: #d0d4da; --head: #e9ecf0; --link: #0969da; }
 * { box-sizing: border-box; }
@@ -45,7 +47,7 @@ p { margin: 0 0 12px; }
 .article { max-width: 860px; }
 .article ul { padding-left: 22px; margin: 0 0 12px; }
 .article li { margin: 0 0 4px; }
-code { font: 0.88em "IBM Plex Mono", ui-monospace, monospace; background: var(--card); padding: 1px 4px; }
+code { font: 0.88em "Cascadia Mono", ui-monospace, monospace; background: var(--card); padding: 1px 4px; }
 a { color: var(--link); }
 .table { overflow-x: auto; margin: 4px 0 16px; }
 table { border-collapse: collapse; font-size: 13.5px; font-variant-numeric: tabular-nums; }
